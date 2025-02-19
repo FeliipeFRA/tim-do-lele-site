@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "ag-grid-angular": "^32.3.3",
+    "sweetalert2": "^11.14.4"
+  }
+}

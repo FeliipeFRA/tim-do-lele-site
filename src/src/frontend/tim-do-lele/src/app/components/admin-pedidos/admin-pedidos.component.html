@@ -1,0 +1,27 @@
+<app-admin-navbar></app-admin-navbar>
+<div class="admin_background"> 
+    
+<!-- COR 99213A -->
+     <!-- Tabela de Últimos Pedidos (IMPLEMENTAR)-->
+     <div class="orders-section">
+        <h3 class="orders-title">Últimos Pedidos</h3>
+        <section>
+          <div class="dashboard-container">
+            
+              <!-- Ag-Grid para exibir as solicitações -->
+              <ag-grid-angular
+                style=" height: 600px;"
+                class="ag-theme-quartz-dark"
+                [columnDefs]="columnDefs"
+                [rowData]="rowData"
+                [defaultColDef]="{ sortable: true, filter: true }"
+                [gridOptions]="{
+                  localeText: localeText
+                }"
+              >
+              </ag-grid-angular>
+            </div>
+        </section>
+      </div>
+
+</div>

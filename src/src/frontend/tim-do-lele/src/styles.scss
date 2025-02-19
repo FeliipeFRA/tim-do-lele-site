@@ -1,0 +1,402 @@
+/*=============== IMPORTAR FONTE ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  /*========== CORES ==========*/
+  --yellow-color: rgb(250,202,4);
+  --white-color: hsl(0, 0%, 100%);
+  --black-color: hsl(0, 0%, 0%);
+  --box-shadow:0 .5rem 1rem rgba(0,0,0,.1);
+  --border:.2rem solid rgba(0,0,0,.1);
+  --outline:.1rem solid rgba(0,0,0,.1);
+  --outline-hover:.2rem solid var(--black-color);
+
+  /*========== FONTE ==========*/
+  --body-font: "Poppins", sans-serif;
+  --h1-font-size: 2rem;
+  --normal-font-size: 1rem;
+  --small-font-size: .813rem;
+
+  /*========== ESPESSURA FONTE ==========*/
+  --font-medium: 500;
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+input,
+section {
+  font-size: var(--normal-font-size);
+  font-family: var(--body-font);
+  background-color: rgb(235, 64, 52);
+}
+
+section {
+  color: var(--white-color);
+}
+
+input,
+section {
+  border: none;
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.logo {
+  margin: 10px;
+}
+
+/*=============== LOGIN ===============*/
+.form {
+  position: relative;
+  height: 94vh;
+  display: grid;
+  align-items: center;
+}
+
+.home__icon {
+  position: absolute; /* Coloca o ícone no canto superior esquerdo */
+  top: 1rem;
+  bottom: 2rem;
+  left: 2%;
+  font-size: 2rem;
+  color: white;
+}
+
+#admin__icon {
+  font-size: 5rem;
+}
+
+.form__logo {
+  display: block;
+  margin: 0 auto;
+  max-width: 60%;
+  height: auto;
+}
+
+.form__form {
+  position: relative;
+  background-color: hsla(0, 0%, 10%, 0.1);
+  border: 2px solid var(--yellow-color);
+  margin-inline: 1.5rem;
+  padding: 2.5rem 1.5rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+}
+
+.form__title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: var(--font-medium);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form__content, .form__box {
+  display: grid;
+}
+
+.form__content {
+  row-gap: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.form__box {
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+  column-gap: 0rem;
+  border-bottom: 1px solid var(--yellow-color);
+}
+
+.form__icon {
+  font-size: 1.25rem;
+}
+
+.form__input {
+  width: 100%;
+  margin-left: 0.75rem;
+  padding-block: 0.5rem;
+  background: none;
+  color: var(--white-color);
+  position: relative;
+  z-index: 1;
+}
+
+.form__box-input {
+  position: relative;
+  width: 100%;
+}
+
+.form__label {
+  position: absolute;
+  left: 13px;
+  top: 5px;
+  font-weight: var(--font-medium);
+  transition: top 0.3s, font-size 0.3s;
+}
+
+.form__eye {
+  position: absolute;
+  right: 10px; /* Ajusta a distância do ícone da borda do input */
+  top: 50%;
+  transform: translateY(-50%); /* Centraliza verticalmente o ícone */
+  font-size: 1.25rem; /* Define um tamanho para o ícone */
+  z-index: 10;
+  cursor: pointer;
+}
+
+.form__box:nth-child(2) .form__input {
+  padding-right: 2.5rem; /* Adiciona espaço para o ícone do olho */
+}
+
+.form__check, .form__check-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form__check {
+  margin-bottom: 1.5rem;
+}
+
+.form__check-label, .form__forgot, .form__register {
+  font-size: var(--small-font-size);
+}
+
+.form__check-group {
+  column-gap: 0.5rem;
+}
+
+.form__check-input {
+  width: 16px;
+  height: 16px;
+}
+
+.form__forgot {
+  color: var(--white-color);
+}
+
+.form__forgot:hover {
+  text-decoration: underline;
+}
+
+.form__submit__button {
+  border: none;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: var(--yellow-color);
+  font-weight: var(--font-medium);
+  font-family: "Poppins", sans-serif;
+  color: black;
+  cursor: pointer;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form__register {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form__register a {
+  color: var(--white-color);
+  font-weight: var(--font-medium);
+}
+
+.form__register a:hover {
+  text-decoration: underline;
+}
+
+/* MEXER EMAIL E SENHA PRA CIMA */
+
+.form__input:focus + .form__label{
+  top: -12px;
+  font-size: var(--small-font-size);
+}
+
+/* Input focus sticky top label */
+.form__input:not(:placeholder-shown).form__input:not(:focus) + .form__label{
+  top: -12px;
+  font-size: var(--small-font-size);
+}
+
+.error-message small {
+  color: rgb(99, 0, 0); /* Define a cor da mensagem de erro como vermelha */
+  font-size: 0.75rem;
+  position: absolute;
+  bottom: -25px; /* Posiciona a mensagem abaixo do campo de input */
+  left: 0.8rem;
+}
+
+/*=============== HOME PAGE ===============*/
+.background {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh; /* Garante que ocupe toda a altura da viewport */
+  background-image: url('/assets/img/bg.png');
+  background-size: cover; /* Cobre o contêiner sem repetir a imagem */
+  background-repeat: no-repeat; /* Evita repetição horizontal e vertical */
+  background-position: center top; /* Posiciona a imagem no topo centralizado */
+}
+
+.content {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Alinha o conteúdo verticalmente no centro */
+  align-items: center; /* Alinha o conteúdo horizontalmente */
+  width: 100%;
+  flex-grow: 1; /* Faz com que o conteúdo ocupe o espaço restante */
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+.fotowide {
+  padding-top: 94px;
+  width: 100%; /* Faz com que a imagem ocupe 100% da largura da tela */
+  height: auto; /* Mantém a proporção da altura */
+  max-width: 100vw; /* Garante que a imagem não ultrapasse a largura da janela */
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  margin: 10px 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* Telas médias */
+@media screen and (min-width: 1200px) {
+  .background {
+    background-size: cover; /* Garante que a imagem ainda cubra a tela */
+    background-attachment: fixed;
+  }
+
+  .form {
+    justify-content: center;
+  }
+
+  .form__form {
+    width: 400px;
+    padding: 2rem 1rem 1.5rem;
+    border-radius: 1.5rem;
+  }
+
+  .form__logo {
+    display: block;
+    margin: 0 auto;
+    max-width: 50%;
+    height: auto;
+  }
+
+  .form__register {
+    text-align: center;
+  }
+
+  .form__title {
+    text-align: center;
+    font-size: var(--h1-font-size);
+    font-weight: var(--font-medium);
+  }
+
+  .form__register {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .form__submit__button {
+    border: none;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--yellow-color);
+    font-weight: var(--font-medium);
+    font-family: "Poppins", sans-serif;
+    color: black;
+    cursor: pointer;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .form__form {
+    margin-inline: 0.5;
+    padding: 0.5rem 1.5rem;
+  }
+  
+  .form__content {
+    row-gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form__title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: var(--font-medium);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+
+/* Telas pequenas (abaixo de 576px) */
+@media screen and (max-width: 575.98px) {
+  
+  .fotowide {
+    padding-top: 94px;
+    width: 70rem;
+  }
+  
+  .form__logo {
+    max-width: 40%; 
+  }
+
+  .form__title {
+    font-size: 1.5rem;
+    margin-top: 0rem;
+  }
+
+  .form__form {
+    margin-bottom: 1rem;
+  }
+
+  .form__register {
+    text-align: center;
+    margin-bottom: 0rem;
+    margin-top: 1.5rem;
+  }
+
+  .form__content {
+    row-gap: 0.75rem;
+  }
+
+  .form__submit__button {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
+
+  .form {
+    margin-top: 1rem; /* Adicione esta linha para ajustar o espaço no topo */
+  }
+
+  .home__icon {
+    left: 5%;
+  }
+}

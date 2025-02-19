@@ -1,0 +1,56 @@
+.header {
+  font-family: "Poppins", sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: space-between;
+  padding: 0rem 7%;
+  background: rgb(172, 60, 60); /* Fundo vinho */
+  box-shadow: var(--box-shadow);
+}
+
+.logo {
+  font-size: 0;
+  margin-right: 1rem; /* Espaço entre logo e ícone */
+}
+
+/* Nav Geral */
+.nav {
+  display: flex;
+  align-items: center; /* Centraliza verticalmente os itens da nav */
+  gap: 1.5rem; /* Espaço entre os links */
+  color: rgb(99, 33, 33); /* Cor vinho escuro */
+}
+
+.nav h1 {
+  font-size: 2rem; /* Ajustar tamanho do texto */
+  font-weight: bold;
+  color: rgb(99, 33, 33); /* Vinho escuro */
+
+}
+
+#admin__icon {
+  font-size: 4rem; /* Tamanho do ícone */
+  color: rgb(99, 33, 33); /* Vinho escuro */
+
+}
+
+/* Links da navbar */
+.nav a {
+  font-size: 1.5rem; /* Tamanho do texto */
+  padding: 1rem 1rem; /* Espaçamento interno */
+  color: white;
+  background: rgb(138, 44, 44); /* Fundo vinho */
+  border-radius: 8px; /* Bordas arredondadas */
+  text-decoration: none; /* Remove sublinhado */
+  transition: all 0.3s ease;
+}
+
+.nav a:hover {
+  background-color: var(--yellow-color); /* Fundo amarelo no hover */
+  color: rgb(133, 92, 32); /* Texto dourado no hover */
+}

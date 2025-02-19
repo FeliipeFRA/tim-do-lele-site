@@ -1,0 +1,139 @@
+/*=============== IMPORTAR FONTE ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --yellow-color: rgb(250,202,4);
+  --white-color: hsl(0, 0%, 100%);
+  --black-color: hsl(0, 0%, 0%);
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
+  --body-font: "Poppins", sans-serif;
+  --h1-font-size: 2rem;
+  --normal-font-size: 1rem;
+  --small-font-size: 0.813rem;
+
+  --font-medium: 500;
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.admin_background {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('/assets/img/admin-bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin_form {
+  width: 30%;
+  height: 94vh;
+  display: grid;
+  align-items: center;
+}
+
+.admin_form__form {
+  background-color: hsl(0, 100%, 19%);
+  border: 2px solid white;
+  margin-inline: 1.5rem;
+  padding: 2.5rem 1.5rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+}
+
+.admin_form__title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: var(--font-medium);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin_form__content {
+  display: grid;
+  row-gap: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin_form__box {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+  border-bottom: 1px solid white;
+}
+
+.admin_form__icon {
+  font-size: 1.25rem;
+}
+
+.admin_form__input {
+  width: 100%;
+  margin-left: 0.75rem;
+  padding-block: 0.5rem;
+  background: none;
+  color: var(--white-color);
+}
+
+.admin_form__box-input {
+  position: relative;
+  width: 100%;
+}
+
+.admin_form__label {
+  position: absolute;
+  left: 13px;
+  top: 5px;
+  font-weight: var(--font-medium);
+  transition: top 0.3s, font-size 0.3s;
+}
+
+.admin_form__eye {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.25rem;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.admin_form__input:focus + .admin_form__label {
+  top: -12px;
+  font-size: var(--small-font-size);
+}
+
+.admin_form__input:not(:placeholder-shown).admin_form__input:not(:focus) + .admin_form__label {
+  top: -12px;
+  font-size: var(--small-font-size);
+}
+
+.admin_error-message small {
+  color: rgb(63, 0, 0);
+  font-size: 0.75rem;
+  position: absolute;
+  bottom: -25px;
+  left: 0.8rem;
+}
+
+.admin_form__submit__button {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: hsl(0, 100%, 14%);;
+  font-weight: var(--font-medium);
+  font-family: var(--body-font);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  margin-top: 1rem;
+}

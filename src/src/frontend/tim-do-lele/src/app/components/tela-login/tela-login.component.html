@@ -1,0 +1,74 @@
+<section>
+    <div class="background">
+        <div class="form">
+            <p></p>
+            <p></p>
+            <form action="" class="form__form" #loginForm="ngForm" (ngSubmit)="validarlogin(loginForm)">
+                <h1 class="form__title">Seja bem-vindo(a)!</h1>
+                <img class="form__logo" src="assets/img/logo-tim.png">
+                
+                <div class="form__content">
+                    <!-- Campo de email -->
+                    <div class="form__box">
+                        <i class="ri-user-3-line form__icon"></i>
+                        <div class="form__box-input">
+                            <input 
+                                type="email" 
+                                required 
+                                class="form__input" 
+                                id="login-email" 
+                                name="email" 
+                                ngModel 
+                                email 
+                                placeholder=" "
+                            >
+                            <label for="login-email" class="form__label">Email</label>
+                            
+                            <!-- Mensagens de erro para o email -->
+                            <div *ngIf="loginForm.controls['email']?.invalid && loginForm.controls['email']?.touched" class="error-message">
+                                <small *ngIf="loginForm.controls['email']?.errors?.['required']">* O Email é obrigatório.</small>
+                                <small *ngIf="loginForm.controls['email']?.errors?.['email']">* Insira um email válido.</small>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- Campo de senha -->
+                    <div class="form__box">
+                        <i class="ri-lock-2-line form__icon"></i>
+                        <div class="form__box-input">
+                            <input 
+                                type="password" 
+                                required 
+                                class="form__input" 
+                                id="login-pass" 
+                                name="password" 
+                                ngModel 
+                                placeholder=" "
+                            >
+                            <label for="login-pass" class="form__label">Senha</label>
+                            <i class="ri-eye-off-line form__eye" id="form-eye" (click)="showHiddenPass('login-pass', 'form-eye')"></i>
+                            
+                            <!-- Mensagens de erro para a senha -->
+                            <div *ngIf="loginForm.controls['password']?.invalid && loginForm.controls['password']?.touched" class="error-message">
+                                <small>* A senha é obrigatória.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form__check">    
+                    <a href="#" class="form__forgot">Esqueceu sua senha?</a>
+                </div>
+    
+                <button type="submit" class="form__submit__button" [disabled]="loginForm.invalid">Login</button>
+    
+                <p class="form__register">
+                    Não tem uma conta? <a href="/cadastro">Registre-se</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Importação dos ícones -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
