@@ -19,7 +19,19 @@ Este projeto visa oferecer um sistema de acompanhamento de pedidos de lanche, ut
 - **PrimeNG**: Biblioteca de componentes ricos para Angular.
 - **PrimeIcons**: Ícones personalizados para serem usados com os componentes do PrimeNG.
 
+
 ## Como Rodar o Projeto
+
+## Instalações
+
+1. Instale o Node.js: https://nodejs.org/en/download
+2. Abra o PowerShell do Windows, digite o seguinte comando: 
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+Em seguida, habilite a execução de Scripts pelo Windows.
+3. Abra o CMD do Windows, e digite o seguinte comando:
+npm install -g @angular/cli
+Isso instalará o Angular.
+
 
 ### Backend
 

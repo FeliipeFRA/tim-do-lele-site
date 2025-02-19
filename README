@@ -1,6 +1,0 @@
-Para rodar a aplicação Angular:
-    ng serve
-
-Para rodar a aplicação Node:
-    node --watch 'arquivo'
-    
