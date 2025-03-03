@@ -137,3 +137,10 @@
   cursor: pointer;
   margin-top: 1rem;
 }
+
+/* Telas pequenas (abaixo de 576px) */
+@media screen and (max-width: 575.98px) {
+  .admin_background {
+    background-image: url('/assets/img/admin-bg-mobile.png');
+  }
+}

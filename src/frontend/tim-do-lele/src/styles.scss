@@ -63,7 +63,7 @@ img {
 .form {
   position: relative;
   height: 94vh;
-  display: grid;
+  display: flex;
   align-items: center;
 }
 
@@ -248,7 +248,7 @@ img {
   flex-direction: column;
   width: 100%;
   min-height: 100vh; /* Garante que ocupe toda a altura da viewport */
-  background-image: url('/assets/img/bg.png');
+  background-image: url('assets/img/bg.png');
   background-size: cover; /* Cobre o contêiner sem repetir a imagem */
   background-repeat: no-repeat; /* Evita repetição horizontal e vertical */
   background-position: center top; /* Posiciona a imagem no topo centralizado */
@@ -359,6 +359,20 @@ a {
 /* Telas pequenas (abaixo de 576px) */
 @media screen and (max-width: 575.98px) {
   
+  .background {
+    background-image: url('/assets/img/bg-mobile.png');
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center top !important;
+    width: 100%;
+    min-height: 100vh; /* Garante que a primeira instância do fundo cubra toda a tela */
+    height: auto; /* Permite expansão conforme o conteúdo */
+    background-image: url('assets/img/bg-mobile.png');
+    background-size: 100% auto; /* Mantém a largura total e ajusta a altura automaticamente */
+    background-repeat: repeat-y; /* Repete a imagem verticalmente sem zoom */
+    background-position: center top;
+  }
+
   .fotowide {
     padding-top: 94px;
     width: 70rem;

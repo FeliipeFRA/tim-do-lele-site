@@ -3,3 +3,13 @@
     font-size: 2.5rem;
 }
 
+/* Telas pequenas (abaixo de 576px) */
+@media screen and (max-width: 575.98px) {
+    .background {
+        background-size: contain !important;
+        background-image: url('assets/img/bg-mobile.png');
+    
+        background-repeat: repeat-y; /* Repete a imagem verticalmente sem zoom */
+        background-position: center top;
+    }
+}
