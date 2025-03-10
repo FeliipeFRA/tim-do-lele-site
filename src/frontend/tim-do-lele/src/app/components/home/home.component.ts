@@ -21,9 +21,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) { // Garante que só execute no navegador
       if (window.innerWidth <= 768) { // Verifica se a tela é mobile
-        this.renderer.setStyle(document.body, 'background-image', 'url("assets/img/bg-mobile.png")');
-        this.renderer.setStyle(document.body, 'background-size', 'cover');
-        this.renderer.setStyle(document.body, 'background-position', 'center top');
+        
       }
     }
   }
