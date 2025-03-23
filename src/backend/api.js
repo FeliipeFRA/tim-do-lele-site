@@ -31,6 +31,18 @@ app.use(cors({
 // Middleware para interpretar JSON
 app.use(express.json());
 
+// Função para validar e-mails com domínios específicos
+function validarEmail(email) {
+    const dominiosPermitidos = ['gmail.com', '@baraodemaua.edu.br', 'hotmail.com', 'yahoo.com', 'yahoo.com.br', 'icloud.com', 'outlook.com', 'aol.com'];
+
+    const padraoEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
+    if (padraoEmail.test(email)) {
+        const dominio = email.split('@')[1];
+        return dominiosPermitidos.includes(dominio);
+    }
+    return false;
+}
 
 app.get('/consulta-users', async (req, res) => {
     //Endpoint responsável por consultar users
@@ -95,6 +107,11 @@ app.post('/autenticar-login', async (req, res) => {
 app.post('/enviar-cadastro', async (req, res) => {
     try {
         const data = req.body;
+
+        // Valida o e-maill com o=domínios permitidos
+        if (!validarEmail(data.email)) {
+            return res.status(400).send({ message: "E-mail inválido." });
+        }
         
         // Criptografa a senha do user
         let senhaCriptografada;
