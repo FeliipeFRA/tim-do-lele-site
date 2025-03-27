@@ -2,9 +2,10 @@
 .card-container {
     display: flex;
     flex-wrap: wrap; /* Permite que os cards se ajustem na tela */
-    justify-content: center; /* Centraliza os cards horizontalmente */
+    justify-content: flex-start; /* Centraliza os cards horizontalmente */
     gap: 20px; /* Espaçamento entre os cards */
     margin: 20px 0; /* Margem geral ao redor dos cards */
+    padding: 0 2.5%; /* Adiciona padding nas laterais para centralizar e alinhar à esquerda */
 }
 
 /* Card */
@@ -19,6 +20,7 @@
     position: center;
     display: flex;
     flex-direction: column;
+    flex-basis: calc(24% - 20px);
 }
 
 .card:hover{
@@ -27,13 +29,13 @@
 }
 
 .card img {
-    width: 70%;
+    width: 40%;
     height: auto;
     
 }
 
 .card-title {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: bold;
     color: var(--yellow-color);
 }
@@ -46,7 +48,7 @@
 
 /* Botão Adicionar ao Carrinho */
 .btn-add-to-cart {
-    font-size: 0.9rem; /* Tamanho menor do texto */
+    font-size: 0.8rem; /* Tamanho menor do texto */
     background-color: rgb(138, 44, 44);
     color: #fff;
     font-weight: bold;
@@ -94,10 +96,21 @@
 @media screen and (max-width: 575.98px) {
     .details-content {
         width: 80%;
-        height: 50%;
+        height: 80%;
     }
 
     .details-img {
-        width: 80%;
+        width: 60%;
+    }
+
+    .card-container {
+        padding: 3%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card {
+        flex-basis: 90%; /* Cada card ocupa 100% da largura disponível (1 por linha no mobile) */
+        width: auto; /* Ajusta a largura para ocupar toda a linha */
     }
 }
