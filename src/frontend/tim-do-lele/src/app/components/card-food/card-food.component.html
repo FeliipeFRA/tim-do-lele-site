@@ -1,9 +1,12 @@
 <div class="card-container">
   <div *ngFor="let lanche of lanches" class="card" (click)="openPopup(lanche)">
-    <div class="card-body text-center">
-      <img src="../../../../assets/img/lanche.png" alt="{{ lanche.NOME }}" class="img-fluid">
-      <h3 class="card-title">{{ lanche.NOME }}</h3>
-      <p class="card-text">Preço: R$ {{ lanche.PRECO.toFixed(2).replace('.', ',') }}</p>
+    <div class="card-body">
+      <img src="../../../../assets/img/lanche.jpg" alt="{{ lanche.NOME }}" class="img-fluid lanche-image">
+      <div class="text-container">
+        <h3 class="card-title">{{ lanche.NOME }}</h3>
+        <p></p>
+        <p class="card-text">R$ {{ lanche.PRECO.toFixed(2).replace('.', ',') }}</p>
+      </div>
     </div>
   </div>
 
@@ -14,7 +17,7 @@
 
       <!-- titulo -->
       <h2 class="details-title">{{ selectedLanche?.NOME }}</h2>
-      <img src="../../../../assets/img/lanche.png" alt="{{ selectedLanche?.NOME }}" class="details-img">
+      <img src="../../../../assets/img/lanche.jpg" alt="{{ selectedLanche?.NOME }}" class="details-img">
 
       <!-- implementar puxar ingredientes do banco -->
       <p class="ingredients-text">{{ selectedLanche?.INGREDIENTES }}</p>
