@@ -11,12 +11,12 @@
 /* Card */
 .card {
     cursor: pointer;
-    background-color: rgb(172, 60, 60);
+    background-color: rgb(145, 47, 47);
     width: 240px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    padding: 20px;
+    text-align: left;
+    padding: 15px;
     position: center;
     display: flex;
     flex-direction: column;
@@ -25,24 +25,39 @@
 
 .card:hover{
     transition: 0.2s;
-    width: 250px;
+    transform: scale(1.05); /* Aumenta o tamanho do card ao passar o mouse */
+    z-index: 10; /* Garante que o card em foco fique sobre os outros */
+}
+
+.card-body {
+    display: flex;
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    padding: 5px;
 }
 
 .card img {
-    width: 40%;
-    height: auto;
-    
+    width: 100px; /* Ajuste o tamanho da imagem conforme necessário */
+    height: max-content;
+    margin-right: 5%; /* Espaçamento entre a imagem e o texto */
+    border-radius: 10px;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column; /* Alinha o texto verticalmente */
+    justify-content: center; /* Alinha o texto no centro */
 }
 
 .card-title {
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 1.2rem;
     color: var(--yellow-color);
 }
+
 
 .card-text {
     font-size: 1.2rem;
     color: #fff;
+    font-weight: bold;
     margin-bottom: auto;
 }
 
@@ -72,6 +87,31 @@
 .original-price {
     color: gray;
 }
+
+.plus-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgb(173, 0, 0);
+    color: white;
+    font-size: 20px;
+    width: 40px;
+    height: 30px;
+    border-radius: 10%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.plus-btn:hover {
+    background-color: var(--yellow-color);
+    color: rgb(133, 92, 32);
+}
+
 
 
 

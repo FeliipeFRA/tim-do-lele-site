@@ -20,7 +20,7 @@
     position: center;
     display: flex;
     flex-direction: column;
-    flex-basis: calc(25% - 20px);
+    flex-basis: calc(24% - 20px);
 }
 
 .card:hover {
@@ -36,7 +36,7 @@
 }
 
 .lanche-image {
-    width: 120px; /* Ajuste o tamanho da imagem conforme necessário */
+    width: 100px; /* Ajuste o tamanho da imagem conforme necessário */
     height: max-content;
     margin-right: 5%; /* Espaçamento entre a imagem e o texto */
     border-radius: 10px;
@@ -59,6 +59,32 @@
     font-weight: bold;
     margin-bottom: auto;
 }
+
+
+.plus-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgb(173, 0, 0);
+    color: white;
+    font-size: 20px;
+    width: 40px;
+    height: 30px;
+    border-radius: 10%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.plus-btn:hover {
+    background-color: var(--yellow-color);
+    color: rgb(133, 92, 32);
+}
+
 
 /* Botão Adicionar ao Carrinho */
 .btn-add-to-cart {
@@ -95,7 +121,7 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    overflow: hidden; /* Impede a rolagem */
+    
 }
 
 /* Detalhes do lanche */
@@ -103,12 +129,13 @@
     color: black;
     background-color: white;
     padding: 20px;
-    width: 35%;
+    width: 50%;
     border-radius: 8px;
     text-align: center;
     position: relative;
     max-height: 90%; /* Limita a altura para não exceder a tela */
-    overflow: hidden; /* Impede a rolagem */
+    overflow-y: auto;
+    overflow-x: hidden;
     transition: height 0.3s ease;
 }
 
