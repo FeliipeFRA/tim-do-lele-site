@@ -63,19 +63,19 @@
 
 /* Botão Adicionar ao Carrinho */
 .btn-add-to-cart {
-    font-size: 0.8rem; /* Tamanho menor do texto */
     background-color: rgb(138, 44, 44);
+    font-size: medium;
     color: #fff;
     font-weight: bold;
     border: none;
-    padding: 8px; /* Margem reduzida */
+    padding: 10px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.2s;
-    width: calc(100% - 20px); /* Ocupa quase toda a largura do card */
-    position: relative; /* Define posição fixa */
-    padding-top: 10px;
-    box-sizing: border-box; /* Garante o cálculo correto de largura */
+    width: calc(100% - 20px); /* Ajuste a largura do botão para ocupar quase todo o card */
+    position: sticky;
+    bottom: 10px; /* Fixa o botão na parte inferior */
+    margin-bottom: 10px;
 }
 
 .btn-add-to-cart:hover {

@@ -12,30 +12,44 @@
     </div>
   </div>
 
-  <!-- Detalhes do Lanche -->
   <div class="details" *ngIf="isPopupOpen" (click)="onBackdropClick($event)">
     <div class="details-content" (click)="$event.stopPropagation()">
       <span class="close-button" (click)="closePopup()">&times;</span>
-      <h2 class="details-title">{{ selectedLanche?.NOME }}</h2>
-      <img src="../../../../assets/img/lanche.jpg" alt="{{ selectedLanche?.NOME }}" class="details-img">
-      <p class="ingredients-text">{{ selectedLanche?.INGREDIENTES }}</p>
-      <div class="sauce-section">
-        <button class="toggle-sauce" (click)="toggleSauceOptions()">Opções de Molhos <span [class.rotated]="isSauceOpen">▼</span></button>
-        <div class="sauce-options" *ngIf="isSauceOpen">
-          <label><input type="checkbox" [checked]="areAllSaucesSelected" (change)="toggleAllSauces()" /> Todos</label>
-          <label *ngFor="let sauce of sauces">
-            <input type="checkbox" [checked]="sauce.selected" (change)="toggleSauce(sauce)" /> {{ sauce.name }}
-          </label>
-        </div>
+  
+      <!-- Layout de Foto e Título -->
+      <div class="left-side">
+        <img src="../../../../assets/img/lanche.jpg" alt="{{ selectedLanche?.NOME }}" class="details-img">
       </div>
-      <div class="observations-section">
-        <label for="observations">Observações:</label>
-        <div class="textarea-container">
-          <textarea id="observations" rows="3" placeholder="Escreva aqui suas observações..."></textarea>
-          <img src="../../../../assets/img/caneta.png" alt="Ícone de Caneta" class="icon-pencil">
+      
+      <div class="right-side">
+        <h2 class="details-title">{{ selectedLanche?.NOME }}</h2>
+  
+        <!-- Opções de Molhos com rolagem -->
+        <div class="sauce-section">
+          <button class="toggle-sauce" (click)="toggleSauceOptions()">Opções de Molhos <span [class.rotated]="isSauceOpen">▼</span></button>
+          <div class="sauce-options" *ngIf="isSauceOpen">
+            <label>
+              <input type="checkbox" [checked]="areAllSaucesSelected" (change)="toggleAllSauces()" /> Todos
+            </label>
+            <label *ngFor="let sauce of sauces">
+              <input type="checkbox" [checked]="sauce.selected" (change)="toggleSauce(sauce)" /> {{ sauce.name }}
+            </label>
+          </div>
         </div>
+  
+        <!-- Observações com rolagem -->
+        <div class="observations-section">
+          <label for="observations">Observações:</label>
+          <div class="textarea-container">
+            <textarea id="observations" rows="3" placeholder="Escreva aqui suas observações..."></textarea>
+            <img src="../../../../assets/img/caneta.png" alt="Ícone de Caneta" class="icon-pencil">
+          </div>
+        </div>
+  
+        <!-- Botão de Adicionar ao Carrinho -->
+        <button class="btn btn-add-to-cart" (click)="addToCart()">Adicionar ao Carrinho - R$ {{ (selectedLanche?.PRECO || 0).toFixed(2).replace('.', ',') }}</button>
       </div>
-      <button class="btn btn-add-to-cart" (click)="addToCart()">Adicionar ao Carrinho - R$ {{ (selectedLanche?.PRECO || 0).toFixed(2).replace('.', ',') }}</button>
     </div>
   </div>
+  
 </div>
