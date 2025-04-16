@@ -163,6 +163,7 @@
 
 /* Título do Card (fixo) */
 .details-title {
+    color: black;
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 25px;
@@ -229,6 +230,18 @@
             }
         }
     }
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px; /* Agora no canto esquerdo */
+    font-size: 22px;
+    color: #000;
+    cursor: pointer;
+    z-index: 10000;
+    background: transparent;
+    border: none;
 }
 
 /* Observações */
@@ -302,8 +315,65 @@
     }
 }
 
-/* Telas pequenas (abaixo de 576px) */
-@media screen and (max-width: 575.98px) {
+    /* Ajustes para telas pequenas */
+@media screen and (max-width: 767px) {
+ 
+    .details-content {
+        flex-direction: column;
+        width: 95%;
+        height: 95vh;
+        max-height: 95vh;
+        padding: 10px;
+        overflow: hidden;
+    }
+
+    .left-side {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 15px;
+    }
+
+    .details-img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .right-side {
+        width: 100%;
+        max-height: unset;
+        overflow: hidden;
+        padding-right: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .internal-content {
+        overflow-y: auto;
+        flex: 1;
+    }
+
+    .btn-add-to-cart {
+        position: sticky;
+        bottom: 0;
+        margin-top: auto;
+        width: 100%;
+        left: 0;
+        right: 0;
+        border-radius: 0;
+    }
+
+    .details-title {
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        z-index: 10;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+
+    
     .details-content {
         width: 80%;
         height: 80%;
@@ -320,7 +390,9 @@
     }
 
     .card {
-        flex-basis: 80%; /* Cada card ocupa 100% da largura disponível (1 por linha no mobile) */
-        width: auto; /* Ajusta a largura para ocupar toda a linha */
+
+        flex-basis: 85%; /* Cada card ocupa 100% da largura disponível (1 por linha no mobile) */
+        width: 90%; /* Ajusta a largura para ocupar toda a linha */
+
     }
 }
