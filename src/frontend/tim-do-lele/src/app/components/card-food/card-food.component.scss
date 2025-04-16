@@ -60,7 +60,6 @@
     margin-bottom: auto;
 }
 
-
 .plus-btn {
     position: absolute;
     bottom: 10px;
@@ -127,6 +126,7 @@
 
 /* Detalhes do lanche */
 .details-content {
+
     background-color: #fff;
     width: 80%;
     max-width: 900px;
@@ -141,6 +141,13 @@
     overflow: hidden; /* Garante que não haja rolagem horizontal */
 }
 
+/* Ingredientes */
+.ingredients-text {
+    font-size: 1.2rem;
+    color: rgb(99, 99, 99);
+    margin: 0;
+}
+
 /* Lado Esquerdo (Imagem do Lanche) */
 .left-side {
     width: 40%;
@@ -152,7 +159,15 @@
     border-radius: 8px;
 }
 
-/* Lado Direito (Texto e Opções) */
+.right-side-tittle{
+    width: 60%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 70vh; /* Permite rolagem vertical se necessário */
+    padding-right: 10px;
+}
+
+
 .right-side {
     width: 60%;
     overflow-y: auto;
@@ -175,9 +190,17 @@
     border-bottom: 2px solid #e0e0e0; /* Linha de separação cinza */
 }
 
+.section_tittle {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+}
+
 /* Opções de Molhos */
 .sauce-section {
-    margin-top: 20px;
+    margin-top: 4%;
 
     .toggle-sauce {
         display: flex;
@@ -250,14 +273,6 @@
     margin-top: 20px;
     text-align: left;
 
-    label {
-        font-size: 1rem;
-        font-weight: bold;
-        color: #333;
-        display: block;
-        margin-bottom: 5px;
-    }
-
     .textarea-container {
         position: relative; /* Necessário para que o ícone seja posicionado relativo a este elemento */
         display: flex;
@@ -317,13 +332,17 @@
 
     /* Ajustes para telas pequenas */
 @media screen and (max-width: 767px) {
- 
+    .details {
+        width: 100%;
+        padding: 0%;
+    }
+
     .details-content {
         flex-direction: column;
-        width: 95%;
-        height: 95vh;
-        max-height: 95vh;
+        width: 90%;
+        height: 90%;
         padding: 10px;
+        margin: 2%;
         overflow: hidden;
     }
 
@@ -373,11 +392,7 @@
         text-align: center;
     }
 
-    
-    .details-content {
-        width: 80%;
-        height: 80%;
-    }
+
 
     .details-img {
         width: 60%;
