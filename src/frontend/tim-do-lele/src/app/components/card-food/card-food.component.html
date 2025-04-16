@@ -1,61 +1,63 @@
 <div class="card-container">
-  <div *ngFor="let lanche of lanches" class="card" (click)="openPopup(lanche)">
-    <div class="card-body text-center">
-      <img src="../../../../assets/img/lanche.png" alt="{{ lanche.NOME }}" class="img-fluid">
-      <h3 class="card-title">{{ lanche.NOME }}</h3>
-      <p class="card-text">Preço: R$ {{ lanche.PRECO.toFixed(2).replace('.', ',') }}</p>
+  <div *ngFor="let lanche of lanches" class="card" (click)="openPopup(lanche)" style="position: relative;">
+    <div class="card-body">
+      <img src="../../../../assets/img/lanche.jpg" alt="{{ lanche.NOME }}" class="img-fluid lanche-image">
+      <div class="text-container">
+        <h3 class="card-title">{{ lanche.NOME }}</h3>
+        <p class="card-text">R$ {{ lanche.PRECO.toFixed(2).replace('.', ',') }}</p>
+      </div>
+      <!-- Adicionando o botão "+" -->
+      <button class="plus-btn" (click)="openPopup(lanche)">+</button>
     </div>
   </div>
 
-  <!-- detalhes do lanche-->
   <div class="details" *ngIf="isPopupOpen" (click)="onBackdropClick($event)">
     <div class="details-content" (click)="$event.stopPropagation()">
       <span class="close-button" (click)="closePopup()">&times;</span>
 
-      <!-- titulo -->
-      <h2 class="details-title">{{ selectedLanche?.NOME }}</h2>
-      <img src="../../../../assets/img/lanche.png" alt="{{ selectedLanche?.NOME }}" class="details-img">
-
-      <!-- implementar puxar ingredientes do banco -->
-      <p class="ingredients-text">{{ selectedLanche?.INGREDIENTES }}</p>
-
-      <!-- Seção de Molhos -->
-      <div class="sauce-section">
-        <button class="toggle-sauce" (click)="toggleSauceOptions()">
-          Opções de Molhos 
-          <span [class.rotated]="isSauceOpen">▼</span>
-        </button>
-        <div class="sauce-options" *ngIf="isSauceOpen">
-          <!-- Opção "Todos" -->
-          <label>
-            <input type="checkbox" [checked]="areAllSaucesSelected" (change)="toggleAllSauces()" /> Todos
-          </label>
-          <!-- Lista de molhos -->
-          <label *ngFor="let sauce of sauces">
-            <input 
-              type="checkbox" 
-              [checked]="sauce.selected" 
-              (change)="toggleSauce(sauce)" 
-            /> 
-            {{ sauce.name }}
-          </label>
-        </div>
+      <!-- Layout de Foto -->
+      <div class="left-side">
+        <img src="../../../../assets/img/lanche.jpg" alt="{{ selectedLanche?.NOME }}" class="details-img">
       </div>
-      
-      <!-- Área de Observações -->
-      <div class="observations-section">
-        <label for="observations">Observações:</label>
-        <div class="textarea-container">
-          <textarea id="observations" rows="3" placeholder="Escreva aqui suas observações..."></textarea>
-          <img src="../../../../assets/img/caneta.png" alt="Ícone de Caneta" class="icon-pencil">
+
+      <!-- Right Side para Título e Conteúdo -->
+      <div class="right-side">
+        <!-- Título ficará na seção right-side-tittle -->
+        <div class="right-side-tittle">
+          <h2 class="details-title">{{ selectedLanche?.NOME }}</h2>
         </div>
+
+        <!-- Conteúdo com rolagem (molhos e observações) -->
+        <div class="internal-content">
+          <h2 class="section_tittle">Ingredientes:</h2>
+          <p class="ingredients-text">{{ selectedLanche?.INGREDIENTES }}</p>
+
+          <!-- Opções de Molhos com rolagem -->
+          <div class="sauce-section">
+            <h2 class="section_tittle">Molhos:</h2>
+            <div class="sauce-options">
+              <label>
+                <input type="checkbox" [checked]="areAllSaucesSelected" (change)="toggleAllSauces()" /> Todos
+              </label>
+              <label *ngFor="let sauce of sauces">
+                <input type="checkbox" [checked]="sauce.selected" (change)="toggleSauce(sauce)" /> {{ sauce.name }}
+              </label>
+            </div>
+          </div>
+
+          <!-- Observações com rolagem -->
+          <h2 class="section_tittle">Observações:</h2>
+          <div class="observations-section">
+            <div class="textarea-container">
+              <textarea id="observations" rows="3" placeholder="Escreva aqui suas observações..."></textarea>
+              <img src="../../../../assets/img/caneta.png" alt="Ícone de Caneta" class="icon-pencil">
+            </div>
+          </div>
+        </div>
+
+        <!-- Botão de Adicionar ao Carrinho -->
+        <button class="btn btn-add-to-cart" (click)="addToCart()">Adicionar ao Carrinho - R$ {{ (selectedLanche?.PRECO || 0).toFixed(2).replace('.', ',') }}</button>
       </div>
-      
-      <!-- Botão de Adicionar ao Carrinho -->
-      <button class="btn btn-add-to-cart" (click)="addToCart()">Adicionar ao Carrinho - R$ {{ (selectedLanche?.PRECO || 0).toFixed(2).replace('.', ',') }}</button>
     </div>
   </div>
 </div>
-  
-
-<script defer src="card-food.component.ts"></script>

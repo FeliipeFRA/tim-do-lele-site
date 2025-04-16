@@ -252,6 +252,8 @@ img {
   background-size: cover; /* Cobre o contêiner sem repetir a imagem */
   background-repeat: no-repeat; /* Evita repetição horizontal e vertical */
   background-position: center top; /* Posiciona a imagem no topo centralizado */
+  background-size: cover; /* Garante que a imagem ainda cubra a tela */
+  background-attachment: fixed;
 }
 
 .content {
@@ -285,10 +287,6 @@ a {
 /*=============== BREAKPOINTS ===============*/
 /* Telas médias */
 @media screen and (min-width: 1200px) {
-  .background {
-    background-size: cover; /* Garante que a imagem ainda cubra a tela */
-    background-attachment: fixed;
-  }
 
   .form {
     justify-content: center;
@@ -355,9 +353,8 @@ a {
   }
 }
 
-
 /* Telas pequenas (abaixo de 576px) */
-@media screen and (max-width: 575.98px) {
+@media screen and (max-width: 675px) {
   
   .background {
     background-image: url('/assets/img/bg-mobile.png');
@@ -408,6 +405,7 @@ a {
   }
 
   .form {
+    justify-content: center;
     margin-top: 1rem; /* Adicione esta linha para ajustar o espaço no topo */
   }
 
