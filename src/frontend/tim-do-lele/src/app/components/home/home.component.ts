@@ -2,13 +2,14 @@ import { Component, OnInit, Renderer2, Inject, PLATFORM_ID } from '@angular/core
 import { isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { RodapeComponent } from '../rodape/rodape.component';
 import { CardFoodComponent } from '../card-food/card-food.component';
 import { CardDrinksComponent } from '../card-drinks/card-drinks.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, CardFoodComponent, CardDrinksComponent],
+  imports: [CommonModule, NavbarComponent, CardFoodComponent, CardDrinksComponent, RodapeComponent], 
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
