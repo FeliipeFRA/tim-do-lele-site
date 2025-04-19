@@ -1,6 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const { ConfigBanco } = require('./query_banco/config_banco.js'); 
+const { ConfigBanco } = require('../query_banco/config_banco.js'); 
 const bcrypt = require('bcrypt'); // Certifique-se de ter o bcrypt instalado
 
 // Função para comparar a senha fornecida com a senha armazenada criptografada

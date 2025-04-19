@@ -11,10 +11,10 @@ const {ConfigBanco} = require('./query_banco/config_banco.js')
 
 
 //criptografia da senha
-const {CriptografarSenha} = require('./cipher.js')
+const {CriptografarSenha} = require('./services/cipher.js')
 
 //validação de login
-const passport = require('./passport-config.js')
+const passport = require('./services/passport-config.js')
 
 const app = express();
 
