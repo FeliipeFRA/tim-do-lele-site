@@ -6,9 +6,12 @@ const {InserirUser} = require('./query_banco/inserir_cadastro.js')
 const {ConsultarLanches} = require('./query_banco/consulta_lanches.js')
 const {ConsultarPedidos} = require('./query_banco/consulta_pedidos.js')
 
+
+//rota de pagamentos
+const pagamento = require('./routes/pagamentos/pagamento.js');
+
 //módulo de configuração do banco de dados
 const {ConfigBanco} = require('./query_banco/config_banco.js')
-
 
 //criptografia da senha
 const {CriptografarSenha} = require('./services/cipher.js')
@@ -17,6 +20,9 @@ const {CriptografarSenha} = require('./services/cipher.js')
 const passport = require('./services/passport-config.js')
 
 const app = express();
+
+//api pagamentos
+app.use('/pagamento', pagamento);
 
 const PORT = 8000;
 
@@ -30,6 +36,7 @@ app.use(cors({
   
 // Middleware para interpretar JSON
 app.use(express.json());
+
 
 
 app.get('/consulta-users', async (req, res) => {
@@ -125,6 +132,15 @@ app.get('/pedidos', async (req, res) => {
         res.status(500).send("Erro ao consultar a tabela pedidos.");
     }
 });
+
+app.post('/pagamentos/pix', async (req, res) =>{
+    try{
+
+    }
+    catch(error){
+
+    }
+})
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
