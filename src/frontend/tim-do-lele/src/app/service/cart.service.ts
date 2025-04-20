@@ -21,10 +21,10 @@ export class CartService {
   
     if (existingItem) {
       // Se o item já existe, garante que QUANTITY seja definida
-      existingItem.QUANTITY = (existingItem.QUANTITY || 0) + 1; // Se não tiver QUANTITY, inicializa como 0 antes de somar
+      existingItem.QUANTITY = (existingItem.QUANTITY || 0) + item.QUANTITY!; // Se não tiver QUANTITY, inicializa como 0 antes de somar
     } else {
       // Se o item não existir, adiciona com QUANTITY inicializada como 1
-      this.cartItems.push({ ...item, QUANTITY: 1 });
+      this.cartItems.push({ ...item, QUANTITY: item.QUANTITY! });
     }
   
     this.cartSubject.next(this.cartItems);

@@ -14,8 +14,10 @@ import { CommonModule } from '@angular/common';
 })
 export class CardFoodComponent implements OnInit {
   lanches: Food[] = [];
+  lanchesAgrupados: { [tipo: string]: Food[] } = {};
   isPopupOpen = false;
   selectedLanche: Food | null = null;
+  quantity: number = 1;  // Inicializa a quantidade com 1
 
   // Propriedade para controlar a exibição das opções de molhos
   isSauceOpen = false;
@@ -34,6 +36,23 @@ export class CardFoodComponent implements OnInit {
   ngOnInit(): void {
     this.getFood.getDataFood().subscribe(data => {
       this.lanches = data;
+
+      // Agrupar por tipo
+      const agrupados: { [tipo: string]: Food[] } = {};
+      for (const lanche of data) {
+        if (!agrupados[lanche.TIPO]) {
+          agrupados[lanche.TIPO] = [];
+        }
+        agrupados[lanche.TIPO].push(lanche);
+      }
+
+      // Ordem personalizada
+      const ordem = ['CACHORRO QUENTE', 'HAMBURGUER', 'FRANGO'];
+      this.lanchesAgrupados = Object.fromEntries(
+        ordem
+          .filter(tipo => agrupados[tipo])
+          .map(tipo => [tipo, agrupados[tipo]])
+      );
     });
   }
 
@@ -56,7 +75,16 @@ export class CardFoodComponent implements OnInit {
   }
 
   openPopup(lanche: Food): void {
-    this.selectedLanche = lanche;
+
+    this.selectedLanche = lanche || {
+      ID: 0, 
+      NOME: '', 
+      PRECO: 14, 
+      INGREDIENTES: '', 
+      QUANTITY: 1, 
+      sauces: [], 
+      observations: '' 
+    };
     this.isPopupOpen = true;
     // Resetar os molhos selecionados
     this.sauces.forEach(sauce => sauce.selected = false);
@@ -70,10 +98,29 @@ export class CardFoodComponent implements OnInit {
   onBackdropClick(event: Event): void {
     this.closePopup();
   }
+  
 
   closePopup(): void {
     this.isPopupOpen = false;
-    this.selectedLanche = null;
+
+    if (this.selectedLanche) {
+      this.selectedLanche.QUANTITY = 1;  // Resetando a quantidade para 1
+    }
+
+    this.selectedLanche = null; // Limpa o lanche selecionado
+  }
+
+  increaseQuantity(): void {
+    if (this.selectedLanche) {
+      this.selectedLanche.QUANTITY = (this.selectedLanche.QUANTITY || 1) + 1;
+      
+    }
+  }
+  
+  decreaseQuantity(): void {
+    if (this.selectedLanche && this.selectedLanche.QUANTITY && this.selectedLanche.QUANTITY > 1) {
+      this.selectedLanche.QUANTITY--;
+    }
   }
 
   addToCart(): void {
@@ -81,7 +128,7 @@ export class CardFoodComponent implements OnInit {
       const lancheComDetalhes = {
         ...this.selectedLanche,
         sauces: this.sauces.filter(sauce => sauce.selected).map(sauce => sauce.name),
-        observations: (document.getElementById('observations') as HTMLTextAreaElement)?.value || ''
+        observations: (document.getElementById('observations') as HTMLTextAreaElement)?.value || '',
       };
   
       this.cartService.addToCart(lancheComDetalhes);

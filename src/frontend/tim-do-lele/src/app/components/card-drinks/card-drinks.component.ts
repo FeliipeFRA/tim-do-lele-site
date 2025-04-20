@@ -12,11 +12,11 @@ import { CommonModule } from '@angular/common';
 })
 export class CardDrinksComponent implements OnInit {
   bebidas: Food[] = [
-    { ID: 101, NOME: 'Coca-Cola 350ml', INGREDIENTES: 'Liquido', PRECO: 5.50 },
-    { ID: 102, NOME: 'Fanta 350ml', INGREDIENTES: 'Liquido', PRECO: 5.00 },
-    { ID: 103, NOME: 'Guaraná 350ml', INGREDIENTES: 'Liquido', PRECO: 5.00 },
-    { ID: 104, NOME: 'Água 500ml', INGREDIENTES: 'Liquido', PRECO: 3.50 },
-    { ID: 105, NOME: 'Água com Gás 500ml', INGREDIENTES: 'Liquido', PRECO: 4.00 },
+    { ID: 101, NOME: 'Coca-Cola 350ml', INGREDIENTES: 'Liquido', PRECO: 5.50, TIPO: "BEBIDA" },
+    { ID: 102, NOME: 'Fanta 350ml', INGREDIENTES: 'Liquido', PRECO: 5.00, TIPO: "BEBIDA" },
+    { ID: 103, NOME: 'Guaraná 350ml', INGREDIENTES: 'Liquido', PRECO: 5.00, TIPO: "BEBIDA" },
+    { ID: 104, NOME: 'Água 500ml', INGREDIENTES: 'Liquido', PRECO: 3.50, TIPO: "BEBIDA" },
+    { ID: 105, NOME: 'Água com Gás 500ml', INGREDIENTES: 'Liquido', PRECO: 4.00, TIPO: "BEBIDA" },
   ];
 
 

@@ -1,11 +1,36 @@
 /* Container dos Cards */
 .card-container {
+    display: block; // agora deixa os grupos empilhados
+    width: 100%;
+}
+
+.grupo-lanche {
+    margin-bottom: 48px;
+    width: 100%;
+}
+
+.tipo-titulo {
+    margin-top: 1rem;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 16px;
+    background-color: rgb(172, 60, 60);
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    padding: 12px 0;
+    margin: 32px auto 16px;
+    border-top: 4px solid var(--yellow-color);
+    border-bottom: 4px solid var(--yellow-color);
+    text-transform: uppercase;
+}
+
+.grupo-card-container {
+    padding: 0 5%; /* Adiciona padding nas laterais para centralizar e alinhar à esquerda */
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 20px;
-    margin: 20px 0;
-    padding: 0 2.5%;
+    gap: 16px;
+    justify-content: left;
 }
 
 /* Card */
@@ -25,27 +50,34 @@
 
 .card:hover {
     transition: 0.2s;
-    transform: scale(1.05); /* Aumenta o tamanho do card ao passar o mouse */
-    z-index: 10; /* Garante que o card em foco fique sobre os outros */
+    transform: scale(1.05);
+    /* Aumenta o tamanho do card ao passar o mouse */
+    z-index: 10;
+    /* Garante que o card em foco fique sobre os outros */
 }
 
 .card-body {
     display: flex;
-    align-items: center; /* Alinha os itens verticalmente ao centro */
+    align-items: center;
+    /* Alinha os itens verticalmente ao centro */
     padding: 5px;
 }
 
 .lanche-image {
-    width: 100px; /* Ajuste o tamanho da imagem conforme necessário */
+    width: 100px;
+    /* Ajuste o tamanho da imagem conforme necessário */
     height: max-content;
-    margin-right: 5%; /* Espaçamento entre a imagem e o texto */
+    margin-right: 5%;
+    /* Espaçamento entre a imagem e o texto */
     border-radius: 10px;
 }
 
 .text-container {
     display: flex;
-    flex-direction: column; /* Alinha o texto verticalmente */
-    justify-content: center; /* Alinha o texto no centro */
+    flex-direction: column;
+    /* Alinha o texto verticalmente */
+    justify-content: center;
+    /* Alinha o texto no centro */
 }
 
 .card-title {
@@ -84,30 +116,6 @@
     color: rgb(133, 92, 32);
 }
 
-
-/* Botão Adicionar ao Carrinho */
-.btn-add-to-cart {
-    background-color: rgb(138, 44, 44);
-    font-size: medium;
-    color: #fff;
-    font-weight: bold;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    width: calc(100% - 20px); /* Ajuste a largura do botão para ocupar quase todo o card */
-     /* Margem aos lados e embaixo */
-    position: relative;
-    bottom: 10px;
-    right: 10px;
-}
-
-.btn-add-to-cart:hover {
-    background-color: var(--yellow-color);
-    color: rgb(133, 92, 32);
-}
-
 /* Modal de Detalhes */
 .details {
     position: fixed;
@@ -115,18 +123,18 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fundo semitransparente */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 9999;
     padding: 20px;
-    overflow-x: hidden; /* Previne a rolagem horizontal */
+    overflow-x: hidden;
+    /* Previne a rolagem horizontal */
 }
 
-/* Detalhes do lanche */
 .details-content {
-
     background-color: #fff;
     width: 80%;
     max-width: 900px;
@@ -138,19 +146,87 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     position: relative;
-    overflow: hidden; /* Garante que não haja rolagem horizontal */
+    overflow: hidden;
+    /* Garante que não haja rolagem horizontal */
 }
 
-/* Ingredientes */
-.ingredients-text {
-    font-size: 1.2rem;
-    color: rgb(99, 99, 99);
-    margin: 0;
+.close-button {
+    position: absolute;
+    top: 7px;
+    right: 15px;
+    /* Agora no canto esquerdo */
+    font-size: 25px;
+    color: #000;
+    cursor: pointer;
+    z-index: 10000;
+    border: none;
+}
+
+.close-button:hover {
+    color: var(--yellow-color);
+    transition: color 0.2s;
+}
+
+.quantity-container {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.quantity-btn {
+width: 2rem;
+height: 2rem;
+border: none;
+background-color: rgb(138, 44, 44);
+color: white;
+font-size: 1.5rem;
+font-weight: bold;
+border-radius: 0.5rem;
+cursor: pointer;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.quantity-btn:hover {
+    background-color: var(--yellow-color);
+    color: rgb(133, 92, 32);
+  }
+
+.quantity-display {
+color: black;
+margin: 0 15px;
+font-size: 1.2rem;
+}
+  
+  
+
+.btn-add-to-cart {
+    background-color: rgb(138, 44, 44);
+    font-size: medium;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: calc(100%);
+    /* Ajuste a largura do botão para ocupar quase todo o card */
+    /* Margem aos lados e embaixo */
+    position: relative;
+    right: 10px;
+}
+
+.btn-add-to-cart:hover {
+    background-color: var(--yellow-color);
+    color: rgb(133, 92, 32);
 }
 
 /* Lado Esquerdo (Imagem do Lanche) */
 .left-side {
-    width: 40%;
+    width: 70%;
     padding-right: 20px;
 }
 
@@ -159,77 +235,91 @@
     border-radius: 8px;
 }
 
-.right-side-tittle{
-    width: 60%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-height: 70vh; /* Permite rolagem vertical se necessário */
-    padding-right: 10px;
+.details-warning {
+    font-size: 0.8rem;
+    color: rgb(99, 99, 99);
+    margin: 0;
 }
 
-
+/* Lado Direito */
 .right-side {
-    width: 60%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-height: 70vh; /* Permite rolagem vertical se necessário */
-    padding-right: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Organiza o título e conteúdo em coluna */
+    max-height: 70vh;
+    /* Limita a altura da área */
+    overflow-y: hidden;
+    /* Permite rolagem apenas na área de conteúdo */
 }
 
-/* Título do Card (fixo) */
-.details-title {
+.right-side-top {
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    /* Espaço entre o título e o conteúdo */
     color: black;
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
-    margin-bottom: 25px;
     position: sticky;
-    top: 20px; /* Mantém o título fixo no topo ao rolar */
-    z-index: 10; /* Garante que o título fique acima do conteúdo */
-    background-color: #fff; /* Cor de fundo branca para o título */
-    padding-bottom: 10px; /* Espaço abaixo do título */
-    border-bottom: 2px solid #e0e0e0; /* Linha de separação cinza */
+    background-color: #fff;
+    border-bottom: 2px solid #e0e0e0;
+    /* Linha de separação cinza */
+}
+
+.right-side-bottom {
+    width: 100%;
+    display: flex;
+    background-color: #fff;
+    z-index: 90;
+    /* Garante que o título fique acima do conteúdo */
+    padding: 10px 0;
+    text-align: center;
+    /* Alinhamento do título */
+    border-top: 2px solid #ddd;
+    /* Linha de separação */
+    margin-top: 3%;
+}
+
+.internal-content {
+    overflow-y: auto; /* Permite rolar apenas o conteúdo */
+    overflow-x: hidden;
 }
 
 .section_tittle {
-        font-size: 1rem;
-        font-weight: bold;
-        color: #333;
-        display: block;
-        margin-bottom: 5px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #333;
+    display: block;
+}
+
+.details-price {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: rgb(184, 23, 23);
+    border-bottom: 2px solid #e0e0e0;
+}
+
+/* Ingredientes */
+.ingredients-text {
+    font-size: 1.2rem;
+    color: rgb(184, 23, 23);
+    padding-bottom: 2.5%;
+    margin-bottom: 2.5%;
+    margin-right: 2.5%;
+    border-bottom: 2px solid #e0e0e0;
 }
 
 /* Opções de Molhos */
 .sauce-section {
     margin-top: 4%;
+    padding-bottom: 3.5%;
+    margin-bottom: 2%;
+    margin-right: 2.5%;
+    border-bottom: 2px solid #e0e0e0;
 
-    .toggle-sauce {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: rgb(138, 44, 44);
-        color: #fff;
-        font-size: 1.1rem;
-        font-weight: bold;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 15px;
-        cursor: pointer;
-        transition: background-color 0.2s;
-
-        span {
-            margin-left: 10px;
-            transition: transform 0.3s;
-        }
-
-        &:hover {
-            background-color: var(--yellow-color);
-            color: rgb(133, 92, 32);
-        }
-
-        &.rotated {
-            transform: rotate(180deg);
-        }
-    }
 
     .sauce-options {
         margin-top: 10px;
@@ -238,8 +328,10 @@
         border-radius: 5px;
         border: 1px solid #ddd;
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Duas colunas */
-        gap: 10px; /* Espaçamento entre os itens */
+        grid-template-columns: repeat(2, 1fr);
+        /* Duas colunas */
+        gap: 10px;
+        /* Espaçamento entre os itens */
 
         label {
             display: flex;
@@ -249,32 +341,22 @@
             cursor: pointer;
 
             input {
-                margin-right: 10px;
+                margin-right: 15px;
             }
         }
     }
 }
 
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 15px; /* Agora no canto esquerdo */
-    font-size: 22px;
-    color: #000;
-    cursor: pointer;
-    z-index: 10000;
-    background: transparent;
-    border: none;
-}
-
 /* Observações */
 .observations-section {
     font-family: "Poppins", sans-serif;
-    margin-top: 20px;
+    margin-top: 4%;
+    margin-right: 2.5%;
     text-align: left;
 
     .textarea-container {
-        position: relative; /* Necessário para que o ícone seja posicionado relativo a este elemento */
+        position: relative;
+        /* Necessário para que o ícone seja posicionado relativo a este elemento */
         display: flex;
     }
 
@@ -286,8 +368,7 @@
         font-size: 1rem;
         resize: none;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        min-height: 80px;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
     }
 
     textarea:focus {
@@ -297,41 +378,42 @@
 
     /* Contêiner da Textarea */
     .textarea-container {
-        position: relative; /* Necessário para que o ícone seja posicionado relativo a este elemento */
+        position: relative;
+        /* Necessário para que o ícone seja posicionado relativo a este elemento */
         display: flex;
     }
 
-    /* Estilo da Textarea */
-    textarea {
-        width: 100%;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        padding: 10px;
-        font-size: 1rem;
-        resize: none;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        min-height: 80px;
-    }
-
-    textarea:focus {
-        border-color: var(--yellow-color);
-        outline: none;
-    }
+    
 
     /* Ícone de Caneta */
     .icon-pencil {
         position: absolute;
-        left: 97%; /* Distância do ícone em relação à borda esquerda */
+        left: 93%;
+        /* Distância do ícone em relação à borda esquerda */
         top: -12px;
-        width: 35px; /* Largura do ícone */
-        height: 35px; /* Altura do ícone */
-        pointer-events: none; /* Impede que o ícone interfira na interação com o textarea */
-        opacity: 0.7; /* Opacidade para suavizar o ícone */
+        width: 35px;
+        /* Largura do ícone */
+        height: 35px;
+        /* Altura do ícone */
+        pointer-events: none;
+        /* Impede que o ícone interfira na interação com o textarea */
+        opacity: 0.7;
+        /* Opacidade para suavizar o ícone */
     }
 }
 
-    /* Ajustes para telas pequenas */
+/* Ajustes para telas pequenas */
 @media screen and (max-width: 767px) {
+
+    .grupo-card-container {
+        padding: 0px;
+        justify-content: center;
+    }
+
+    .tipo-titulo {
+        font-size: 1.6rem;
+    }
+
     .details {
         width: 100%;
         padding: 0%;
@@ -399,15 +481,18 @@
     }
 
     .card-container {
-        justify-content: center; /* Ajusta o alinhamento para que os cards ocupem 100% da largura no mobile */
+        justify-content: center;
+        /* Ajusta o alinhamento para que os cards ocupem 100% da largura no mobile */
         justify-content: center;
         padding: 0%;
     }
 
     .card {
 
-        flex-basis: 85%; /* Cada card ocupa 100% da largura disponível (1 por linha no mobile) */
-        width: 90%; /* Ajusta a largura para ocupar toda a linha */
+        flex-basis: 85%;
+        /* Cada card ocupa 100% da largura disponível (1 por linha no mobile) */
+        width: 90%;
+        /* Ajusta a largura para ocupar toda a linha */
 
     }
 }
