@@ -1,5 +1,6 @@
 .header {
   font-family: "Poppins", sans-serif;
+  
   position: fixed;
   top: 0;
   left: 0;
@@ -11,6 +12,7 @@
   padding: 0rem 7%;
   background: rgb(172, 60, 60);
   box-shadow: var(--box-shadow);
+  border-bottom:7px solid var(--yellow-color);
 }
 
 .logo {
@@ -31,6 +33,9 @@
   text-decoration: none;
   transition: all 0.7s linear;
   color: black;
+  text-transform: uppercase;
+  font-weight: bold;
+  
 
   a {
       font-size: 1.7rem;
@@ -38,7 +43,8 @@
       color: white;
 
       &:hover {
-          font-size: 310%;
+          transition: 0.2s;
+          font-size: 300%;
           color: var(--yellow-color);
           text-decoration: none;
       }

@@ -8,6 +8,17 @@
     padding: 0 5%; /* Adiciona padding nas laterais para centralizar e alinhar à esquerda */
 }
 
+.tipo-titulo {
+    font-size: 3.2rem;
+    text-align: left;
+    margin-bottom: 16px;
+    color: #fff;
+    font-weight: bold;
+    padding: 0 5%; /* Adiciona padding nas laterais para centralizar e alinhar à esquerda */
+    text-transform: uppercase;
+    text-decoration: underline
+}
+
 /* Card */
 .card {
     cursor: pointer;
@@ -25,7 +36,7 @@
 
 .card:hover{
     transition: 0.2s;
-    transform: scale(1.05); /* Aumenta o tamanho do card ao passar o mouse */
+    transform: scale(1.02); /* Aumenta o tamanho do card ao passar o mouse */
     z-index: 10; /* Garante que o card em foco fique sobre os outros */
 }
 

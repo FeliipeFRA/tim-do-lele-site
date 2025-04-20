@@ -7,7 +7,8 @@
           <img src="../../../../assets/img/lanche.jpg" alt="{{ lanche.NOME }}" class="img-fluid lanche-image">
           <div class="text-container">
             <h3 class="card-title">{{ lanche.NOME }}</h3>
-            <p class="card-text">R$ {{ lanche.PRECO.toFixed(2).replace('.', ',') }}</p>
+            <p class="card-text">Ingredientes: {{ lanche.INGREDIENTES}}</p>
+            <p class="card-price">R$ {{ lanche.PRECO.toFixed(2).replace('.', ',') }}</p>
           </div>
           <button class="plus-btn" (click)="openPopup(lanche)">+</button>
         </div>
