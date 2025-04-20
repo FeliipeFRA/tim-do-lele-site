@@ -38,6 +38,29 @@ app.use(cors({
 app.use(express.json());
 
 
+// Função para validar e-mails com domínios específicos
+function validarEmail(email) {
+    const dominiosPermitidos = ['gmail.com', 'baraodemaua.edu.br', 'hotmail.com', 'yahoo.com', 'yahoo.com.br', 'icloud.com', 'outlook.com', 'aol.com'];
+
+    const padraoEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
+    if (padraoEmail.test(email)) {
+        const dominio = email.split('@')[1];
+        return dominiosPermitidos.includes(dominio);
+    }
+    return false;
+}
+
+// Função para validar número de telefone brasileiro
+// O formato esperado é: +55 (XX) XXXXX-XXXX
+// Função de validação do número de telefone
+function validarTelefone(telefone) {
+    // Expressão regular para validar números de telefone em diversos formatos
+    const padraoTelefone = /^(?:\(?\d{2}\)?\s?)?(?:9\d{4}[-\s]?\d{4}|\d{4}[-\s]?\d{4})$/;
+
+    return padraoTelefone.test(telefone);
+}
+
 
 app.get('/consulta-users', async (req, res) => {
     //Endpoint responsável por consultar users
@@ -103,6 +126,17 @@ app.post('/enviar-cadastro', async (req, res) => {
     try {
         const data = req.body;
         
+         // Valida o e-maill com o=domínios permitidos
+         if (!validarEmail(data.email)) {
+            return res.status(400).send({ message: "E-mail inválido." });
+        }
+        // Valida o numero de telefone 
+        if (!validarTelefone(data.telefone)) {
+            return res.status(400).send({ message: "Número de telefone inválido. O formato correto é: (XX) XXXXX-XXXX, 9XXXXXXXXX ou 9XXXX-XXXX." });
+        }
+        // Caso o telefone seja válido, continua com o processo de cadastro
+        return res.status(200).json({ message: "Cadastro realizado com sucesso!" });
+
         // Criptografa a senha do user
         let senhaCriptografada;
         try {
