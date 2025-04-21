@@ -261,7 +261,7 @@ font-size: 1.2rem;
 .right-side-top {
     width: 100%;
     background-color: #fff;
-    text-align: center;
+    text-align: left;
     /* Espaço entre o título e o conteúdo */
     color: black;
     font-size: 30px;
@@ -289,6 +289,7 @@ font-size: 1.2rem;
 .internal-content {
     overflow-y: auto; /* Permite rolar apenas o conteúdo */
     overflow-x: hidden;
+    text-align: left;
 }
 
 .section_tittle {
@@ -319,7 +320,6 @@ font-size: 1.2rem;
 
 /* Opções de Molhos */
 .sauce-section {
-    margin-top: 4%;
     padding-bottom: 3.5%;
     margin-bottom: 2%;
     margin-right: 2.5%;
@@ -352,10 +352,23 @@ font-size: 1.2rem;
     }
 }
 
+.arrow-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 10px; /* Ajuste o espaço entre o título e a seta */
+    transition: transform 0.3s ease;
+}
+  
+.arrow-icon i {
+font-size: 20px; /* Define o tamanho do ícone */
+color: #777777;  /* Cor do ícone (amarelo) */
+}
+  
+
 /* Observações */
 .observations-section {
     font-family: "Poppins", sans-serif;
-    margin-top: 4%;
+    margin-top: 2%;
     margin-right: 2.5%;
     text-align: left;
 

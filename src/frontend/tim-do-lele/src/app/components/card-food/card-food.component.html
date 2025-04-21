@@ -41,25 +41,40 @@
           <h2 class="section_tittle">Ingredientes:</h2>
           <p class="ingredients-text">{{ selectedLanche?.INGREDIENTES }}</p> 
           <!-- Opções de Molhos com rolagem -->
+          
+          <h2 class="section_tittle">
+            Molhos:
+            <span (click)="toggleSaucesVisibility()" class="arrow-icon">
+              <i class="fa" [ngClass]="isSaucesVisible ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+            </span>
+          </h2>
           <div class="sauce-section">
-            <h2 class="section_tittle">Molhos:</h2>
-            <div class="sauce-options">
-              <label>
-                <input type="checkbox" [checked]="areAllSaucesSelected" (change)="toggleAllSauces()" /> Todos
-              </label>
-              <label *ngFor="let sauce of sauces">
-                <input type="checkbox" [checked]="sauce.selected" (change)="toggleSauce(sauce)" /> {{ sauce.name }}
-              </label>
+            <div *ngIf="isSaucesVisible">
+              <div class="sauce-options">
+                <label>
+                  <input type="checkbox" [checked]="areAllSaucesSelected" (change)="toggleAllSauces()" /> Todos
+                </label>
+                <label *ngFor="let sauce of sauces">
+                  <input type="checkbox" [checked]="sauce.selected" (change)="toggleSauce(sauce)" /> {{ sauce.name }}
+                </label>
+              </div>
             </div>
           </div>
 
           <!-- Observações com rolagem -->
-          <h2 class="section_tittle">Observações:</h2>
+          <h2 class="section_tittle">
+            Observações:
+            <span (click)="toggleObservationsVisibility()" class="arrow-icon">
+              <i class="fa" [ngClass]="isObservationsVisible ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+            </span>
+          </h2>
         
           <div class="observations-section">
-            <div class="textarea-container">
-              <textarea id="observations" rows="3" placeholder="Escreva aqui suas observações..."></textarea>
-              <img src="../../../../assets/img/caneta.png" alt="Ícone de Caneta" class="icon-pencil">
+            <div *ngIf="isObservationsVisible">
+              <div class="textarea-container">
+                <textarea id="observations" rows="3" placeholder="Escreva aqui suas observações..."></textarea>
+                <img src="../../../../assets/img/caneta.png" alt="Ícone de Caneta" class="icon-pencil">
+              </div>
             </div>
           </div>
         </div>

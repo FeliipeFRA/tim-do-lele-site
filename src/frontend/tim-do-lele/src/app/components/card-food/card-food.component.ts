@@ -18,7 +18,8 @@ export class CardFoodComponent implements OnInit {
   isPopupOpen = false;
   selectedLanche: Food | null = null;
   quantity: number = 1;  // Inicializa a quantidade com 1
-
+  isSaucesVisible = true;
+  isObservationsVisible = true;
   // Propriedade para controlar a exibição das opções de molhos
   isSauceOpen = false;
 
@@ -61,6 +62,8 @@ export class CardFoodComponent implements OnInit {
     return this.sauces.every(sauce => sauce.selected);
   }
 
+
+
   toggleAllSauces(): void {
     const newState = !this.areAllSaucesSelected;
     this.sauces.forEach(sauce => (sauce.selected = newState));
@@ -70,8 +73,12 @@ export class CardFoodComponent implements OnInit {
     sauce.selected = !sauce.selected;
   }
 
-  toggleSauceOptions(): void {
-    this.isSauceOpen = !this.isSauceOpen;
+  toggleSaucesVisibility(): void {
+    this.isSaucesVisible = !this.isSaucesVisible;
+  }
+
+  toggleObservationsVisibility(): void {
+    this.isObservationsVisible = !this.isObservationsVisible;
   }
 
   openPopup(lanche: Food): void {
@@ -88,7 +95,8 @@ export class CardFoodComponent implements OnInit {
     this.isPopupOpen = true;
     // Resetar os molhos selecionados
     this.sauces.forEach(sauce => sauce.selected = false);
-
+    this.isSaucesVisible = true;
+    this.isObservationsVisible = true;
     // Resetar observações
     if (this.selectedLanche) {
       this.selectedLanche.observations = ''; // ou deixar vazio, se for string

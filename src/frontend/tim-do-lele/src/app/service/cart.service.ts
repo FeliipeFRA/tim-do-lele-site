@@ -8,8 +8,9 @@ import { Food } from 'app/components/Food.model';
 export class CartService {
   private cartItems: Food[] = [];
   private cartSubject = new BehaviorSubject<Food[]>([]);
-
   public cart$ = this.cartSubject.asObservable();
+
+  
 
   addToCart(item: Food): void {
     // Verifica se o lanche já existe no carrinho com os mesmos molhos e observações
@@ -21,10 +22,10 @@ export class CartService {
   
     if (existingItem) {
       // Se o item já existe, garante que QUANTITY seja definida
-      existingItem.QUANTITY = (existingItem.QUANTITY || 0) + item.QUANTITY!; // Se não tiver QUANTITY, inicializa como 0 antes de somar
+      existingItem.QUANTITY = (existingItem.QUANTITY || 1) + item.QUANTITY!; // Se não tiver QUANTITY, inicializa como 0 antes de somar
     } else {
       // Se o item não existir, adiciona com QUANTITY inicializada como 1
-      this.cartItems.push({ ...item, QUANTITY: item.QUANTITY! });
+      this.cartItems.push({ ...item, QUANTITY: item.QUANTITY || 1 });
     }
   
     this.cartSubject.next(this.cartItems);
