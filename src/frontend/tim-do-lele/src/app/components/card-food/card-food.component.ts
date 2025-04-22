@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CardFoodComponent implements OnInit {
   lanches: Food[] = [];
-  lanchesAgrupados: { [tipo: string]: Food[] } = {};
+  lanchesAgrupados: { tipo: string; lanches: Food[]; imagem: string }[] = [];
   isPopupOpen = false;
   selectedLanche: Food | null = null;
   quantity: number = 1;  // Inicializa a quantidade com 1
@@ -49,14 +49,33 @@ export class CardFoodComponent implements OnInit {
 
       // Ordem personalizada
       const ordem = ['CACHORRO-QUENTE', 'HAMBURGUER', 'FRANGO'];
-      this.lanchesAgrupados = Object.fromEntries(
-        ordem
-          .filter(tipo => agrupados[tipo])
-          .map(tipo => [tipo, agrupados[tipo]])
-      );
+
+      // Criar um array de lanches agrupados com a ordem correta
+      this.lanchesAgrupados = ordem.map(tipo => ({
+        tipo,
+        lanches: agrupados[tipo] || [],
+        imagem: this.getImagemPorTipo(tipo)  // Associar imagem ao tipo
+      }));
     });
   }
 
+  // Função para associar a imagem ao tipo
+  getImagemPorTipo(tipo: string): string {
+    switch (tipo) {
+      case 'CACHORRO-QUENTE':
+        return 'assets/img/cachorro-quente.png';  // Caminho para imagem de cachorro-quente
+      case 'HAMBURGUER':
+        return 'assets/img/hamburguer.png';  // Caminho para imagem de hambúrguer
+      case 'FRANGO':
+        return 'assets/img/frango.png';  // Caminho para imagem de frango
+      default:
+        return 'assets/img/default.png';  // Imagem padrão, caso o tipo não seja encontrado
+    }
+  
+  }
+  
+  
+  
   // Verifica se todos os molhos estão selecionados
   get areAllSaucesSelected(): boolean {
     return this.sauces.every(sauce => sauce.selected);
