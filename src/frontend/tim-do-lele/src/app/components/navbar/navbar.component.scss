@@ -38,13 +38,13 @@
   
 
   a {
-      font-size: 1.7rem;
+      font-size: 1.7vw;
       margin: 0 1rem;
       color: white;
 
       &:hover {
           transition: 0.2s;
-          font-size: 300%;
+          font-size: 1.8vw;
           color: var(--yellow-color);
           text-decoration: none;
       }
