@@ -63,13 +63,13 @@ export class CardFoodComponent implements OnInit {
   getImagemPorTipo(tipo: string): string {
     switch (tipo) {
       case 'CACHORRO-QUENTE':
-        return 'assets/img/cachorro-quente.png';  // Caminho para imagem de cachorro-quente
+        return 'assets/img/lanches/cachorro-quente.png';  // Caminho para imagem de cachorro-quente
       case 'HAMBURGUER':
-        return 'assets/img/hamburguer.png';  // Caminho para imagem de hambúrguer
+        return 'assets/img/lanches/hamburguer.png';  // Caminho para imagem de hambúrguer
       case 'FRANGO':
-        return 'assets/img/frango.png';  // Caminho para imagem de frango
+        return 'assets/img/lanches/frango.png';  // Caminho para imagem de frango
       default:
-        return 'assets/img/default.png';  // Imagem padrão, caso o tipo não seja encontrado
+        return 'assets/img/lanches/default.png';  // Imagem padrão, caso o tipo não seja encontrado
     }
   
   }

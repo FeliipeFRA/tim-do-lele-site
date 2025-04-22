@@ -22,7 +22,7 @@
 
       <!-- Layout de Foto -->
       <div class="left-side">
-        <img src="../../../../assets/img/lanche.jpg" alt="{{ selectedLanche?.NOME }}" class="details-img">
+        <img [src]="getImagemPorTipo(selectedLanche!.TIPO)" alt="{{ selectedLanche?.NOME }}" class="details-img" />
         <p class="details-warning">* Imagem meramente ilustrativa</p>
       </div>
 
