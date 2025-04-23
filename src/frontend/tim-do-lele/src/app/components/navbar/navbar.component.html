@@ -47,17 +47,17 @@
     
             <!-- Exibir molhos -->
             <p *ngIf="item.sauces" class="sauce-text">
-              <span *ngIf="item.sauces.length > 0"><strong>Molhos:</strong></span>
+              <span *ngIf="item.sauces.length > 0"><strong>Molhos: </strong></span>
               <span *ngFor="let sauce of item.sauces">{{ sauce }}; </span>
             </p>
     
             <!-- Exibir observação -->
-            <p *ngIf="item.observations">
-              <strong>Observação: </strong> {{ item.observations }}
+            <p *ngIf="item.observations" class="observations-text">
+              <strong>Observações: </strong> {{ item.observations }}
             </p>
     
             <div class="quantity-controls">
-              <!-- Botões para controle de quantidade -->
+              <!-- Botões para controle de quantidade --> 
               <button *ngIf="(item.QUANTITY ?? 0) === 1"
                       class="btn-quantity ri-delete-bin-6-line"
                       (click)="cartService.removeFromCart(item)">

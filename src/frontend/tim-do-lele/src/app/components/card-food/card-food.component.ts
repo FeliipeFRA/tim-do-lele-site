@@ -14,11 +14,12 @@ import { CommonModule } from '@angular/common';
 })
 export class CardFoodComponent implements OnInit {
   lanches: Food[] = [];
-  lanchesAgrupados: { [tipo: string]: Food[] } = {};
+  lanchesAgrupados: { tipo: string; lanches: Food[]; imagem: string }[] = [];
   isPopupOpen = false;
   selectedLanche: Food | null = null;
   quantity: number = 1;  // Inicializa a quantidade com 1
-
+  isSaucesVisible = true;
+  isObservationsVisible = true;
   // Propriedade para controlar a exibição das opções de molhos
   isSauceOpen = false;
 
@@ -48,18 +49,39 @@ export class CardFoodComponent implements OnInit {
 
       // Ordem personalizada
       const ordem = ['CACHORRO-QUENTE', 'HAMBURGUER', 'FRANGO'];
-      this.lanchesAgrupados = Object.fromEntries(
-        ordem
-          .filter(tipo => agrupados[tipo])
-          .map(tipo => [tipo, agrupados[tipo]])
-      );
+
+      // Criar um array de lanches agrupados com a ordem correta
+      this.lanchesAgrupados = ordem.map(tipo => ({
+        tipo,
+        lanches: agrupados[tipo] || [],
+        imagem: this.getImagemPorTipo(tipo)  // Associar imagem ao tipo
+      }));
     });
   }
 
+  // Função para associar a imagem ao tipo
+  getImagemPorTipo(tipo: string): string {
+    switch (tipo) {
+      case 'CACHORRO-QUENTE':
+        return 'assets/img/lanches/cachorro-quente.png';  // Caminho para imagem de cachorro-quente
+      case 'HAMBURGUER':
+        return 'assets/img/lanches/hamburguer.png';  // Caminho para imagem de hambúrguer
+      case 'FRANGO':
+        return 'assets/img/lanches/frango.png';  // Caminho para imagem de frango
+      default:
+        return 'assets/img/lanches/default.png';  // Imagem padrão, caso o tipo não seja encontrado
+    }
+  
+  }
+  
+  
+  
   // Verifica se todos os molhos estão selecionados
   get areAllSaucesSelected(): boolean {
     return this.sauces.every(sauce => sauce.selected);
   }
+
+
 
   toggleAllSauces(): void {
     const newState = !this.areAllSaucesSelected;
@@ -70,8 +92,12 @@ export class CardFoodComponent implements OnInit {
     sauce.selected = !sauce.selected;
   }
 
-  toggleSauceOptions(): void {
-    this.isSauceOpen = !this.isSauceOpen;
+  toggleSaucesVisibility(): void {
+    this.isSaucesVisible = !this.isSaucesVisible;
+  }
+
+  toggleObservationsVisibility(): void {
+    this.isObservationsVisible = !this.isObservationsVisible;
   }
 
   openPopup(lanche: Food): void {
@@ -88,7 +114,8 @@ export class CardFoodComponent implements OnInit {
     this.isPopupOpen = true;
     // Resetar os molhos selecionados
     this.sauces.forEach(sauce => sauce.selected = false);
-
+    this.isSaucesVisible = true;
+    this.isObservationsVisible = true;
     // Resetar observações
     if (this.selectedLanche) {
       this.selectedLanche.observations = ''; // ou deixar vazio, se for string

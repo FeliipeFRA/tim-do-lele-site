@@ -1,6 +1,7 @@
 /*=============== IMPORTAR FONTE ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
 
+
 /*=============== VARIABLES CSS ===============*/
 :root {
   /*========== CORES ==========*/
@@ -89,7 +90,7 @@ img {
 
 .form__form {
   position: relative;
-  background-color: hsla(0, 0%, 10%, 0.1);
+  background-color: rgba(172, 60, 60, 0.4);
   border: 2px solid var(--yellow-color);
   margin-inline: 1.5rem;
   padding: 2.5rem 1.5rem;

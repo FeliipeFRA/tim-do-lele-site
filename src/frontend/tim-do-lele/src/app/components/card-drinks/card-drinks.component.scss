@@ -9,12 +9,13 @@
 }
 
 .tipo-titulo {
+    margin-top: 1rem;
     font-size: 3.2rem;
     text-align: left;
     margin-bottom: 16px;
-    color: #fff;
+    color: rgb(255, 255, 255);
     font-weight: bold;
-    padding: 0 5%; /* Adiciona padding nas laterais para centralizar e alinhar à esquerda */
+    padding: 0 5%;
     text-transform: uppercase;
     text-decoration: underline
 }
