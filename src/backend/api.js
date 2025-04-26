@@ -126,18 +126,13 @@ app.post('/enviar-cadastro', async (req, res) => {
     try {
         const data = req.body;
         
-         // Valida o e-maill com o=domínios permitidos
-         if (!validarEmail(data.email)) {
+        if (!validarEmail(data.email)) {
             return res.status(400).send({ message: "E-mail inválido." });
         }
-        // Valida o numero de telefone 
         if (!validarTelefone(data.telefone)) {
-            return res.status(400).send({ message: "Número de telefone inválido. O formato correto é: (XX) XXXXX-XXXX, 9XXXXXXXXX ou 9XXXX-XXXX." });
+            return res.status(400).send({ message: "Número de telefone inválido." });
         }
-        // Caso o telefone seja válido, continua com o processo de cadastro
-        return res.status(200).json({ message: "Cadastro realizado com sucesso!" });
 
-        // Criptografa a senha do user
         let senhaCriptografada;
         try {
             senhaCriptografada = await CriptografarSenha(data.senha);
@@ -147,7 +142,10 @@ app.post('/enviar-cadastro', async (req, res) => {
         }
 
         await InserirUser(data.email, data.nome, senhaCriptografada, data.telefone);
-        res.status(200).json({ message: "Dados enviados com sucesso." });
+
+        // Agora sim envia a resposta final
+        res.status(200).json({ message: "Cadastro realizado com sucesso!" });
+
     } catch (erro) {
         console.error("Erro ao enviar cadastro:", erro);
         res.status(500).send({ message: "Falha ao enviar os dados." });
