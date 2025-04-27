@@ -4,6 +4,7 @@ const cors = require('cors')
 const { ConsultarUsers } = require('./query_banco/consulta_cadastro.js');
 const {InserirUser} = require('./query_banco/inserir_cadastro.js')
 const {ConsultarLanches} = require('./query_banco/consulta_lanches.js')
+const { ConsultarBebidas } = require('./query_banco/consulta_bebidas.js');
 const {ConsultarPedidos} = require('./query_banco/consulta_pedidos.js')
 const { verificarEmailExistenteNoBanco } = require('./query_banco/verificar_email.js');
 
@@ -62,23 +63,6 @@ function validarTelefone(telefone) {
     return padraoTelefone.test(telefone);
 }
 
-// Função para verificar email duplicado
-async function verificarEmailExistente(email) {
-    try {
-        const emailExistente = await verificarEmailExistenteNoBanco(email);
-        return emailExistente; // Retorna se o email já existe ou não
-    } catch (error) {
-        console.error("Erro ao verificar email:", error);
-        throw new Error("Erro ao verificar email.");
-    }
-} 
-
-// Função para verificar telefone duplicado
-async function verificarTelefoneExistente(telefone) {
-    const telefoneExistente = await ConsultarUsers(telefone);
-    return telefoneExistente !== null;
-}
-
 app.get('/consulta-users', async (req, res) => {
     //Endpoint responsável por consultar users
     try {
@@ -99,6 +83,16 @@ app.get('/lanches', async (req, res)=>{
 
     }
 })
+
+app.get('/bebidas', async (req, res) => {
+    try {
+        const bebidas = await ConsultarBebidas();
+        res.status(200).json(bebidas);
+    } catch (error) {
+        console.error("Erro ao consultar a tabela bebidas:", error);
+        res.status(500).send("Erro ao consultar a tabela bebidas.");
+    }
+});
 
 
 app.post('/autenticar-login', async (req, res) => {
@@ -137,12 +131,6 @@ app.post('/autenticar-login', async (req, res) => {
     }
 });
 
-  // Verificação de email duplicado
-async function verificarEmailExistente(email) {
-    const emailExistente = await verificarEmailExistenteNoBanco(email); // Chama a função de consulta específica
-    return emailExistente; // Retorna se o email já existe ou não
-}
-
 app.post('/enviar-cadastro', async (req, res) => {
     try {
         const { email, nome, senha, telefone } = req.body;
@@ -157,20 +145,22 @@ app.post('/enviar-cadastro', async (req, res) => {
             return res.status(400).send({ message: "E-mail inválido." });
         }
 
-        const emailExistente = await verificarEmailExistente(email); // Aqui estamos chamando a função
-        if (emailExistente) {
-            return res.status(400).send({ message: "Este e-mail já está cadastrado." });
-        }
-
         // Validação de telefone
         if (!validarTelefone(telefone)) {
             return res.status(400).send({ message: "Número de telefone inválido." });
         }
 
-        // Verificação de telefone duplicado
-        const telefoneExistente = await verificarTelefoneExistente(telefone);
-        if (telefoneExistente) {
-            return res.status(400).send({ message: "Este telefone já está cadastrado." });
+        // Verificar se o email já existe no banco
+        let emailExistente;
+        try {
+            emailExistente = await verificarEmailExistenteNoBanco(email);
+        } catch (error) {
+            console.error("Erro ao verificar se o e-mail existe:", error);
+            return res.status(500).send({ message: "Erro ao verificar e-mail no banco." });
+        }
+
+        if (emailExistente) {
+            return res.status(400).send({ message: "E-mail já cadastrado." });
         }
 
         // Criptografar a senha

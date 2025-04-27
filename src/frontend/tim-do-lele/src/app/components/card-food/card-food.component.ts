@@ -73,7 +73,22 @@ export class CardFoodComponent implements OnInit {
     }
   
   }
+
+  getImagemPorIdOuTipo(id: number, tipo: string): string {
+    const caminhoBase = 'assets/img/lanches/';
+    const caminhoImagemPorId = `${caminhoBase}${id}.jpg`;
   
+    // A imagem padrão baseada no tipo
+    const imagemPadraoPorTipo = this.getImagemPorTipo(tipo);
+    // Retorna o caminho por ID. O Angular não consegue verificar se o arquivo existe diretamente.
+    // Então a gente assume que se o ID existe no sistema, a imagem foi colocada certinho.
+    // (Se quiser tratar erro de imagem quebrada, dá para tratar no HTML depois)
+    return caminhoImagemPorId || imagemPadraoPorTipo;
+  }
+  
+  onImageError(event: any, tipo: string) {
+    event.target.src = this.getImagemPorTipo(tipo);
+  }
   
   
   // Verifica se todos os molhos estão selecionados
