@@ -5,6 +5,7 @@ const { ConsultarUsers } = require('./query_banco/consulta_cadastro.js');
 const {InserirUser} = require('./query_banco/inserir_cadastro.js')
 const {ConsultarLanches} = require('./query_banco/consulta_lanches.js')
 const {ConsultarPedidos} = require('./query_banco/consulta_pedidos.js')
+const { verificarEmailExistenteNoBanco } = require('./query_banco/verificar_email.js');
 
 
 //rota de pagamentos
@@ -40,7 +41,7 @@ app.use(express.json());
 
 // Função para validar e-mails com domínios específicos
 function validarEmail(email) {
-    const dominiosPermitidos = ['gmail.com', 'baraodemaua.edu.br', 'hotmail.com', 'yahoo.com', 'yahoo.com.br', 'icloud.com', 'outlook.com', 'aol.com'];
+    const dominiosPermitidos = ['gmail.com', 'baraodemaua.edu.br', 'hotmail.com', 'yahoo.com', 'yahoo.com.br', 'icloud.com', 'outlook.com', 'aol.com', 'msn.com', 'live.com', 'uol.com.br', 'terra.com.br', 'bol.com.br', 'ig.com.br', 'r7.com'];
 
     const padraoEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
@@ -61,6 +62,22 @@ function validarTelefone(telefone) {
     return padraoTelefone.test(telefone);
 }
 
+// Função para verificar email duplicado
+async function verificarEmailExistente(email) {
+    try {
+        const emailExistente = await verificarEmailExistenteNoBanco(email);
+        return emailExistente; // Retorna se o email já existe ou não
+    } catch (error) {
+        console.error("Erro ao verificar email:", error);
+        throw new Error("Erro ao verificar email.");
+    }
+} 
+
+// Função para verificar telefone duplicado
+async function verificarTelefoneExistente(telefone) {
+    const telefoneExistente = await ConsultarUsers(telefone);
+    return telefoneExistente !== null;
+}
 
 app.get('/consulta-users', async (req, res) => {
     //Endpoint responsável por consultar users
@@ -120,30 +137,49 @@ app.post('/autenticar-login', async (req, res) => {
     }
 });
 
-
+  // Verificação de email duplicado
+async function verificarEmailExistente(email) {
+    const emailExistente = await verificarEmailExistenteNoBanco(email); // Chama a função de consulta específica
+    return emailExistente; // Retorna se o email já existe ou não
+}
 
 app.post('/enviar-cadastro', async (req, res) => {
     try {
-        const data = req.body;
-        
-        if (!validarEmail(data.email)) {
+        const { email, nome, senha, telefone } = req.body;
+
+        // Validação de campos obrigatórios
+        if (!email || !nome || !senha || !telefone) {
+            return res.status(400).send({ message: "Todos os campos são obrigatórios." });
+        }
+
+        // Validação de email
+        if (!validarEmail(email)) {
             return res.status(400).send({ message: "E-mail inválido." });
         }
-        if (!validarTelefone(data.telefone)) {
+
+        const emailExistente = await verificarEmailExistente(email); // Aqui estamos chamando a função
+        if (emailExistente) {
+            return res.status(400).send({ message: "Este e-mail já está cadastrado." });
+        }
+
+        // Validação de telefone
+        if (!validarTelefone(telefone)) {
             return res.status(400).send({ message: "Número de telefone inválido." });
         }
 
-        let senhaCriptografada;
-        try {
-            senhaCriptografada = await CriptografarSenha(data.senha);
-        } catch (erroCripto) {
-            console.error("Erro ao criptografar senha:", erroCripto);
-            return res.status(500).send({ message: "Erro na criptografia da senha." });
+        // Verificação de telefone duplicado
+        const telefoneExistente = await verificarTelefoneExistente(telefone);
+        if (telefoneExistente) {
+            return res.status(400).send({ message: "Este telefone já está cadastrado." });
         }
 
-        await InserirUser(data.email, data.nome, senhaCriptografada, data.telefone);
+        // Criptografar a senha
+        const senhaCriptografada = await CriptografarSenha(senha);
 
-        // Agora sim envia a resposta final
+        // Inserir no banco de dados
+        await InserirUser(email, nome, senhaCriptografada, telefone);
+
+        // Enviar resposta de sucesso
         res.status(200).json({ message: "Cadastro realizado com sucesso!" });
 
     } catch (erro) {
@@ -176,5 +212,4 @@ app.post('/pagamentos/pix', async (req, res) =>{
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
-
 });

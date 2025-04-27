@@ -59,10 +59,14 @@ export class TelaCadastroComponent implements OnInit {
       },
       error: (erro) => {
         console.error("Erro ao enviar cadastro ao backend.", erro);
-        this.showAlert("Erro ao realizar o cadastro. Tente novamente.");
+    
+        const mensagemErro = erro?.error?.message || "Erro ao realizar o cadastro. Tente novamente.";
+        this.showAlert(mensagemErro);
+    
         form.reset();
       }
     });
+    
   }
 
   showHiddenPass(inputId: string, iconId: string): void {
