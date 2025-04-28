@@ -66,6 +66,7 @@ img {
   height: 94vh;
   display: flex;
   align-items: center;
+  
 }
 
 .home__icon {
@@ -295,6 +296,7 @@ a {
   }
 
   .form__form {
+    height: fit-content;
     width: 400px;
     padding: 2rem 1rem 1.5rem;
     border-radius: 1.5rem;
@@ -303,7 +305,7 @@ a {
   .form__logo {
     display: block;
     margin: 0 auto;
-    max-width: 50%;
+    max-width: 30%;
     height: auto;
   }
 
@@ -363,7 +365,6 @@ a {
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center top !important;
-  
     width: 100%;
     min-height: 100vh; /* Garante que a primeira instância do fundo cubra toda a tela */
     height: auto; /* Permite expansão conforme o conteúdo */
@@ -388,6 +389,7 @@ a {
   }
 
   .form__form {
+    width: 100%;
     margin-bottom: 1rem;
   }
 

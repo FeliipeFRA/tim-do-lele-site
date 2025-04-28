@@ -20,5 +20,15 @@ export class GetFoodService {
             return throwError(() => new Error('Erro ao obter dados dos lanches, tente novamente mais tarde.'));
         })
     );
-}
+  }
+  getDataDrinks(): Observable<Food[]> {
+    const url = 'http://localhost:8000/bebidas';
+    return this.http.get<Food[]>(url).pipe(
+        catchError(error => {
+            console.error('Erro ao obter bebidas:', error);
+            return throwError(() => new Error('Erro ao obter dados das bebidas, tente novamente mais tarde.'));
+        })
+    );
+  }
+
 }

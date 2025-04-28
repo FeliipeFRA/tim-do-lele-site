@@ -7,10 +7,10 @@ function  ConsultarLanches() {
     return new Promise ((resolve, reject) => {
         db.all('SELECT * FROM LANCHES', (error, rows) => {  
             if (error) {
-                console.error("Erro ao consultar a tabela users:", error.message);
+                console.error("Erro ao consultar a tabela lanches:", error.message);
                 reject(error);
             } else {
-                console.log("Elementos da tabela usuarios encontrados com sucesso!", rows);
+                console.log("Elementos da tabela lanches encontrados com sucesso!", rows);
 
                 // Imprime cada usuário encontrado
                 rows.forEach(lanche => {
