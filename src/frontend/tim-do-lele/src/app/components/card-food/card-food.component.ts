@@ -48,7 +48,7 @@ export class CardFoodComponent implements OnInit {
       }
 
       // Ordem personalizada
-      const ordem = ['CACHORRO-QUENTE', 'HAMBURGUER', 'FRANGO'];
+      const ordem = ['CACHORRO-QUENTE', 'HAMBURGUER', 'FRANGO', 'SANDUÍCHE'];
 
       // Criar um array de lanches agrupados com a ordem correta
       this.lanchesAgrupados = ordem.map(tipo => ({
