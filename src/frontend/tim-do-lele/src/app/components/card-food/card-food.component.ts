@@ -48,7 +48,7 @@ export class CardFoodComponent implements OnInit {
       }
 
       // Ordem personalizada
-      const ordem = ['CACHORRO-QUENTE', 'HAMBURGUER', 'FRANGO', 'SANDUÍCHE'];
+      const ordem = ['CACHORRO-QUENTE', 'HAMBURGUER', 'FRANGO', 'SANDUICHE'];
 
       // Criar um array de lanches agrupados com a ordem correta
       this.lanchesAgrupados = ordem.map(tipo => ({
@@ -68,6 +68,8 @@ export class CardFoodComponent implements OnInit {
         return 'assets/img/lanches/hamburguer.png';  // Caminho para imagem de hambúrguer
       case 'FRANGO':
         return 'assets/img/lanches/frango.png';  // Caminho para imagem de frango
+      case 'SANDUICHE':
+        return 'assets/img/lanches/sanduiche.png';  // Caminho para imagem de frango
       default:
         return 'assets/img/lanches/default.png';  // Imagem padrão, caso o tipo não seja encontrado
     }
