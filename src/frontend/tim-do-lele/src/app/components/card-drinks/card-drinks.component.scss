@@ -5,6 +5,7 @@
     justify-content: flex-start; /* Centraliza os cards horizontalmente */
     gap: 20px; /* Espaçamento entre os cards */
     margin: 20px 0; /* Margem geral ao redor dos cards */
+    
     padding: 0 5%; /* Adiciona padding nas laterais para centralizar e alinhar à esquerda */
 }
 
@@ -12,12 +13,20 @@
     margin-top: 1rem;
     font-size: 3.2rem;
     text-align: left;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
     color: rgb(255, 255, 255);
     font-weight: bold;
     padding: 0 5%;
     text-transform: uppercase;
     text-decoration: underline
+}
+
+.grupo-card-container {
+    padding: 0 5%; /* Adiciona padding nas laterais para centralizar e alinhar à esquerda */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: left;
 }
 
 /* Card */
@@ -28,11 +37,11 @@
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: left;
-    padding: 15px;
+    padding: 10px;
     position: center;
     display: flex;
     flex-direction: column;
-    flex-basis: calc(24% - 20px);
+    flex-basis: calc(25%);
 }
 
 .card:hover{
@@ -151,12 +160,17 @@
         height: 80%;
     }
 
+    .tipo-titulo {
+        font-size: 2rem;
+        padding-left: 9%;
+    }
+
     .details-img {
         width: 60%;
     }
 
     .card-container {
-        padding: 3%;
+
         align-items: center;
         justify-content: center;
     }

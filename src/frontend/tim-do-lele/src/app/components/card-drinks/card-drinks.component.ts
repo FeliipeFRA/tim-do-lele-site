@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'app/service/cart.service';
+import { GetFoodService } from 'app/service/get-food.service';
 import { Food } from 'app/components/Food.model';
 import { CommonModule } from '@angular/common';
 
@@ -11,25 +12,23 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./card-drinks.component.scss'],
 })
 export class CardDrinksComponent implements OnInit {
-  bebidas: Food[] = [
-    { ID: 101, NOME: 'Coca-Cola 350ml', INGREDIENTES: 'Liquido', PRECO: 5.50, TIPO: "BEBIDA" },
-    { ID: 102, NOME: 'Fanta 350ml', INGREDIENTES: 'Liquido', PRECO: 5.00, TIPO: "BEBIDA" },
-    { ID: 103, NOME: 'Guaraná 350ml', INGREDIENTES: 'Liquido', PRECO: 5.00, TIPO: "BEBIDA" },
-    { ID: 104, NOME: 'Água 500ml', INGREDIENTES: 'Liquido', PRECO: 3.50, TIPO: "BEBIDA" },
-    { ID: 105, NOME: 'Água com Gás 500ml', INGREDIENTES: 'Liquido', PRECO: 4.00, TIPO: "BEBIDA" },
-  ];
+  bebidas: Food[] = [];
 
-
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private getFoodService: GetFoodService // ✨ Adicionado aqui
+  ) {}
 
   ngOnInit(): void {
-    // Qualquer inicialização adicional, se necessário
+    this.getFoodService.getDataDrinks().subscribe(data => {
+      this.bebidas = data;
+    });
   }
 
   addToCart(bebida: Food): void {
     this.cartService.addToCart({
       ...bebida,
-      QUANTITY: 1, // Define a quantidade inicial como 1
+      QUANTITY: 1,
     });
   }
 }

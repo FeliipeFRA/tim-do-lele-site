@@ -1,7 +1,6 @@
 /*=============== IMPORTAR FONTE ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
 
-
 /*=============== VARIABLES CSS ===============*/
 :root {
   /*========== CORES ==========*/
@@ -21,8 +20,9 @@
 
   /*========== ESPESSURA FONTE ==========*/
   --font-medium: 500;
+  --animate-duration: 800ms;
+  --animate-delay: 0.9s;
 }
-
 /*=============== BASE ===============*/
 * {
   box-sizing: border-box;
@@ -66,6 +66,7 @@ img {
   height: 94vh;
   display: flex;
   align-items: center;
+  
 }
 
 .home__icon {
@@ -240,7 +241,9 @@ img {
   font-size: 0.75rem;
   position: absolute;
   bottom: -25px; /* Posiciona a mensagem abaixo do campo de input */
-  left: 0.8rem;
+  justify-content: center;
+  align-items: center;
+  left: 5rem;
 }
 
 /*=============== HOME PAGE ===============*/
@@ -295,6 +298,7 @@ a {
   }
 
   .form__form {
+    height: fit-content;
     width: 400px;
     padding: 2rem 1rem 1.5rem;
     border-radius: 1.5rem;
@@ -303,7 +307,7 @@ a {
   .form__logo {
     display: block;
     margin: 0 auto;
-    max-width: 50%;
+    max-width: 30%;
     height: auto;
   }
 
@@ -363,7 +367,6 @@ a {
     background-size: cover !important;
     background-repeat: no-repeat !important;
     background-position: center top !important;
-  
     width: 100%;
     min-height: 100vh; /* Garante que a primeira instância do fundo cubra toda a tela */
     height: auto; /* Permite expansão conforme o conteúdo */
@@ -388,6 +391,7 @@ a {
   }
 
   .form__form {
+    width: 100%;
     margin-bottom: 1rem;
   }
 
@@ -414,4 +418,8 @@ a {
   .home__icon {
     left: 5%;
   }
+
+  .error-message small {
+    left: 5rem;
+  }  
 }
