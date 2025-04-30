@@ -42,7 +42,7 @@
     position: center;
     display: flex;
     flex-direction: column;
-    flex-basis: calc(50% - 30px);
+    flex-basis: calc(49%);
 }
 
 .card:hover {
@@ -417,6 +417,13 @@ color: #777777;  /* Cor do ícone (amarelo) */
         opacity: 0.7;
         /* Opacidade para suavizar o ícone */
     }
+}
+
+.additionals-section {
+    font-family: "Poppins", sans-serif;
+    margin-top: 2%;
+    margin-right: 2.5%;
+    text-align: left;
 }
 
 /* Ajustes para telas pequenas */

@@ -1,12 +1,12 @@
 // Módulo responsável por configurar as rotas da API
 const express = require('express');
 const cors = require('cors')
-const { ConsultarUsers } = require('./query_banco/consulta_cadastro.js');
+const {ConsultarUsers } = require('./query_banco/consulta_cadastro.js');
 const {InserirUser} = require('./query_banco/inserir_cadastro.js')
 const {ConsultarLanches} = require('./query_banco/consulta_lanches.js')
-const { ConsultarBebidas } = require('./query_banco/consulta_bebidas.js');
+const {ConsultarBebidas } = require('./query_banco/consulta_bebidas.js');
 const {ConsultarPedidos} = require('./query_banco/consulta_pedidos.js')
-const { verificarEmailExistenteNoBanco } = require('./query_banco/verificar_email.js');
+const {verificarEmailExistenteNoBanco } = require('./query_banco/verificar_email.js');
 
 
 //rota de pagamentos
@@ -112,7 +112,7 @@ app.post('/autenticar-login', async (req, res) => {
                 return res.status(500).send({ message: "Erro no servidor." });
             }
             if (!user) {
-                return res.status(401).send({ message: "Usuário não encontrado." });
+                return res.status(401).send({ message: "Usuário não cadastrado." });
             }
 
             // Compara a senha criptografada com a coluna SENHA

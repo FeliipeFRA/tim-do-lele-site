@@ -1,7 +1,6 @@
 /*=============== IMPORTAR FONTE ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
 
-
 /*=============== VARIABLES CSS ===============*/
 :root {
   /*========== CORES ==========*/
@@ -21,8 +20,9 @@
 
   /*========== ESPESSURA FONTE ==========*/
   --font-medium: 500;
+  --animate-duration: 800ms;
+  --animate-delay: 0.9s;
 }
-
 /*=============== BASE ===============*/
 * {
   box-sizing: border-box;
@@ -241,7 +241,9 @@ img {
   font-size: 0.75rem;
   position: absolute;
   bottom: -25px; /* Posiciona a mensagem abaixo do campo de input */
-  left: 0.8rem;
+  justify-content: center;
+  align-items: center;
+  left: 5rem;
 }
 
 /*=============== HOME PAGE ===============*/
@@ -416,4 +418,8 @@ a {
   .home__icon {
     left: 5%;
   }
+
+  .error-message small {
+    left: 5rem;
+  }  
 }

@@ -33,12 +33,7 @@
       <ng-container *ngIf="cartItems.length > 0">
         <div class="box" *ngFor="let item of cartItems; let i = index">
           <!-- Exibição dinâmica da imagem -->
-          <img 
-            class="img-cart" 
-            [src]="'../../../../assets/img/' + item.ID + '.png'" 
-            (error)="handleImgError($event)" 
-            alt="{{ item.NOME }}">
-
+            <img [src]="getImagemPorIdOuTipo(item.ID, item.TIPO)" alt="{{ item.NOME }}" class="img-cart" (error)="onImageError($event, item.TIPO)"  />
 
           
           <div class="content">
