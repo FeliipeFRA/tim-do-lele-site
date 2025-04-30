@@ -12,13 +12,9 @@ function  ConsultarBebidas() {
             } else {
                 console.log("Elementos da tabela bebidas encontrados com sucesso!", rows);
 
-                // Imprime cada usuário encontrado
-                rows.forEach(lanche => {
-                    console.log(lanche);
-                });
+        
 
                 resolve(rows);  // Resolve a promise com as linhas da tabela
-                console.log("Registros encontrados:", rows);
             }
         });
     });

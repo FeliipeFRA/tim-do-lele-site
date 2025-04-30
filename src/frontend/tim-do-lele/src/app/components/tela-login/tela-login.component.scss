@@ -1,0 +1,38 @@
+/* Popup geral */
+.custom-popup {
+    border-radius: 12px;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  /* Botão de confirmação personalizado */
+  .custom-confirm-btn {
+    background-color: #ff6b6b;  /* Cor do botão de erro */
+    color: white;
+    border-radius: 6px;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Botão de confirmação para sucesso */
+  .custom-confirm-btn-success {
+    background-color: #3085d6;  /* Cor do botão de sucesso */
+    color: white;
+    border-radius: 6px;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Pop-up de sucesso */
+  .custom-popup-success {
+    border-radius: 12px;
+    background-color: #d4edda;  /* Cor de fundo do sucesso */
+    color: #155724;  /* Cor do texto */
+    font-weight: bold;
+  }
+  
