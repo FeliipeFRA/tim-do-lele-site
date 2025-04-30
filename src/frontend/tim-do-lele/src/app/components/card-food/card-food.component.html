@@ -61,6 +61,21 @@
             </div>
           </div>
 
+          <h2 class="section_tittle">
+            Adicionais:
+            <span (click)="toggleAdditionalsVisibility()" class="arrow-icon">
+              <i class="fa" [ngClass]="isAdditionalsVisible ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+            </span>
+          </h2>
+
+          <div class="additionals-section">
+            <div *ngIf="isObservationsVisible">
+              <div class="textarea-container">
+    
+              </div>
+            </div>
+          </div>
+
           <!-- Observações com rolagem -->
           <h2 class="section_tittle">
             Observações:
@@ -78,6 +93,8 @@
             </div>
           </div>
         </div>
+
+        
 
         <div class="right-side-bottom">
           <div class="quantity-container">

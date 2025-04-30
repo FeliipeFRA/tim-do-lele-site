@@ -19,6 +19,7 @@ export class CardFoodComponent implements OnInit {
   selectedLanche: Food | null = null;
   quantity: number = 1;  // Inicializa a quantidade com 1
   isSaucesVisible = true;
+  isAdditionalsVisible = true;
   isObservationsVisible = true;
   // Propriedade para controlar a exibição das opções de molhos
   isSauceOpen = false;
@@ -111,6 +112,10 @@ export class CardFoodComponent implements OnInit {
 
   toggleSaucesVisibility(): void {
     this.isSaucesVisible = !this.isSaucesVisible;
+  }
+
+  toggleAdditionalsVisibility(): void {
+    this.isAdditionalsVisible = !this.isAdditionalsVisible;
   }
 
   toggleObservationsVisibility(): void {

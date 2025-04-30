@@ -419,6 +419,13 @@ color: #777777;  /* Cor do ícone (amarelo) */
     }
 }
 
+.additionals-section {
+    font-family: "Poppins", sans-serif;
+    margin-top: 2%;
+    margin-right: 2.5%;
+    text-align: left;
+}
+
 /* Ajustes para telas pequenas */
 @media screen and (max-width: 767px) {
     .card-title {
