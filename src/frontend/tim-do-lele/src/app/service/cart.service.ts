@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Food } from 'app/components/Food.model';
 
+
 @Injectable({
   providedIn: 'root',
 })
