@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from 'app/service/cart.service';
-import { Food } from 'app/components/Food.model';
+import { Food } from 'app/models/Food.model';
 import { RouterLink } from '@angular/router';
 
 @Component({

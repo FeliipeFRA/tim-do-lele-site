@@ -69,9 +69,12 @@
           </h2>
 
           <div class="additionals-section">
-            <div *ngIf="isObservationsVisible">
-              <div class="textarea-container">
-    
+            <div *ngIf="isAdditionalsVisible">
+              <div class="additionals-options">
+  
+                <label *ngFor="let Adicional of adicionais">
+                  <input type="checkbox" [checked]="Adicional.selected" (change)="toggleAdicional(Adicional)" /> <strong>R${{ Adicional.valor.toFixed(2).replace('.', ',') }}</strong>  - {{ Adicional.name }}
+                </label>
               </div>
             </div>
           </div>

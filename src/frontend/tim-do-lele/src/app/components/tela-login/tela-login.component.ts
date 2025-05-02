@@ -65,25 +65,14 @@ export class TelaLoginComponent {
       confirmButton: 'custom-confirm-btn',  // Classe CSS para o botão
     },
     showClass: {
-      popup: 'animate__animated animate__fadeInDown',  // Animação de entrada
+      popup: 'animate__fadeIn',  // Animação de entrada
+      
     },
     hideClass: {
-      popup: 'animate__animated animate__fadeOutUp',  // Animação de saída
+      popup: 'animate__bounceOut',  // Animação de saída
     },
     });
   }
-
-  // Função para exibir o alerta de sucesso
-  private showSuccessAlert(message: string): void {
-    Swal.fire({
-      title: 'Parabéns!',
-      text: message,
-      icon: 'success',
-      confirmButtonText: 'Ok'
-    });
-  }
-
-
 
 
   //design do front

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetFoodService } from 'app/service/get-food.service';
 import { CartService } from 'app/service/cart.service';
-import { Food } from 'app/components/Food.model';
+import { Food } from 'app/models/Food.model';
 import { CommonModule } from '@angular/common';
 
 
@@ -23,7 +23,7 @@ export class CardFoodComponent implements OnInit {
   isObservationsVisible = true;
   // Propriedade para controlar a exibição das opções de molhos
   isSauceOpen = false;
-
+  adicionais: { name: string; valor: number; selected: boolean }[] = [];
   sauces = [
     { name: 'Ketchup', selected: false },
     { name: 'Big Mac', selected: false },
@@ -56,6 +56,14 @@ export class CardFoodComponent implements OnInit {
         tipo,
         lanches: agrupados[tipo] || [],
         imagem: this.getImagemPorTipo(tipo)  // Associar imagem ao tipo
+      }));
+    });
+
+    this.getFood.GetDataAdditionals().subscribe(adds => {
+      this.adicionais = adds.map(a => ({
+        name: a.NOME,
+        valor: a.PRECO,
+        selected: false
       }));
     });
   }
@@ -100,7 +108,6 @@ export class CardFoodComponent implements OnInit {
   }
 
 
-
   toggleAllSauces(): void {
     const newState = !this.areAllSaucesSelected;
     this.sauces.forEach(sauce => (sauce.selected = newState));
@@ -108,6 +115,10 @@ export class CardFoodComponent implements OnInit {
 
   toggleSauce(sauce: { name: string; selected: boolean }): void {
     sauce.selected = !sauce.selected;
+  }
+  
+  toggleAdicional(Adicional: { name: string; valor: number, selected: boolean }): void {
+    Adicional.selected = !Adicional.selected;
   }
 
   toggleSaucesVisibility(): void {
@@ -136,6 +147,7 @@ export class CardFoodComponent implements OnInit {
     this.isPopupOpen = true;
     // Resetar os molhos selecionados
     this.sauces.forEach(sauce => sauce.selected = false);
+    this.adicionais.forEach(adicional => adicional.selected = false);
     this.isSaucesVisible = true;
     this.isObservationsVisible = true;
     // Resetar observações
@@ -150,6 +162,7 @@ export class CardFoodComponent implements OnInit {
   
 
   closePopup(): void {
+    
     this.isPopupOpen = false;
 
     if (this.selectedLanche) {
