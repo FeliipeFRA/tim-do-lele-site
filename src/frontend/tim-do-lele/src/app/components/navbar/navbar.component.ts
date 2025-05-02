@@ -2,7 +2,7 @@ import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from 'app/service/cart.service';
 import { Food } from 'app/components/Food.model';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -17,10 +17,18 @@ export class NavbarComponent implements OnInit {
 
   cartItems: Food[] = [];
   totalItems: number = 0;
+  userName: string | null = '';
+  role: string | null = '';
 
-  constructor(public cartService: CartService) {}
+  constructor(public cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
+    // Verifique se estamos no ambiente de navegador antes de acessar o localStorage
+    if (typeof window !== 'undefined') {
+      this.userName = localStorage.getItem('userId');
+      this.role = localStorage.getItem('role');
+    }
+
     this.cartService.cart$.subscribe((items) => {
       this.cartItems = items;
       this.updateTotalItems();
@@ -90,4 +98,16 @@ export class NavbarComponent implements OnInit {
       0
     );
   }
+
+  logout(): void {
+    // Limpa os dados de login armazenados no localStorage
+    localStorage.removeItem('userId');
+    localStorage.removeItem('role');
+    
+    // Redireciona o usuário para a página de login
+    this.router.navigate(['/login']);  // Navega para a página de login
+  }
+
+
+
 }
