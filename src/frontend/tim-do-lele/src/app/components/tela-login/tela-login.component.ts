@@ -22,7 +22,7 @@ export class TelaLoginComponent {
   ) {}
 
   data: any [] = [];
-  email: string |undefined;
+  email: string | undefined;
   senha: string | undefined;
 
   // Método para validar login
@@ -54,22 +54,22 @@ export class TelaLoginComponent {
   }
   
   private showAlert(message: string): void {
-    Swal.fire({
-      icon: 'error',
-      title: message,
-      confirmButtonText: 'Tentar Novamente',  // Texto do botão de confirmação
-      confirmButtonColor: '#d33',  // Cor do botão de confirmação
-      background: '#f8d7da',  // Cor de fundo
-      customClass: {
-      popup: 'custom-popup',  // Classe CSS personalizada para o popup
-      confirmButton: 'custom-confirm-btn',  // Classe CSS para o botão
-    },
-    showClass: {
-      popup: 'animate__animated animate__fadeInDown',  // Animação de entrada
-    },
-    hideClass: {
-      popup: 'animate__animated animate__fadeOutUp',  // Animação de saída
-    },
+      Swal.fire({
+        icon: 'error',
+        title: message,
+        confirmButtonText: 'Tentar Novamente',  // Texto do botão de confirmação
+        confirmButtonColor: '#d33',  // Cor do botão de confirmação
+        background: '#f8d7da',  // Cor de fundo
+        customClass: {
+        popup: 'custom-popup',  // Classe CSS personalizada para o popup
+        confirmButton: 'custom-confirm-btn',  // Classe CSS para o botão
+      },
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown',  // Animação de entrada
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',  // Animação de saída
+      },
     });
   }
 
