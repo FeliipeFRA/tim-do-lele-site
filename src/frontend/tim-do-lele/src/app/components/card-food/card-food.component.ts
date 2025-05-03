@@ -107,6 +107,19 @@ export class CardFoodComponent implements OnInit {
     return this.sauces.every(sauce => sauce.selected);
   }
 
+  get totalSelecionado(): number {
+    if (!this.selectedLanche) return 0;
+  
+    const quantidade = this.selectedLanche.QUANTITY ?? 1;
+    const precoBase = this.selectedLanche.PRECO * quantidade;
+  
+    const precoAdicionais = this.adicionais
+      .filter(add => add.selected)
+      .reduce((soma, add) => soma + add.valor * quantidade, 0);
+  
+    return precoBase + precoAdicionais;
+  }
+  
 
   toggleAllSauces(): void {
     const newState = !this.areAllSaucesSelected;
@@ -187,9 +200,18 @@ export class CardFoodComponent implements OnInit {
 
   addToCart(): void {
     if (this.selectedLanche) {
-      const lancheComDetalhes = {
+      const adicionaisSelecionados = this.adicionais
+        .filter(add => add.selected)
+        .map(add => ({
+          ID: 0, // ou null se o ID não for relevante
+          NOME: add.name,
+          PRECO: add.valor
+        }));
+  
+      const lancheComDetalhes: Food = {
         ...this.selectedLanche,
         sauces: this.sauces.filter(sauce => sauce.selected).map(sauce => sauce.name),
+        additionals: adicionaisSelecionados,
         observations: (document.getElementById('observations') as HTMLTextAreaElement)?.value || '',
       };
   

@@ -108,7 +108,7 @@
           <div class="quantity-container">
             <div *ngIf="selectedLanche">
               <button class="btn-add-to-cart" (click)="addToCart()">
-                Adicionar R$ {{ ((selectedLanche.PRECO) * (selectedLanche.QUANTITY ?? 1)).toFixed(2).replace('.', ',') }}
+                Adicionar R$ {{ totalSelecionado.toFixed(2).replace('.', ',') }}
               </button>
             </div>
           </div>
