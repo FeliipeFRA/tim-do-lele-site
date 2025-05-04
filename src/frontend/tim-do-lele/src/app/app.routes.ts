@@ -8,6 +8,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TelaInicialComponent } from './components/tela-inicial/tela-inicial.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { AdminPedidosComponent } from './components/admin-pedidos/admin-pedidos.component';
+import { CarrinhoComponent } from './components/carrinho/carrinho.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
     {
@@ -58,5 +60,15 @@ export const routes: Routes = [
         path: "pedidos",
         component: AdminPedidosComponent,
         title: "Tim do Lelê - Pedidos",
+    },
+    {
+        path: "carrinho",
+        component: CarrinhoComponent,
+        title: "Tim do Lelê - Carrinho"
+    },
+    {
+        path: '**',
+        component: PageNotFoundComponent
     }
+      
 ];
