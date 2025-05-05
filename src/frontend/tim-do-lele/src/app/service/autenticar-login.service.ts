@@ -20,15 +20,10 @@ export class AutenticarService {
     });
 
     return this.http.post<any>(this.apiUrl, loginData, { headers }).pipe(
+      
       tap((response) => {
-        if(response.message === 'Login bem-sucedido') {
-      //armazena userId e role no local storage após o login
-
         localStorage.setItem('userId', response.userId);
         localStorage.setItem('role', response.role);
-
-        this.router.navigate(['/home']); // Redireciona para a página inicial após o login bem-sucedido
-        }
       }),
     );
   }

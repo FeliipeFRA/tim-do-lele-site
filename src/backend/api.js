@@ -6,6 +6,7 @@ const {InserirUser} = require('./query_banco/inserir_cadastro.js')
 const {ConsultarLanches} = require('./query_banco/consulta_lanches.js')
 const {ConsultarBebidas } = require('./query_banco/consulta_bebidas.js');
 const {ConsultarPedidos} = require('./query_banco/consulta_pedidos.js')
+const {ConsultarAdicionais} = require('./query_banco/consulta_adicionais.js')
 const {verificarEmailExistenteNoBanco } = require('./query_banco/verificar_email.js');
 
 
@@ -89,11 +90,18 @@ app.get('/bebidas', async (req, res) => {
         const bebidas = await ConsultarBebidas();
         res.status(200).json(bebidas);
     } catch (error) {
-        console.error("Erro ao consultar a tabela bebidas:", error);
-        res.status(500).send("Erro ao consultar a tabela bebidas.");
+
     }
 });
 
+app.get('/adicionais', async (req, res) => {
+    try {
+        const adicionais = await ConsultarAdicionais();
+        res.status(200).json(adicionais);
+    } catch (error) {
+
+    }
+});
 
 app.post('/autenticar-login', async (req, res) => {
     try {
@@ -124,8 +132,7 @@ app.post('/autenticar-login', async (req, res) => {
             res.status(200).send({ 
                 message: "Login bem-sucedido!", 
                 userId: user.ID, // Retorna o ID do usuário
-                role: user.ROLE // Retorna o papel do usuário (admin ou user)
-            
+                role: user.NIVELUSER // Retorna o papel do usuário (admin ou user)
             });
             
         });
