@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'app/service/cart.service';
 import { GetFoodService } from 'app/service/get-food.service';
-import { Food } from 'app/components/Food.model';
+import { Food } from 'app/models/Food.model';
 import { CommonModule } from '@angular/common';
 
 @Component({
