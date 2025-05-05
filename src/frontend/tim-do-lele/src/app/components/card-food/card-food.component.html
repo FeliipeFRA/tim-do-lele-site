@@ -4,7 +4,7 @@
     <div class="grupo-card-container">
       <div *ngFor="let lanche of tipo.lanches" class="card" (click)="openPopup(lanche)" style="position: relative;">
         <div class="card-body">
-          <img [src]="tipo.imagem" alt="{{ lanche.NOME }}" class="img-fluid lanche-image" />
+          <img [src]="getImagemPorIdOuTipo(lanche.ID, tipo.tipo)" alt="{{ lanche.NOME }}" class="img-fluid lanche-image" (error)="onImageError($event, tipo.tipo)"  />
           <div class="text-container">
             <h3 class="card-title">{{ lanche.NOME }}</h3>
             <p class="card-text">Ingredientes: {{ lanche.INGREDIENTES}}</p>
@@ -22,7 +22,7 @@
 
       <!-- Layout de Foto -->
       <div class="left-side">
-        <img [src]="getImagemPorTipo(selectedLanche!.TIPO)" alt="{{ selectedLanche?.NOME }}" class="details-img" />
+        <img [src]="getImagemPorIdOuTipo(selectedLanche!.ID, selectedLanche!.TIPO)" alt="{{ selectedLanche?.NOME }}" class="details-img" (error)="onImageError($event, selectedLanche!.TIPO)"/>
         <p class="details-warning">* Imagem meramente ilustrativa</p>
       </div>
 
@@ -61,6 +61,24 @@
             </div>
           </div>
 
+          <h2 class="section_tittle">
+            Adicionais:
+            <span (click)="toggleAdditionalsVisibility()" class="arrow-icon">
+              <i class="fa" [ngClass]="isAdditionalsVisible ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+            </span>
+          </h2>
+
+          <div class="additionals-section">
+            <div *ngIf="isAdditionalsVisible">
+              <div class="additionals-options">
+  
+                <label *ngFor="let Adicional of adicionais">
+                  <input type="checkbox" [checked]="Adicional.selected" (change)="toggleAdicional(Adicional)" /> <strong>R${{ Adicional.valor.toFixed(2).replace('.', ',') }}</strong>  - {{ Adicional.name }}
+                </label>
+              </div>
+            </div>
+          </div>
+
           <!-- Observações com rolagem -->
           <h2 class="section_tittle">
             Observações:
@@ -79,6 +97,8 @@
           </div>
         </div>
 
+        
+
         <div class="right-side-bottom">
           <div class="quantity-container">
             <button class="quantity-btn" (click)="decreaseQuantity()">-</button>
@@ -88,7 +108,7 @@
           <div class="quantity-container">
             <div *ngIf="selectedLanche">
               <button class="btn-add-to-cart" (click)="addToCart()">
-                Adicionar R$ {{ ((selectedLanche.PRECO) * (selectedLanche.QUANTITY ?? 1)).toFixed(2).replace('.', ',') }}
+                Adicionar R$ {{ totalSelecionado.toFixed(2).replace('.', ',') }}
               </button>
             </div>
           </div>

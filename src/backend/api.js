@@ -1,10 +1,13 @@
 // Módulo responsável por configurar as rotas da API
 const express = require('express');
 const cors = require('cors')
-const { ConsultarUsers } = require('./query_banco/consulta_cadastro.js');
+const {ConsultarUsers } = require('./query_banco/consulta_cadastro.js');
 const {InserirUser} = require('./query_banco/inserir_cadastro.js')
 const {ConsultarLanches} = require('./query_banco/consulta_lanches.js')
+const {ConsultarBebidas } = require('./query_banco/consulta_bebidas.js');
 const {ConsultarPedidos} = require('./query_banco/consulta_pedidos.js')
+const {ConsultarAdicionais} = require('./query_banco/consulta_adicionais.js')
+const {verificarEmailExistenteNoBanco } = require('./query_banco/verificar_email.js');
 
 
 //rota de pagamentos
@@ -40,7 +43,7 @@ app.use(express.json());
 
 // Função para validar e-mails com domínios específicos
 function validarEmail(email) {
-    const dominiosPermitidos = ['gmail.com', 'baraodemaua.edu.br', 'hotmail.com', 'yahoo.com', 'yahoo.com.br', 'icloud.com', 'outlook.com', 'aol.com'];
+    const dominiosPermitidos = ['gmail.com', 'baraodemaua.edu.br', 'hotmail.com', 'yahoo.com', 'yahoo.com.br', 'icloud.com', 'outlook.com', 'aol.com', 'msn.com', 'live.com', 'uol.com.br', 'terra.com.br', 'bol.com.br', 'ig.com.br', 'r7.com'];
 
     const padraoEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 
@@ -60,7 +63,6 @@ function validarTelefone(telefone) {
 
     return padraoTelefone.test(telefone);
 }
-
 
 app.get('/consulta-users', async (req, res) => {
     //Endpoint responsável por consultar users
@@ -83,6 +85,23 @@ app.get('/lanches', async (req, res)=>{
     }
 })
 
+app.get('/bebidas', async (req, res) => {
+    try {
+        const bebidas = await ConsultarBebidas();
+        res.status(200).json(bebidas);
+    } catch (error) {
+
+    }
+});
+
+app.get('/adicionais', async (req, res) => {
+    try {
+        const adicionais = await ConsultarAdicionais();
+        res.status(200).json(adicionais);
+    } catch (error) {
+
+    }
+});
 
 app.post('/autenticar-login', async (req, res) => {
     try {
@@ -101,7 +120,7 @@ app.post('/autenticar-login', async (req, res) => {
                 return res.status(500).send({ message: "Erro no servidor." });
             }
             if (!user) {
-                return res.status(401).send({ message: "Usuário não encontrado." });
+                return res.status(401).send({ message: "Usuário não cadastrado." });
             }
 
             // Compara a senha criptografada com a coluna SENHA
@@ -110,7 +129,12 @@ app.post('/autenticar-login', async (req, res) => {
             }
 
             // Login bem-sucedido
-            res.status(200).send({ message: "Login bem-sucedido!" });
+            res.status(200).send({ 
+                message: "Login bem-sucedido!", 
+                userId: user.ID, // Retorna o ID do usuário
+                role: user.NIVELUSER // Retorna o papel do usuário (admin ou user)
+            });
+            
         });
 
         db.close();
@@ -120,34 +144,51 @@ app.post('/autenticar-login', async (req, res) => {
     }
 });
 
-
-
 app.post('/enviar-cadastro', async (req, res) => {
     try {
-        const data = req.body;
-        
-         // Valida o e-maill com o=domínios permitidos
-         if (!validarEmail(data.email)) {
+        const { email, nome, senha, telefone } = req.body;
+
+        // Validação de campos obrigatórios
+        if (!email || !nome || !senha || !telefone) {
+            return res.status(400).send({ message: "Todos os campos são obrigatórios." });
+        }
+
+        // Validação de email
+        if (!validarEmail(email)) {
             return res.status(400).send({ message: "E-mail inválido." });
         }
-        // Valida o numero de telefone 
-        if (!validarTelefone(data.telefone)) {
-            return res.status(400).send({ message: "Número de telefone inválido. O formato correto é: (XX) XXXXX-XXXX, 9XXXXXXXXX ou 9XXXX-XXXX." });
-        }
-        // Caso o telefone seja válido, continua com o processo de cadastro
-        return res.status(200).json({ message: "Cadastro realizado com sucesso!" });
 
-        // Criptografa a senha do user
-        let senhaCriptografada;
+        // Validação de telefone
+        if (!validarTelefone(telefone)) {
+            return res.status(400).send({ message: "Número de telefone inválido." });
+        }
+
+        // Verificar se o email já existe no banco
+        let emailExistente;
         try {
-            senhaCriptografada = await CriptografarSenha(data.senha);
-        } catch (erroCripto) {
-            console.error("Erro ao criptografar senha:", erroCripto);
-            return res.status(500).send({ message: "Erro na criptografia da senha." });
+            emailExistente = await verificarEmailExistenteNoBanco(email);
+        } catch (error) {
+            console.error("Erro ao verificar se o e-mail existe:", error);
+            return res.status(500).send({ message: "Erro ao verificar e-mail no banco." });
         }
 
-        await InserirUser(data.email, data.nome, senhaCriptografada, data.telefone);
-        res.status(200).json({ message: "Dados enviados com sucesso." });
+        if (emailExistente) {
+            return res.status(400).send({ message: "E-mail já cadastrado." });
+        }
+
+        // Criptografar a senha
+        const senhaCriptografada = await CriptografarSenha(senha);
+
+        // Inserir no banco de dados
+        await InserirUser(email, nome, senhaCriptografada, telefone);
+
+        // Enviar resposta de sucesso
+        res.status(200).json({ message: "Cadastro realizado com sucesso!",
+            userId: userId, // Retorna o ID do usuário
+            role: 'user' // Retorna o role (pode ser 'user' ou 'admin', dependendo da sua lógica)
+         });
+
+
     } catch (erro) {
         console.error("Erro ao enviar cadastro:", erro);
         res.status(500).send({ message: "Falha ao enviar os dados." });
@@ -178,5 +219,4 @@ app.post('/pagamentos/pix', async (req, res) =>{
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
-
 });
