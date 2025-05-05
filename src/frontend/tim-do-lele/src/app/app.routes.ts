@@ -67,13 +67,14 @@ export const routes: Routes = [
         component: AdminPedidosComponent,
         canActivate: [AuthGuard, AdminGuard], // Protege a rota pedidos para administradores (AuthGuard + AdminGuard)
         title: "Tim do Lelê - Pedidos",
-    }
+    },
 
     {
         path: "carrinho",
         component: CarrinhoComponent,
         title: "Tim do Lelê - Carrinho"
     },
+
     {
         path: '**',
         component: PageNotFoundComponent
