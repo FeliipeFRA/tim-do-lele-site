@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from 'app/service/cart.service';
-import { Food } from 'app/components/Food.model';
+import { Food } from 'app/models/Food.model';
 import { RouterLink, Router } from '@angular/router';
 
 @Component({
@@ -86,11 +86,24 @@ export class NavbarComponent implements OnInit {
   }
 
   get total(): number {
-    return this.cartItems.reduce(
-      (total, item) => total + item.PRECO * (item.QUANTITY || 1),
+    return this.cartItems.reduce((total, item) => {
+      const precoBase = item.PRECO * (item.QUANTITY ?? 1);
+      const precoAdd = (item.additionals || []).reduce((soma, add) => soma + add.PRECO * (item.QUANTITY ?? 1), 0);
+      return total + precoBase + precoAdd;
+    }, 0);
+  }
+
+  formatarPrecoTotalItem(item: Food): string {
+    const quantidade = item.QUANTITY ?? 1;
+    const precoBase = item.PRECO * quantidade;
+    const precoAdd = (item.additionals || []).reduce(
+      (soma, a) => soma + a.PRECO * quantidade,
       0
     );
+    const total = precoBase + precoAdd;
+    return total.toFixed(2).replace('.', ',');
   }
+  
 
   private updateTotalItems(): void {
     this.totalItems = this.cartItems.reduce(
