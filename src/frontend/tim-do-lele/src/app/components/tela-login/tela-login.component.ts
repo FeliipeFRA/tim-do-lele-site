@@ -22,7 +22,7 @@ export class TelaLoginComponent {
   ) {}
 
   data: any [] = [];
-  email: string |undefined;
+  email: string | undefined;
   senha: string | undefined;
 
   // Método para validar login

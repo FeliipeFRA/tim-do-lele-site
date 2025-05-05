@@ -129,7 +129,12 @@ app.post('/autenticar-login', async (req, res) => {
             }
 
             // Login bem-sucedido
-            res.status(200).send({ message: "Login bem-sucedido!" });
+            res.status(200).send({ 
+                message: "Login bem-sucedido!", 
+                userId: user.ID, // Retorna o ID do usuário
+                role: user.NIVELUSER // Retorna o papel do usuário (admin ou user)
+            });
+            
         });
 
         db.close();
@@ -178,7 +183,11 @@ app.post('/enviar-cadastro', async (req, res) => {
         await InserirUser(email, nome, senhaCriptografada, telefone);
 
         // Enviar resposta de sucesso
-        res.status(200).json({ message: "Cadastro realizado com sucesso!" });
+        res.status(200).json({ message: "Cadastro realizado com sucesso!",
+            userId: userId, // Retorna o ID do usuário
+            role: 'user' // Retorna o role (pode ser 'user' ou 'admin', dependendo da sua lógica)
+         });
+
 
     } catch (erro) {
         console.error("Erro ao enviar cadastro:", erro);
