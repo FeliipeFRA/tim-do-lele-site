@@ -108,6 +108,4 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);  // Navega para a página de login
   }
 
-
-
 }
