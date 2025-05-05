@@ -56,8 +56,10 @@ export const routes: Routes = [
     {
         path: "perfil",
         component: PerfilComponent,
+        canActivate: [AuthGuard], // Protege a rota home para usuários logados (usando AuthGuard)
         title: "Tim do Lelê - Perfil",
     },
+    
     {
         path: "pedidos",
         component: AdminPedidosComponent,

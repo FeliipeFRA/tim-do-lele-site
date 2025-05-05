@@ -124,8 +124,7 @@ app.post('/autenticar-login', async (req, res) => {
             res.status(200).send({ 
                 message: "Login bem-sucedido!", 
                 userId: user.ID, // Retorna o ID do usuário
-                role: user.ROLE // Retorna o papel do usuário (admin ou user)
-            
+                role: user.NIVELUSER // Retorna o papel do usuário (admin ou user)
             });
             
         });
