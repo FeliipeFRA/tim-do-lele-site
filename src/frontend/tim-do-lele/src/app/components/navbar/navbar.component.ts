@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit {
   totalItems: number = 0;
   userName: string | null = '';
   role: string | null = '';
+  isCartOpen = false;
 
   constructor(public cartService: CartService, private router: Router) {}
 
@@ -35,12 +36,18 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+
   toggleSearchForm() {
     this.searchForm.nativeElement.classList.toggle('active');
   }
 
   toggleCart() {
-    this.cart.nativeElement.classList.toggle('active');
+    if (this.isCartOpen) {
+      this.isCartOpen = false
+    } else {
+      this.isCartOpen = true
+    }
+    
   }
 
   toggleMenu() {

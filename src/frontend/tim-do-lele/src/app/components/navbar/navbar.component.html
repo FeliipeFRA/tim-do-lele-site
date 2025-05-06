@@ -15,6 +15,7 @@
             <span *ngIf="totalItems > 0" class="cart-badge">{{ totalItems }}</span>
         </div>
         <a href="/perfil">
+          
             <div class="ri-user-line" id="user-btn"></div>
         </a>
         <button *ngIf="userName" (click)="logout()" class="logout-btn">Logout</button> <!-- Exibe o botão de logout se o usuário estiver logado -->
@@ -26,7 +27,7 @@
         <label for="search-box" class="ri-search-line"></label>
     </form>
 
-    <div #cart class="shopping-cart">
+    <div #cart class="shopping-cart" *ngIf="isCartOpen">
       <div *ngIf="cartItems.length === 0" class="empty-cart-message">
         Carrinho Vazio
       </div>
