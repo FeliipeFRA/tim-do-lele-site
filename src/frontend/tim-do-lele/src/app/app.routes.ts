@@ -72,6 +72,7 @@ export const routes: Routes = [
     {
         path: "carrinho",
         component: CarrinhoComponent,
+        canActivate: [AuthGuard], // Protege a rota home para usuários logados (usando AuthGuard)
         title: "Tim do Lelê - Carrinho"
     },
 

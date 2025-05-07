@@ -1,1 +1,31 @@
-<p>carrinho works!</p>
+<!-- carrinho.component.html -->
+<div>
+    <h2>Revisar seu Carrinho</h2>
+    <div *ngFor="let item of cartItems">
+      <div class="cart-item">
+        <img [src]="getImagemPorIdOuTipo(item.ID, item.TIPO)" alt="{{ item.NOME }}" />
+        <div>
+          <h3>{{ item.NOME }}</h3>
+          <p>Quantidade: {{ item.QUANTITY }}</p>
+          <span class="price">
+            R$ {{ formatarPrecoTotalItem(item) }}
+          </span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="total">
+      <strong>Total: R$ {{ total.toFixed(2).replace('.', ',') }}</strong>
+    </div>
+  
+    <!-- Botões para continuar ou voltar -->
+    <button routerLink="/home">Voltar para a Home</button>
+    <button routerLink="/pagamento">Escolher Método de Pagamento</button>
+  </div>
+  
+  <!-- Se o carrinho estiver vazio -->
+  <ng-template #emptyCart>
+    <p>Seu carrinho está vazio!</p>
+    <button a="/home">Voltar para a Home</button>
+  </ng-template>
+  
