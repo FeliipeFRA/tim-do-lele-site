@@ -1,5 +1,5 @@
 <div class="card-container">
-  <div *ngFor="let tipo of lanchesAgrupados">
+  <div *ngFor="let tipo of lanchesAgrupados" [attr.id]="formatarId(tipo.tipo)">
     <h2 class="tipo-titulo">{{ tipo.tipo }}</h2>
     <div class="grupo-card-container">
       <div *ngFor="let lanche of tipo.lanches" class="card" (click)="openPopup(lanche)" style="position: relative;">

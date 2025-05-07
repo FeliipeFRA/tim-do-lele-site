@@ -2,16 +2,17 @@
     <img class="logo" src="assets/img/logo-tim-header.png">
     <nav class="nav">
         <a href="/home">Início</a>
-        <a href="#burgers">Cachorro-Quente</a>
-        <a href="#burgers">Hamburguer</a>
-        <a href="#burgers">Frango</a>
-        <a href="#bebidas">Bebidas</a>
+        <a (click)="scrollToSection('cachorro-quente')">Cachorro-quente</a>
+        <a (click)="scrollToSection('hamburguer')">Hamburguer</a>
+        <a (click)="scrollToSection('frango')">Frango</a>
+        <a (click)="scrollToSection('bebidas')">Bebidas</a>
     </nav>
+
 
     <div class="icons">
         <div class="ri-menu-line" id="menu-btn" (click)="toggleMenu()"></div>
         <div class="ri-search-line" id="search-btn" (click)="toggleSearchForm()"></div>
-        <div class="ri-shopping-cart-line" id="cart-btn" (click)="toggleCart()">
+        <div class="ri-shopping-cart-line" id="cart-btn" id="cart-btn" (click)="toggleCart()">
             <span *ngIf="totalItems > 0" class="cart-badge">{{ totalItems }}</span>
         </div>
         <a href="/perfil">
@@ -80,3 +81,4 @@
     </div>
     
 </header>
+

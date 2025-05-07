@@ -184,4 +184,9 @@ export class CardFoodComponent implements OnInit {
       this.closePopup();
     }
   }
+  
+  formatarId(titulo: string): string {
+    return titulo.toLowerCase().replace(/\s+/g, '-').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
 }

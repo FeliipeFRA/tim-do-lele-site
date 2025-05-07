@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from 'app/service/cart.service';
 import { Food } from 'app/components/Food.model';
@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit {
 
   cartItems: Food[] = [];
   totalItems: number = 0;
+  isCartOpen: boolean = false;
 
   constructor(public cartService: CartService) {}
 
@@ -32,8 +33,24 @@ export class NavbarComponent implements OnInit {
   }
 
   toggleCart() {
-    this.cart.nativeElement.classList.toggle('active');
+    this.isCartOpen = !this.isCartOpen;
+    if (this.isCartOpen) {
+      this.cart.nativeElement.classList.add('active');
+    } else {
+      this.cart.nativeElement.classList.remove('active');
+    }
   }
+
+  @HostListener('document:click', ['$event'])
+onClickOutside(event: MouseEvent) {
+  const clickedInsideCart = this.cart?.nativeElement.contains(event.target);
+  const clickedCartIcon = (event.target as HTMLElement).id === 'cart-btn';
+
+  if (!clickedInsideCart && !clickedCartIcon) {
+    this.isCartOpen = false;
+    this.cart.nativeElement.classList.remove('active');
+  }
+}
 
   toggleMenu() {
     const nav = document.querySelector('.nav');
@@ -90,4 +107,12 @@ export class NavbarComponent implements OnInit {
       0
     );
   }
+  
+  scrollToSection(sectionId: string) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
 }
