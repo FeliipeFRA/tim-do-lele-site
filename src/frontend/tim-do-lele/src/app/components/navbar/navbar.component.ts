@@ -1,8 +1,8 @@
 import { Component, ElementRef, ViewChild, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from 'app/service/cart.service';
-import { Food } from 'app/components/Food.model';
-import { RouterLink } from '@angular/router';
+import { Food } from 'app/models/Food.model';
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -17,11 +17,19 @@ export class NavbarComponent implements OnInit {
 
   cartItems: Food[] = [];
   totalItems: number = 0;
+  userName: string | null = '';
+  role: string | null = '';
   isCartOpen: boolean = false;
 
-  constructor(public cartService: CartService) {}
+  constructor(public cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
+    // Verifique se estamos no ambiente de navegador antes de acessar o localStorage
+    if (typeof window !== 'undefined') {
+      this.userName = localStorage.getItem('userId');
+      this.role = localStorage.getItem('role');
+    }
+
     this.cartService.cart$.subscribe((items) => {
       this.cartItems = items;
       this.updateTotalItems();
@@ -95,11 +103,24 @@ onClickOutside(event: MouseEvent) {
   }
 
   get total(): number {
-    return this.cartItems.reduce(
-      (total, item) => total + item.PRECO * (item.QUANTITY || 1),
+    return this.cartItems.reduce((total, item) => {
+      const precoBase = item.PRECO * (item.QUANTITY ?? 1);
+      const precoAdd = (item.additionals || []).reduce((soma, add) => soma + add.PRECO * (item.QUANTITY ?? 1), 0);
+      return total + precoBase + precoAdd;
+    }, 0);
+  }
+
+  formatarPrecoTotalItem(item: Food): string {
+    const quantidade = item.QUANTITY ?? 1;
+    const precoBase = item.PRECO * quantidade;
+    const precoAdd = (item.additionals || []).reduce(
+      (soma, a) => soma + a.PRECO * quantidade,
       0
     );
+    const total = precoBase + precoAdd;
+    return total.toFixed(2).replace('.', ',');
   }
+  
 
   private updateTotalItems(): void {
     this.totalItems = this.cartItems.reduce(
@@ -107,6 +128,16 @@ onClickOutside(event: MouseEvent) {
       0
     );
   }
+
+  logout(): void {
+    // Limpa os dados de login armazenados no localStorage
+    localStorage.removeItem('userId');
+    localStorage.removeItem('role');
+    
+    // Redireciona o usuário para a página de login
+    this.router.navigate(['/login']);  // Navega para a página de login
+  }
+
   
   scrollToSection(sectionId: string) {
     const element = document.getElementById(sectionId);

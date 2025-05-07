@@ -195,7 +195,7 @@
 
 /* Estilos para o texto dos molhos */
 .sauce-text {
-  font-size: 12px; /* Tamanho de texto pequeno */
+  font-size: 14px; /* Tamanho de texto pequeno */
   color: black; /* Cor do texto preta */
   margin: 0px; /* Espaçamento entre os molhos */
   text-align: left; /* Alinha o texto à esquerda */
@@ -203,7 +203,21 @@
   white-space: normal; /* Permite quebra de linha normal */
   overflow-wrap: break-word; /* Garante que o texto será quebrado em palavras longas */
   max-width: 100%; /* Impede que o texto ultrapasse o limite do contêiner */
+  list-style: none;
 }
+
+.additionals-text {
+  font-size: 14px; /* Tamanho de texto pequeno */
+  color: black; /* Cor do texto preta */
+  margin: 0px; /* Espaçamento entre os molhos */
+  text-align: left; /* Alinha o texto à esquerda */
+  word-break: break-word; /* Quebra a palavra se necessário para evitar overflow */
+  white-space: normal; /* Permite quebra de linha normal */
+  overflow-wrap: break-word; /* Garante que o texto será quebrado em palavras longas */
+  max-width: 100%; /* Impede que o texto ultrapasse o limite do contêiner */
+  list-style: none;
+}
+
 
 /* Estilo para as observações */
 .observations-text {

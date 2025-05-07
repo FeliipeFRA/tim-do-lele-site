@@ -69,9 +69,12 @@
           </h2>
 
           <div class="additionals-section">
-            <div *ngIf="isObservationsVisible">
-              <div class="textarea-container">
-    
+            <div *ngIf="isAdditionalsVisible">
+              <div class="additionals-options">
+  
+                <label *ngFor="let Adicional of adicionais">
+                  <input type="checkbox" [checked]="Adicional.selected" (change)="toggleAdicional(Adicional)" /> <strong>R${{ Adicional.valor.toFixed(2).replace('.', ',') }}</strong>  - {{ Adicional.name }}
+                </label>
               </div>
             </div>
           </div>
@@ -105,7 +108,7 @@
           <div class="quantity-container">
             <div *ngIf="selectedLanche">
               <button class="btn-add-to-cart" (click)="addToCart()">
-                Adicionar R$ {{ ((selectedLanche.PRECO) * (selectedLanche.QUANTITY ?? 1)).toFixed(2).replace('.', ',') }}
+                Adicionar R$ {{ totalSelecionado.toFixed(2).replace('.', ',') }}
               </button>
             </div>
           </div>
