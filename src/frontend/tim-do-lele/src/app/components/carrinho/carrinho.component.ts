@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { CartService } from 'app/service/cart.service';
 import { Food } from 'app/models/Food.model';
 import { RouterLink, Router } from '@angular/router';
+import { NavbarCheckoutComponent } from '../navbar-checkout/navbar-checkout.component';
 
 @Component({
   selector: 'app-carrinho',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, NavbarCheckoutComponent],
   templateUrl: './carrinho.component.html',
   styleUrls: ['./carrinho.component.scss'],
 })

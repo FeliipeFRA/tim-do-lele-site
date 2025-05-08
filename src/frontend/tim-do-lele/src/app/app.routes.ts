@@ -12,6 +12,7 @@ import { CarrinhoComponent } from './components/carrinho/carrinho.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';  // Importação do AdminGuard
+import { NavbarCheckoutComponent } from './components/navbar-checkout/navbar-checkout.component'
 
 export const routes: Routes = [
     {
@@ -49,6 +50,11 @@ export const routes: Routes = [
         path: "navbar",
         component: NavbarComponent,
         title: "Tim do Lelê - Navbar",
+    },
+    {
+        path: "navbar-checkout",
+        component: NavbarCheckoutComponent,
+        title: "Tim do Lelê - Navbar"
     },
     {
         path: "tela-inicial",

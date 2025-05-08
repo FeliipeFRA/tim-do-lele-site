@@ -1,31 +1,64 @@
-<!-- carrinho.component.html -->
-<div>
-    <h2>Revisar seu Carrinho</h2>
-    <div *ngFor="let item of cartItems">
-      <div class="cart-item">
-        <img [src]="getImagemPorIdOuTipo(item.ID, item.TIPO)" alt="{{ item.NOME }}" />
-        <div>
-          <h3>{{ item.NOME }}</h3>
-          <p>Quantidade: {{ item.QUANTITY }}</p>
-          <span class="price">
-            R$ {{ formatarPrecoTotalItem(item) }}
-          </span>
+<app-navbar-checkout></app-navbar-checkout>
+
+<div class="checkout">
+  <div class="container">
+    <!-- Exibindo os itens do carrinho -->
+    <div *ngFor="let item of cartItems" class="product-card">
+      <!-- Imagem do produto -->
+      <img class="product-image" [src]="getImagemPorTipo(item.TIPO)" alt="Produto" (error)="onImageError($event, item.TIPO)">
+
+      <div class="product-details">
+        <!-- Nome do produto -->
+        <div class="product-header">
+          <h2 class="product-name">{{ item.NOME }}</h2>
+          <p class="quantity">Quant: {{ item.QUANTITY }}</p>
+        </div>
+
+        <!-- Preço do produto -->
+        <p class="product-price">R$ {{ formatarPrecoTotalItem(item) }}</p>
+
+  
+
+        <!-- Exibição de Molhos -->
+        <div *ngIf="item.sauces && item.sauces.length > 0" class="sauce-text">
+          <strong>Molhos:</strong>
+          <ul>
+            <li *ngFor="let sauce of item.sauces">{{ sauce }}</li>
+          </ul>
+        </div>
+
+        <!-- Exibição de Adicionais -->
+        <div *ngIf="item.additionals && item.additionals.length > 0" class="additionals-text">
+          <strong>Adicionais:</strong>
+          <ul>
+            <li *ngFor="let adicional of item.additionals">
+              {{ adicional.NOME }} - R$ {{ adicional.PRECO.toFixed(2).replace('.', ',') }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Exibição de Observações -->
+        <div *ngIf="item.observations" class="observations-text">
+          <strong>Observações:</strong> {{ item.observations }}
         </div>
       </div>
     </div>
-  
-    <div class="total">
-      <strong>Total: R$ {{ total.toFixed(2).replace('.', ',') }}</strong>
-    </div>
-  
-    <!-- Botões para continuar ou voltar -->
-    <button routerLink="/home">Voltar para a Home</button>
-    <button routerLink="/pagamento">Escolher Método de Pagamento</button>
+
   </div>
-  
-  <!-- Se o carrinho estiver vazio -->
-  <ng-template #emptyCart>
-    <p>Seu carrinho está vazio!</p>
-    <button a="/home">Voltar para a Home</button>
-  </ng-template>
-  
+  <div class = bottom-container>
+    <div class="total">
+      <h3>Total: R$ {{ total.toFixed(2).replace('.', ',') }}</h3>
+    </div>
+  </div>
+ 
+</div>
+
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Botões para Retirar no Local e Pagamento via PIX -->
+    <div class="footer-buttons">
+      <button class="btn-footer" >Pagamento no Local</button>
+      <button class="btn-footer" >Pagamento via PIX</button>
+    </div>
+  </div>
+</footer>
