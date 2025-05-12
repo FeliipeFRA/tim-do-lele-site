@@ -131,6 +131,7 @@
     box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.3);
     border-top:7px solid var(--yellow-color);
     text-align: center;
+    align-items: center;
   }
   
   .bottom-container {
@@ -140,8 +141,9 @@
 
   .footer-container {
     display: flex;
+    text-align: center;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 20px;
     background-color: #ac3c3c;
     flex-wrap: nowrap;
@@ -150,7 +152,7 @@
   /* Container dos botões no rodapé */
   .footer-buttons {
     display: flex;
-    gap: 10px;
+    gap: 150px;
   }
 
   app-navbar-checkout {
@@ -164,6 +166,7 @@
     background-color: rgb(138, 44, 44); /* Cor de fundo do botão */
     color: #fff;
     padding: 10px 20px;
+    width: 300px;
     font-size: 1rem;
     font-weight: bold;
     border: none;
@@ -187,10 +190,8 @@
   
     /* Cards responsivos */
     .product-card {
-      flex-direction: column; /* Deixa os itens empilhados */
       width: 100%; /* Garante que ocupe 100% da largura */
       padding: 15px;
-      align-items: center; /* Alinha os itens no centro */
     }
   
     /* Imagem do produto */
@@ -225,12 +226,11 @@
       }
     
       .footer-buttons {
-        margin-top: 10px;
+        gap: 10px;
       }
     
       .btn-footer {
         width: 100%; /* Os botões ocuparão toda a largura disponível em telas pequenas */
-        margin-bottom: 10px;
       }
   }
   

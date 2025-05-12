@@ -27,78 +27,90 @@
         <label for="search-box" class="ri-search-line"></label>
     </form>
     <div class ="cart-container" *ngIf="isCartOpen">
+      
+
       <div #cart class="shopping-cart" >
-        <div *ngIf="cartItems.length === 0" class="empty-cart-message">
-          Carrinho Vazio
+        <span class="close-button" (click)="toggleCart()">&times;</span>
+        <div class="cart-header">
+        <h3>MEU PEDIDO <i class="ri-shopping-cart-line cart-icon"></i></h3>
         </div>
+        
       
-        <ng-container *ngIf="cartItems.length > 0">
-          <div class="box" *ngFor="let item of cartItems; let i = index">
-            <!-- Exibição dinâmica da imagem -->
-              <img [src]="getImagemPorIdOuTipo(item.ID, item.TIPO)" alt="{{ item.NOME }}" class="img-cart" (error)="onImageError($event, item.TIPO)"  />
-  
-            
-            <div class="content">
-              <h3 class="card-title">{{ item.NOME }}</h3>
-              <span class="price">
-                R$ {{ formatarPrecoTotalItem(item) }}
-              </span>
+
+        <div class = "internal-content">
+          <div *ngIf="cartItems.length === 0" class="empty-cart-message">
+            Seu carrinho está vazio! :(
+          </div>
+          
+
+          <ng-container *ngIf="cartItems.length > 0">
+            <div class="box" *ngFor="let item of cartItems; let i = index">
+              <!-- Exibição dinâmica da imagem -->
+                <img [src]="getImagemPorIdOuTipo(item.ID, item.TIPO)" alt="{{ item.NOME }}" class="img-cart" (error)="onImageError($event, item.TIPO)"  />
+    
               
-              
-      
-              <!-- Exibir molhos -->
-              <p *ngIf="item.sauces" class="sauce-text">
-                <span *ngIf="item.sauces.length > 0"><strong>Molhos: </strong></span>
-                <li *ngFor="let sauce of item.sauces">
-                  {{ sauce }}
-                </li>
+                <div class="content">
+                  <h3 class="card-title">{{ item.NOME }}</h3>
+                  <span class="price">
+                    R$ {{ formatarPrecoTotalItem(item) }}
+                  </span>
                 
-              </p>
-              
-              <div *ngIf="item.additionals && item.additionals.length > 0" class="additionals-text">
-                <strong>Adicionais:</strong>
-                <ul class="additionals-text">
-                  <li *ngFor="let adicional of item.additionals">
-                    {{ adicional.NOME }} - R$ {{ adicional.PRECO.toFixed(2).replace('.', ',') }}
+                
+        
+                <!-- Exibir molhos -->
+                <p *ngIf="item.sauces" class="sauce-text">
+                  <span *ngIf="item.sauces.length > 0"><strong>Molhos: </strong></span>
+                  <li *ngFor="let sauce of item.sauces">
+                    {{ sauce }}
                   </li>
-                </ul>
-              </div>
-              
-  
-              <!-- Exibir observação -->
-              <p *ngIf="item.observations" class="observations-text">
-                <strong>Observações: </strong> {{ item.observations }}
-              </p>
-              
-              
-              
-  
-              <div class="quantity-controls">
-                <!-- Botões para controle de quantidade --> 
-                <button *ngIf="(item.QUANTITY ?? 0) === 1"
-                        class="btn-quantity ri-delete-bin-6-line"
-                        (click)="cartService.removeFromCart(item)">
-                </button>
-                <button *ngIf="(item.QUANTITY ?? 0) > 1"
-                        class="btn-quantity"
-                        (click)="cartService.decreaseQuantity(item)">
-                  -
-                </button>
-                <span class="quantity-value">{{ item.QUANTITY ?? 0 }}</span>
-                <button class="btn-quantity"
-                        (click)="cartService.increaseQuantity(item)">
-                  +
-                </button>
+                </p>
+                
+                <div *ngIf="item.additionals && item.additionals.length > 0" class="additionals-text">
+                  <strong>Adicionais:</strong>
+                  <ul class="additionals-text">
+                    <li *ngFor="let adicional of item.additionals">
+                      {{ adicional.NOME }} - R$ {{ adicional.PRECO.toFixed(2).replace('.', ',') }}
+                    </li>
+                  </ul>
+                </div>
+                
+    
+                <!-- Exibir observação -->
+                <p *ngIf="item.observations" class="observations-text">
+                  <strong>Observações: </strong> {{ item.observations }}
+                </p>
+                
+                
+                
+    
+                <div class="quantity-controls">
+                  <!-- Botões para controle de quantidade --> 
+                  <button *ngIf="(item.QUANTITY ?? 0) === 1"
+                          class="btn-quantity ri-delete-bin-6-line"
+                          (click)="cartService.removeFromCart(item)">
+                  </button>
+                  <button *ngIf="(item.QUANTITY ?? 0) > 1"
+                          class="btn-quantity"
+                          (click)="cartService.decreaseQuantity(item)">
+                    -
+                  </button>
+                  <span class="quantity-value">{{ item.QUANTITY ?? 0 }}</span>
+                  <button class="btn-quantity"
+                          (click)="cartService.increaseQuantity(item)">
+                    +
+                  </button>
+                </div>
               </div>
             </div>
+        
+            
+          </ng-container>
+            
           </div>
-      
-          <div class="total">
-            Total: R$ {{ total.toFixed(2).replace('.', ',') }}
-          </div>
-      
-          <a routerLink="/carrinho" class="btn">Finalizar Compra</a>
-        </ng-container>
+        <div class="cart-footer"> 
+            <div class="total">Total: R$ {{ total.toFixed(2).replace('.', ',') }}</div>
+            <a routerLink="/carrinho" class="btn">Finalizar Compra</a>
+            </div>
       </div>
     </div>
     

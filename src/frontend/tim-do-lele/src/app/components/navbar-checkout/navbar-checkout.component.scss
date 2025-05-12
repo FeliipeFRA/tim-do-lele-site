@@ -13,7 +13,19 @@
     border-bottom: 7px solid var(--yellow-color);
 }
 
-.checkout-tittle {
+.header-content {
+    font-family: "Poppins", sans-serif;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: space-between; /* Espaço entre os elementos */
+    padding: 0rem 7%;
+}
+
+.checkout-title {
     align-items: center;
     font-size: xx-large;
     color: rgb(255, 255, 255);
@@ -22,6 +34,12 @@
     margin: 0 1rem; /* Adiciona margem para separar do botão e logo */
     flex-grow: 1; /* Faz com que o título ocupe o máximo de espaço possível */
     text-align: center; /* Garante que o título fique centralizado */
+}
+
+.cart-icon {
+    font-size: 2rem; /* Ajusta o tamanho do ícone */
+    color: white; /* Deixa o ícone branco */
+    margin: 0; /* Remove a margem */
 }
 
 a {
@@ -41,7 +59,6 @@ a {
 
 .logo {
     font-size: 0;
-    margin-bottom: 0%;
 }
 
 .nav {
@@ -101,40 +118,69 @@ a {
 
 /* Responsividade */
 @media screen and (max-width: 768px) {
+    /* Garantir que a largura total seja 100% */
     .header {
-        padding-right: 0rem;
-        padding-left: 0rem 3%;
+        padding-right: 3%;
+        padding-left: 3%;
+        align-items: center; /* Centraliza os itens */
+        width: 100%; /* Garante que o header ocupe 100% da largura */
+        box-sizing: border-box; /* Garantir que o padding não ultrapasse a largura */
+        overflow-x: hidden; /* Evitar barra de rolagem horizontal */
+    }
+
+    /* Ajustes para o conteúdo do header */
+    .header-content {
+        display: flex;
+        flex-direction: column; /* Coloca os itens em coluna, com o texto acima do ícone */
+        align-items: center; /* Centraliza o conteúdo */
+        justify-content: center;
+        width: 100%; /* Garante que ocupe a largura inteira */
+        box-sizing: border-box; /* Evita que o conteúdo ultrapasse a largura */
     }
 
     .logo {
-        width: 75%;
-        margin: 5%;
-
+        width: 20%; /* Ajusta o tamanho da logo no mobile */
+        margin: 0 auto; /* Centraliza a logo */
+        max-width: 300px; /* Limita a largura máxima da logo */
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
-    .checkout-tittle {
-        font-size: 1.5rem;
+    .checkout-title {
+        font-size: 150%; /* Ajusta o tamanho da fonte para mobile */
+        white-space: nowrap; /* Impede que o texto quebre linha */
+        text-align: center; /* Garante o alinhamento central */
+
+        padding: 0; /* Remove padding */
     }
-  
+
+    /* Ajuste para o ícone de carrinho */
+    .cart-icon {
+        font-size: 2rem;
+        color: white;
+    }
+
+    /* Ajusta o menu de navegação para o mobile */
     .nav {
         display: none; /* Oculta o menu de navegação em telas menores */
         flex-direction: column;
         position: absolute;
-        top: 100%; /* Exibe o menu abaixo do header */
+        top: 100%;
         right: 0;
         background: rgb(172, 60, 60);
         width: 100%;
         transition: all 0.3s ease;
     }
-  
+
     .nav.active {
-        display: flex; 
+        display: flex;
     }
-  
+
     #menu-btn {
-        display: inline-block; 
+        display: inline-block;
     }
-  
+
+    /* Ajusta os ícones */
     .icons {
         display: flex;
         align-items: center;
