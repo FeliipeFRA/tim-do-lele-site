@@ -109,11 +109,6 @@
   box-shadow: var(--box-shadow);
   transition: right 0.3s linear;
 
-  &.active {
-      right: 1%; /* Mostra a barra de pesquisa quando ativa */
-      transition: 0.3s linear;
-  }
-
   input {
       height: 100%;
       width: 100%;
@@ -138,8 +133,9 @@
 }
 
 .header .shopping-cart{
+  align-items: center;
   position: absolute;
-  top:120%; right:-200%;
+  top:120%;
   padding:1rem;
   border-radius: .5rem;
   box-shadow: var(--box-shadow);
@@ -147,13 +143,9 @@
   background: #fff;
   transition: right 0.3s linear;
   max-height: 80vh; /* Define a altura máxima como 80% da altura da tela */
-  overflow-y: auto; /* Adiciona barra de rolagem vertical se o conteúdo exceder a altura */
   padding-right: 10px; /* Adiciona espaço extra para o scrollbar */
-
-  &.active {
     right: 1%; /* Mostra a barra de pesquisa quando ativa */
-    transition: 0.3s linear;
-  }
+  z-index: 9999;
 }
 
 .img-cart{
@@ -182,13 +174,32 @@
   z-index: 2;
 }
 
+  .internal-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto; /* Permite rolar apenas o conteúdo */
+  overflow-x: hidden;
+  text-align: left;
+}
+
+/* Mensagem de carrinho vazio */
+.empty-cart-message {
+  font-size: 1.25rem;
+  color: rgb(43, 43, 43);
+  text-align: center;
+  flex: 1; /* Ocupa o espaço disponível */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .header .shopping-cart .box{
   display: flex;
   align-items: center;
   gap: 0rem;
   position: relative;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
   border-bottom: 1px solid #ccc; /* Linha entre os lanches */
 
 }
@@ -245,7 +256,50 @@
   text-overflow: ellipsis; /* Adiciona '...' caso o texto ultrapasse o limite, se necessário */
 }
 
+.cart-header {
+  position: sticky;
+  top: 0;
+  color: #000000;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+  z-index: 1;
+  background-color: white;
+  border-bottom:2px solid var(--yellow-color);
+  margin-bottom: 5px;
+}
+
+.cart-footer {
+  position: sticky;
+  bottom: 0;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-size: 1rem;
+  z-index: 2;
+  border-top: 2px solid var(--yellow-color);
+}
+
+.close-button {
+    position: absolute;
+    top: 7px;
+    right: 15px;
+    /* Agora no canto esquerdo */
+    font-size: 25px;
+    color: #000;
+    cursor: pointer;
+    z-index: 10000;
+    border: none;
+}
+
+.close-button:hover {
+    color: var(--yellow-color);
+    transition: color 0.2s;
+}
+
 .empty-cart-message{
+  padding-top: 0.5rem;
   color:rgb(43, 43, 43);
   font-size: 1.25rem;
 }
@@ -329,7 +383,7 @@
 }
 
 /* Responsividade */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .header {
       padding: 0 2rem;
       
@@ -358,50 +412,223 @@
       display: flex;
       align-items: center;
   }
-}
 
-@media (max-width: 991px) {
-
-}
-
-@media (max-width: 450px) {
-  .header .shopping-cart{
-    position: absolute;
-    top:100%; right:-200%;
-    padding:1rem;
-    border-radius: .5rem;
-    box-shadow: var(--box-shadow);
-    width: 80%;
-    background: #fff;
-    transition: right 0.3s linear;
-    max-height: 80vh; /* Define a altura máxima como 80% da altura da tela */
-    overflow-y: auto; /* Adiciona barra de rolagem vertical se o conteúdo exceder a altura */
-    padding-right: 10px; /* Adiciona espaço extra para o scrollbar */
-  
-    &.active {
-      right: 0%; /* Mostra a barra de pesquisa quando ativa */
-      transition: 0.3s linear;
-    }
+  .cart-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fundo semitransparente */
+    z-index: 9999;
+    display: flex;
+    padding: 20px;
+    overflow-x: hidden;
+    /* Previne a rolagem horizontal */
+    animation: animate__slideOutDown;
+    animation-duration: 2s; /* don't forget to set a duration! */
+    width: 100%;
+    padding: 0%;
+    justify-content: flex-end; // fixar embaixo
+    align-items: flex-end;     // fixar embaixo
   }
 
+  .header .shopping-cart{
+      background-color: #fff;
+      display: flex;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      position: relative;
+      overflow: auto;
+  /* Garante que não haja rolagem horizontal */
+      right: 0%;
+      flex-direction: column;
+      width: 101%;
+      height: 85vh!important; // ocupa 80% da altura
+      overflow: hidden;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      background-color: #fff;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+      animation: slideUp 0.3s ease-out;
+  }
   
-  .search-form {
-    position: absolute;
-    top: 120%;
-    right: -200%;
-    width: 90%;
-    height: 2rem;
-    background: #fff;
-    border-radius: 0.5rem;
-    overflow: hidden;
+  .img-cart{
+    border-radius: 10px;
+    width: 30%;
+    height: auto;  
+    margin-right: 0.5rem;      
+  }
+
+
+  .cart-badge {
+    position: relative;
+    top: 0; /* Alinha no topo */
+    right: 0; /* Alinha à direita */
+    transform: translate(90%, -50%); /* Ajusta a posição para o canto superior direito */
+    background-color: red;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem; /* Reduz o tamanho da fonte */
+    font-weight: bold;
+    width: 1.5rem; /* Define a largura da bolinha */
+    height: 1.5rem; /* Define a altura da bolinha */
+    border-radius: 50%; /* Garante o formato circular */
     display: flex;
     align-items: center;
-    box-shadow: var(--box-shadow);
-    transition: right 0.3s linear;
-
-    &.active {
-        right: 1%; /* Mostra a barra de pesquisa quando ativa */
-        transition: 0.3s linear;
-    }
+    justify-content: center;
+    z-index: 2;
+  }
+  
+  .header .shopping-cart .box{
+    display: flex;
+    align-items: center;
+    gap: 0rem;
+    position: relative;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ccc; /* Linha entre os lanches */
+  
+  }
+  
+  /* Estilos para o texto dos molhos */
+  .sauce-text {
+    font-size: 14px; /* Tamanho de texto pequeno */
+    color: black; /* Cor do texto preta */
+    margin: 0px; /* Espaçamento entre os molhos */
+    text-align: left; /* Alinha o texto à esquerda */
+    word-break: break-word; /* Quebra a palavra se necessário para evitar overflow */
+    white-space: normal; /* Permite quebra de linha normal */
+    overflow-wrap: break-word; /* Garante que o texto será quebrado em palavras longas */
+    max-width: 100%; /* Impede que o texto ultrapasse o limite do contêiner */
+    list-style: none;
+  }
+  
+  .additionals-text {
+    font-size: 14px; /* Tamanho de texto pequeno */
+    color: black; /* Cor do texto preta */
+    margin: 0px; /* Espaçamento entre os molhos */
+    text-align: left; /* Alinha o texto à esquerda */
+    word-break: break-word; /* Quebra a palavra se necessário para evitar overflow */
+    white-space: normal; /* Permite quebra de linha normal */
+    overflow-wrap: break-word; /* Garante que o texto será quebrado em palavras longas */
+    max-width: 100%; /* Impede que o texto ultrapasse o limite do contêiner */
+    list-style: none;
+  }
+  
+  
+  /* Estilo para as observações */
+  .observations-text {
+    font-size: 14px; /* Tamanho de texto pequeno */
+    color: black; /* Cor do texto preta */
+    text-align: left; /* Alinha o texto à esquerda */
+    word-break: break-word; /* Quebra a palavra se necessário para evitar overflow */
+    white-space: normal; /* Permite quebra de linha normal */
+    overflow-wrap: break-word; /* Garante que o texto será quebrado em palavras longas */
+    max-width: 100%; /* Impede que o texto ultrapasse o limite do contêiner */
+  }
+  
+  
+  .header .shopping-cart .box .content{
+    align-items: start;
+  }
+  
+  .header .shopping-cart .box .content h3{
+    align-items: start;
+    color:rgb(43, 43, 43);
+    font-size: 1.5rem;
+    text-align: left; /* Alinha o texto à esquerda */
+    white-space: normal; /* Permite que o texto quebre em várias linhas */
+    overflow: hidden; /* Garante que não haja overflow */
+    text-overflow: ellipsis; /* Adiciona '...' caso o texto ultrapasse o limite, se necessário */
+  }
+  
+  .empty-cart-message{
+    color:rgb(43, 43, 43);
+    font-size: 1.25rem;
+  }
+  
+  .header .shopping-cart .box .content span{
+    color:rgb(61, 61, 61);
+    font-size: 1.6rem;
+  }
+  
+  .header .shopping-cart .box .content .sauce-text span{
+    font-size: 14px; /* Tamanho de texto pequeno */
+    color: black; /* Cor do texto preta */
+  }
+  
+  .header .shopping-cart .box .content quantity{
+    padding-left: 1rem;
+  }
+  
+  .header .shopping-cart .total{
+    font-size: 1.75rem;  
+    padding: 0.5rem;
+    text-align: right;
+    color: var(--black-color)
+  }
+  
+  .header .shopping-cart .btn{
+    font-weight: bold;
+    display: block;
+    text-align: center;
+  }
+  
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .btn-quantity {
+    width: 1.75rem;
+    height: 1.75rem;
+    border: none;
+    background-color: rgb(172, 60, 60);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .btn-quantity:hover {
+    background-color: var(--yellow-color);
+    color: rgb(133, 92, 32);
+  }
+  
+  .quantity-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    width: 2rem; /* Para alinhar bem o número */
+  }
+  
+  .header .shopping-cart .box .ri-delete-bin-6-line {
+    font-size: 1rem; /* Tamanho do ícone da lixeira igual ao do botão */
+    color: white; /* Cor do ícone */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(172, 60, 60); /* Fundo igual ao do botão */
+    width: 1.75rem; /* Largura do botão */
+    height: 1.75rem; /* Altura do botão */
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .header .shopping-cart .box .ri-delete-bin-6-line:hover {
+    background-color: var(--yellow-color);
+    color: rgb(133, 92, 32);
   }
 }
+
