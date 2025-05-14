@@ -37,7 +37,7 @@ export class TelaLoginComponent {
       password: form.value.password
     };
   
-    // Envia a requisição de login
+    // Envia a requisição de logina
     this.autenticarService.postLogin(loginData).subscribe({
       next: (data) => {
         console.log("Login realizado com sucesso.");

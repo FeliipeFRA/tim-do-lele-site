@@ -119,7 +119,7 @@
 }
 
 .admin_error-message small {
-  color: rgb(63, 0, 0);
+  color: rgb(172, 105, 105);
   font-size: 0.75rem;
   position: absolute;
   bottom: -25px;
@@ -138,9 +138,71 @@
   margin-top: 1rem;
 }
 
+/* Popup geral */
+.custom-popup {
+    border-radius: 12px;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  /* Botão de confirmação personalizado */
+  .custom-confirm-btn {
+    background-color: #ff6b6b;  /* Cor do botão de erro */
+    color: white;
+    border-radius: 6px;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Botão de confirmação para sucesso */
+  .custom-confirm-btn-success {
+    background-color: #3085d6;  /* Cor do botão de sucesso */
+    color: white;
+    border-radius: 6px;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Pop-up de sucesso */
+  .custom-popup-success {
+    border-radius: 12px;
+    background-color: #d4edda;  /* Cor de fundo do sucesso */
+    color: #155724;  /* Cor do texto */
+    font-weight: bold;
+  }
+  
+
 /* Telas pequenas (abaixo de 576px) */
 @media screen and (max-width: 575.98px) {
   .admin_background {
     background-image: url('/assets/img/admin-bg-mobile.png');
+  }
+}
+
+@media (max-width: 480px) {
+  .admin_form {
+    padding: 30px 20px;
+    width: 100%;
+  }
+
+  .admin_form__title {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+  }
+
+  .admin_form__icon {
+    margin-right: 10px;
+    font-size: 1.2rem;
+  }
+
+  .admin_form__submit__button {
+    font-size: 1rem;
+    padding: 12px 0;
+    margin-top: 30px;
   }
 }
