@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from 'app/service/cart.service';
 import { Food } from 'app/models/Food.model';
@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit {
   totalItems: number = 0;
   userName: string | null = '';
   role: string | null = '';
+  isCartOpen = false;
 
   constructor(public cartService: CartService, private router: Router) {}
 
@@ -35,12 +36,22 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  @HostListener('document:click', ['$event'])
+closeCartOnClickOutside(event: MouseEvent): void {
+  const target = event.target as HTMLElement; // Cast para HTMLElement
+
+  // Verifica se o carrinho está aberto e se o clique não foi dentro do carrinho
+  if (this.isCartOpen && target && !this.cart?.nativeElement.contains(target) && !target.closest('#cart-btn')) {
+    this.isCartOpen = false; // Fecha o carrinho se clicado fora
+  }
+}
+
   toggleSearchForm() {
     this.searchForm.nativeElement.classList.toggle('active');
   }
 
   toggleCart() {
-    this.cart.nativeElement.classList.toggle('active');
+   this.isCartOpen = !this.isCartOpen; // Alterna entre verdadeiro e falso
   }
 
   toggleMenu() {
