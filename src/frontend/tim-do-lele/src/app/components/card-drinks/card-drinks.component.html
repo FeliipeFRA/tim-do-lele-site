@@ -3,7 +3,7 @@
   
   <div *ngFor="let bebida of bebidas; let i = index" class="card" style="position: relative;">
     <div class="card-body">
-      <img [src]="'../../../../assets/img/bebidas/' + (i + 101) +'.png'" alt="{{ bebida.NOME }}" class="img-fluid">
+      <img [src]="'../../../../assets/img/bebidas/' + (i + 1) +'.png'" alt="{{ bebida.NOME }}" class="img-fluid">
       <div class="text-container">
         <h3 class="card-title">{{ bebida.NOME }}</h3>
         <p class="card-text">R$ {{ bebida.PRECO.toFixed(2).replace('.', ',') }}</p>

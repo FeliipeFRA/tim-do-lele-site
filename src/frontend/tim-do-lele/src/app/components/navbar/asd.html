@@ -1,34 +1,4 @@
-<header class="header">
-  <img class="logo" src="assets/img/logo-tim-header.png">
-  <nav class="nav">
-    <a href="/home">Início</a>
-    <a href="#burgers">Cachorro-Quente</a>
-    <a href="#burgers">Hamburguer</a>
-    <a href="#burgers">Frango</a>
-    <a href="#bebidas">Bebidas</a>
-  </nav>
-
-  <div class="icons">
-    <div class="ri-menu-line" id="menu-btn" (click)="toggleMenu()"></div>
-    <div class="ri-search-line" id="search-btn" (click)="toggleSearchForm()"></div>
-    <div class="ri-shopping-cart-line" id="cart-btn" (click)="toggleCart()">
-      <span *ngIf="totalItems > 0" class="cart-badge">{{ totalItems }}</span>
-    </div>
-    <a routerLink="/perfil">
-
-      <div class="ri-user-line" id="user-btn"></div>
-    </a>
-    <button *ngIf="userName" (click)="logout()" class="logout-btn">Logout</button>
-    <!-- Exibe o botão de logout se o usuário estiver logado -->
-  </div>
-
-  <!-- IMPLEMENTAR PESQUISA-->
-  <form #searchForm action="" class="search-form">
-    <input type="search" id="search-box" placeholder="Pesquise aqui..." class="box">
-    <label for="search-box" class="ri-search-line"></label>
-  </form>
-
-  <div class="cart-container" *ngIf="isCartOpen">
+<div class="cart-container" *ngIf="isCartOpen">
     <div #cart class="shopping-cart">
         <span class="close-button" (click)="toggleCart()">&times;</span>
         <div class="cart-content">
@@ -107,11 +77,13 @@
 
             </div>
             <div class="cart-footer">
-                <div class="total"><strong>Total:</strong> R$ {{ total.toFixed(2).replace('.', ',') }}</div>
-                <a routerLink="/carrinho" class="checkout-btn">Finalizar Compra</a>
+                <div class="total">Total: R$ {{ total.toFixed(2).replace('.', ',') }}</div>
+                <a routerLink="/carrinho" class="btn">Finalizar Compra</a>
             </div>
         </div>
     </div>
-  </div>
 
-</header>
+
+
+
+</div>

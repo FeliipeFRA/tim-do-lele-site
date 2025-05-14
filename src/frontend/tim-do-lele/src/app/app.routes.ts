@@ -42,8 +42,7 @@ export const routes: Routes = [
     {
         path: "admin",
         component: AdminComponent,
-        canActivate: [AuthGuard, AdminGuard], // Protege a rota admin para usuários logados e com permissão de admin (usando AuthGuard e AdminGuard)
-        title: "Tim do Lelê - Admin",
+        title: "Tim do Lelê - Admin Login",
     },
 
     {
