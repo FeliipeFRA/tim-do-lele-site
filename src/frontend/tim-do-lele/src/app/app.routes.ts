@@ -12,6 +12,7 @@ import { CarrinhoComponent } from './components/carrinho/carrinho.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';  // Importação do AdminGuard
+import { NavbarCheckoutComponent } from './components/navbar-checkout/navbar-checkout.component'
 
 export const routes: Routes = [
     {
@@ -41,14 +42,18 @@ export const routes: Routes = [
     {
         path: "admin",
         component: AdminComponent,
-        canActivate: [AuthGuard, AdminGuard], // Protege a rota admin para usuários logados e com permissão de admin (usando AuthGuard e AdminGuard)
-        title: "Tim do Lelê - Admin",
+        title: "Tim do Lelê - Admin Login",
     },
 
     {
         path: "navbar",
         component: NavbarComponent,
         title: "Tim do Lelê - Navbar",
+    },
+    {
+        path: "navbar-checkout",
+        component: NavbarCheckoutComponent,
+        title: "Tim do Lelê - Navbar"
     },
     {
         path: "tela-inicial",
@@ -72,6 +77,7 @@ export const routes: Routes = [
     {
         path: "carrinho",
         component: CarrinhoComponent,
+        canActivate: [AuthGuard], // Protege a rota home para usuários logados (usando AuthGuard)
         title: "Tim do Lelê - Carrinho"
     },
 

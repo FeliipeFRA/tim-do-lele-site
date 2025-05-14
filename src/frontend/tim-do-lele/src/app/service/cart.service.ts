@@ -33,6 +33,7 @@ export class CartService {
   
   increaseQuantity(item: Food): void {
     const cartItem = this.cartItems.find(cartItem =>
+      cartItem.TIPO === item.TIPO &&
       cartItem.ID === item.ID &&
       JSON.stringify(cartItem.sauces) === JSON.stringify(item.sauces) &&
       JSON.stringify(cartItem.additionals) === JSON.stringify(item.additionals) &&

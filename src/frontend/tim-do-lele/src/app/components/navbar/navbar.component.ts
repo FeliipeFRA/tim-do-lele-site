@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from 'app/service/cart.service';
 import { Food } from 'app/models/Food.model';
@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit {
   totalItems: number = 0;
   userName: string | null = '';
   role: string | null = '';
+  isCartOpen = false;
 
   constructor(public cartService: CartService, private router: Router) {}
 
@@ -35,12 +36,22 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  @HostListener('document:click', ['$event'])
+closeCartOnClickOutside(event: MouseEvent): void {
+  const target = event.target as HTMLElement; // Cast para HTMLElement
+
+  // Verifica se o carrinho está aberto e se o clique não foi dentro do carrinho
+  if (this.isCartOpen && target && !this.cart?.nativeElement.contains(target) && !target.closest('#cart-btn')) {
+    this.isCartOpen = false; // Fecha o carrinho se clicado fora
+  }
+}
+
   toggleSearchForm() {
     this.searchForm.nativeElement.classList.toggle('active');
   }
 
   toggleCart() {
-    this.cart.nativeElement.classList.toggle('active');
+   this.isCartOpen = !this.isCartOpen; // Alterna entre verdadeiro e falso
   }
 
   toggleMenu() {
@@ -55,6 +66,8 @@ export class NavbarComponent implements OnInit {
   // Função para associar a imagem ao tipo
   getImagemPorTipo(tipo: string): string {
     switch (tipo) {
+      case 'Lata':
+        return 'assets/img/bebidas/lata.png';  // Caminho para imagem de lata
       case 'CACHORRO-QUENTE':
         return 'assets/img/lanches/cachorro-quente.png';  // Caminho para imagem de cachorro-quente
       case 'HAMBURGUER':
@@ -74,11 +87,19 @@ export class NavbarComponent implements OnInit {
   }
 
   getImagemPorIdOuTipo(id: number, tipo: string): string {
-    const caminhoBase = 'assets/img/lanches/';
-    const caminhoImagemPorId = `${caminhoBase}${id}.jpg`;
-  
+    let caminhoBase: string;
+    if (tipo === 'Lata') {
+      caminhoBase = 'assets/img/bebidas/';
+    } else {
+      caminhoBase = 'assets/img/lanches/';
+    }
+
+    const extensao = tipo === 'Lata' ? 'png' : 'jpg';
+    const caminhoImagemPorId = `${caminhoBase}${id}.${extensao}`;
+
     // A imagem padrão baseada no tipo
     const imagemPadraoPorTipo = this.getImagemPorTipo(tipo);
+
     // Retorna o caminho por ID. O Angular não consegue verificar se o arquivo existe diretamente.
     // Então a gente assume que se o ID existe no sistema, a imagem foi colocada certinho.
     // (Se quiser tratar erro de imagem quebrada, dá para tratar no HTML depois)
