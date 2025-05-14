@@ -477,20 +477,6 @@ color: #777777;  /* Cor do ícone (amarelo) */
     }
 
     .details {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        /* Fundo semitransparente */
-        display: flex;
-        z-index: 9999;
-        padding: 20px;
-        overflow-x: hidden;
-        /* Previne a rolagem horizontal */
-        animation: animate__slideOutDown;
-        animation-duration: 2s; /* don't forget to set a duration! */
         width: 100%;
         padding: 0%;
         justify-content: flex-end; // fixar embaixo
@@ -498,23 +484,12 @@ color: #777777;  /* Cor do ícone (amarelo) */
     }
 
     .details-content {
-        background-color: #fff;
-        display: flex;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        box-sizing: border-box;
-        position: relative;
-        overflow: auto;
-    /* Garante que não haja rolagem horizontal */
         flex-direction: column;
-        width: 101%;
-        height: 85vh!important; // ocupa 80% da altura
+        width: 100%;
+        height: 90vh!important; // ocupa 80% da altura
         overflow: hidden;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
         background-color: #fff;
         box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
         animation: slideUp 0.3s ease-out;
