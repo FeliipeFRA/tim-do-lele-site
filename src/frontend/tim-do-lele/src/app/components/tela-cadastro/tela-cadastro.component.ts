@@ -52,20 +52,19 @@ export class TelaCadastroComponent implements OnInit {
 
     // Enviar dados para o serviço de cadastro
     this.cadastroService.postDataCadastro(form.value).subscribe({
-      next: () => {
-        this.showSuccessAlert('Seu cadastro foi concluído com sucesso!');
-        this.router.navigate(['/login']);
-        form.reset();
-      },
-      error: (erro) => {
-        console.error("Erro ao enviar cadastro ao backend.", erro);
-    
-        const mensagemErro = erro?.error?.message || "Erro ao realizar o cadastro. Tente novamente.";
-        this.showAlert(mensagemErro);
-    
-        form.reset();
-      }
-    });
+  next: (response) => {
+    // Aqui, 'response.userId' será o valor do userId retornado do backend
+    this.showSuccessAlert('Seu cadastro foi concluído com sucesso!');
+    this.router.navigate(['/login']);
+    form.reset();
+  },
+  error: (erro) => {
+    console.error("Erro ao enviar cadastro ao backend.", erro);
+    const mensagemErro = erro?.error?.message || "Erro ao realizar o cadastro. Tente novamente.";
+    this.showAlert(mensagemErro);
+    form.reset();
+  }
+});
     
   }
 

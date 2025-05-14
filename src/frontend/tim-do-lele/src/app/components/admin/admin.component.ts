@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgForm, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 //services
 import { AutenticarService } from 'app/service/autenticar-login.service';
@@ -25,30 +26,57 @@ export class AdminComponent {
 
   // Método para validar login
   validarlogin(form: NgForm) {
-    if (form.invalid) {
-      console.log('Formulário inválido!');
-      return;
-    }
-  
-    const loginData = {
-      email: form.value.email,
-      password: form.value.password
-    };
-  
-    // Envia a requisição de login
-    this.autenticarService.postLogin(loginData).subscribe({
-      next: (data) => {
-        console.log("Login realizado com sucesso.");
-        this.router.navigate(['/pedidos']);
-        
-      },
-      error: (erro) => {
-        console.error("Erro ao logar na conta.", erro);
+  if (form.invalid) {
+    console.log('Formulário inválido!');
+    return;
+  }
+
+  const loginData = {
+    email: form.value.email,
+    password: form.value.password
+  };
+
+  this.autenticarService.postLogin(loginData).subscribe({
+    next: (data) => {
+      console.log("Login realizado com sucesso.");
+
+      if (data.role === 'ADMIN') {
+        this.router.navigate(['/pedidos']); // Navega para admin somente se for admin
+      } else {
+        // Se não for admin, mostra alerta e não navega
+        this.showAlert('Acesso restrito para administradores.');
         form.reset();
       }
-    });
+    },
+    error: (erro) => {
+      console.error("Erro ao logar na conta.", erro);
+      const mensagemErro = erro?.error?.message || "Erro ao realizar o login. Tente novamente.";
+      this.showAlert(mensagemErro);
+      form.reset();
+    }
+  });
   }
   
+private showAlert(message: string): void {
+  Swal.fire({
+    icon: 'error',
+    title: 'Erro',
+    text: message,
+    confirmButtonText: 'Tentar Novamente',
+    confirmButtonColor: '#d33',
+    background: '#f8d7da',
+    customClass: {
+      popup: 'custom-popup',
+      confirmButton: 'custom-confirm-btn',
+    },
+    showClass: {
+      popup: 'animate__fadeIn',
+    },
+    hideClass: {
+      popup: 'animate__bounceOut',
+    },
+  });
+}
 
 
 

@@ -14,14 +14,14 @@ export class AdminGuard implements CanActivate {
   
     if (!userId || !role) {
       // Redireciona para o login se o usuário não estiver logado
-      this.router.navigate(['/login']);
+      this.router.navigate(['/admin']);
       return false;
     }
   
     // Verifica se o usuário tem o role 'admin'
-    if (this.router.url === '/admin' && role !== 'admin') {
+    if (this.router.url === '/admin' && role !== 'ADMIN') {
       // Se o usuário não for admin, redireciona para a página Home
-      this.router.navigate(['/home']);
+      this.router.navigate(['/admin']);
       return false;
     }
   
