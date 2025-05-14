@@ -14,15 +14,16 @@ async function InserirUser(email, nome, senha, telefone) {
                 return reject(err); // Rejeitar a Promise em caso de erro
             } else {
                 console.log(`Um registro inserido com ID ${this.lastID}`);
-                resolve(this.lastID); // Resolver a Promise com o ID do registro inserido
+                // Resolver a Promise com o ID do registro inserido
+                resolve(this.lastID);
             }
         });
-
-        // Fechar o banco dentro do callback
+    })
+    .finally(() => {
+        // Fechar o banco de dados após a Promise ser resolvida ou rejeitada
         db.close((error) => {
             if (error) {
                 console.log("Erro ao fechar o banco!", error);
-                reject(error); // Rejeitar a Promise se houver erro ao fechar o banco
             } else {
                 console.log("Banco fechado com sucesso!");
             }

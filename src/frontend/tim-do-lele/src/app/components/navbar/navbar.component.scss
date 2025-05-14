@@ -89,6 +89,23 @@
   cursor: pointer;
 }
 
+.checkout-btn{
+  display: inline-block;
+  padding: .8rem;
+  font-size: 1.7rem;
+  border-radius: .5rem;
+  background-color: rgb(187, 44, 44);;
+  color:#fff;
+  cursor: pointer;
+  margin: 0;
+}
+
+.checkout-btn:hover{
+  background-color: var(--yellow-color);
+  color: rgb(133, 92, 32);
+  text-decoration: none;
+}
+
 .btn:hover{
   background-color: var(--yellow-color);
   color: rgb(133, 92, 32);
@@ -265,7 +282,7 @@
   font-weight: bold;
   z-index: 1;
   background-color: white;
-  border-bottom:2px solid var(--yellow-color);
+  border-bottom: 3px solid #ddd;
   margin-bottom: 5px;
 }
 
@@ -278,7 +295,7 @@
   text-align: center;
   font-size: 1rem;
   z-index: 2;
-  border-top: 2px solid var(--yellow-color);
+  border-top: 3px solid #ddd;
 }
 
 .close-button {
@@ -320,7 +337,6 @@
 
 .header .shopping-cart .total{
   font-size: 1.75rem;  
-  padding: 0.5rem;
   text-align: right;
   color: var(--black-color)
 }
@@ -389,6 +405,9 @@
       
   }
 
+  .cart-footer {
+      padding: 0;
+  }
   .nav {
       display: none; /* Oculta o menu de navegação em telas menores */
       flex-direction: column;
@@ -398,6 +417,21 @@
       background: rgb(172, 60, 60);
       width: 100%;
       transition: all 0.3s ease;
+  }
+
+  .checkout-btn {
+    margin: 0 !important;
+  }
+  .a {
+    margin: 0 !important;
+  }
+
+  .header .shopping-cart .total {
+    font-size: 1.5rem;
+    padding: 0;
+    margin: 0;
+    text-align: right;
+    color: var(--black-color);
   }
 
   .nav.active {
@@ -495,6 +529,17 @@
     border-bottom: 1px solid #ccc; /* Linha entre os lanches */
   
   }
+
+  .cart-content {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto; /* Permite rolar apenas o conteúdo */
+    overflow-x: hidden;
+    text-align: left;
+  }
   
   /* Estilos para o texto dos molhos */
   .sauce-text {
@@ -565,13 +610,6 @@
   
   .header .shopping-cart .box .content quantity{
     padding-left: 1rem;
-  }
-  
-  .header .shopping-cart .total{
-    font-size: 1.75rem;  
-    padding: 0.5rem;
-    text-align: right;
-    color: var(--black-color)
   }
   
   .header .shopping-cart .btn{

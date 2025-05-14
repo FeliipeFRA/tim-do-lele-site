@@ -180,7 +180,14 @@ app.post('/enviar-cadastro', async (req, res) => {
         const senhaCriptografada = await CriptografarSenha(senha);
 
         // Inserir no banco de dados
-        await InserirUser(email, nome, senhaCriptografada, telefone);
+        console.log('Inserindo usuário:', email, nome, telefone);
+        const userId = await InserirUser(email, nome, senhaCriptografada, telefone);
+        if (!userId) {
+            return res.status(500).send({ message: "Erro ao obter o ID do usuário." });
+        }
+        
+        console.log(`ID do usuário inserido: ${userId}`);  // Verificando se o ID foi retornado
+
 
         // Enviar resposta de sucesso
         res.status(200).json({ message: "Cadastro realizado com sucesso!",
@@ -191,7 +198,7 @@ app.post('/enviar-cadastro', async (req, res) => {
 
     } catch (erro) {
         console.error("Erro ao enviar cadastro:", erro);
-        res.status(500).send({ message: "Falha ao enviar os dados." });
+        res.status(500).send({ message: erro.message});
     }
 });
 

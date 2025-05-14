@@ -66,6 +66,8 @@ closeCartOnClickOutside(event: MouseEvent): void {
   // Função para associar a imagem ao tipo
   getImagemPorTipo(tipo: string): string {
     switch (tipo) {
+      case 'Lata':
+        return 'assets/img/bebidas/lata.png';  // Caminho para imagem de lata
       case 'CACHORRO-QUENTE':
         return 'assets/img/lanches/cachorro-quente.png';  // Caminho para imagem de cachorro-quente
       case 'HAMBURGUER':
@@ -85,11 +87,19 @@ closeCartOnClickOutside(event: MouseEvent): void {
   }
 
   getImagemPorIdOuTipo(id: number, tipo: string): string {
-    const caminhoBase = 'assets/img/lanches/';
-    const caminhoImagemPorId = `${caminhoBase}${id}.jpg`;
-  
+    let caminhoBase: string;
+    if (tipo === 'Lata') {
+      caminhoBase = 'assets/img/bebidas/';
+    } else {
+      caminhoBase = 'assets/img/lanches/';
+    }
+
+    const extensao = tipo === 'Lata' ? 'png' : 'jpg';
+    const caminhoImagemPorId = `${caminhoBase}${id}.${extensao}`;
+
     // A imagem padrão baseada no tipo
     const imagemPadraoPorTipo = this.getImagemPorTipo(tipo);
+
     // Retorna o caminho por ID. O Angular não consegue verificar se o arquivo existe diretamente.
     // Então a gente assume que se o ID existe no sistema, a imagem foi colocada certinho.
     // (Se quiser tratar erro de imagem quebrada, dá para tratar no HTML depois)
