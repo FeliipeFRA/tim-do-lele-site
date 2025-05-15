@@ -63,6 +63,7 @@ closeCartOnClickOutside(event: MouseEvent): void {
     const imgElement = event.target as HTMLImageElement;
     imgElement.src = '../../../../assets/img/lanche-p.png'; // Caminho para a imagem padrão
   }
+  
   // Função para associar a imagem ao tipo
   getImagemPorTipo(tipo: string): string {
     switch (tipo) {

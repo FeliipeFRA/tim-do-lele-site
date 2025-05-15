@@ -106,10 +106,13 @@
                 </ng-container>
 
             </div>
-            <div class="cart-footer">
-                <div class="total"><strong>Total:</strong> R$ {{ total.toFixed(2).replace('.', ',') }}</div>
-                <a routerLink="/carrinho" class="checkout-btn">Finalizar Compra</a>
-            </div>
+            <ng-container *ngIf="cartItems.length > 0">
+                <div class="cart-footer">
+                    <div class="total"><strong>Total:</strong> R$ {{ total.toFixed(2).replace('.', ',') }}</div>
+                    <a routerLink="/carrinho" class="checkout-btn">Finalizar Compra</a>
+                </div>
+            </ng-container>
+           
         </div>
     </div>
   </div>
