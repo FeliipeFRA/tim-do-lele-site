@@ -1,0 +1,236 @@
+/* Estilo do Carrinho */
+.checkout {
+    
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9; /* Cor de fundo */
+    width: 100%;
+    height: 100vh; /* Faz com que o checkout ocupe a tela inteira */
+    overflow: hidden; /* Impede que a rolagem ocorra aqui */
+  }
+  
+  /* Container do carrinho (rolagem somente aqui) */
+  .container {
+    padding-top: 6rem;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Rolagem só nos itens do carrinho */
+    max-height: calc(100vh - 150px); /* Limita a altura para que a navbar e o rodapé fiquem fixos */
+  }
+  
+  /* Estilo do Card do Produto */
+  .product-card {
+    display: flex;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  /* A imagem do produto */
+  .product-image {
+    width: 100px; /* Ajusta a largura da imagem */
+    height: 100px; /* Ajusta a altura da imagem */
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  /* Detalhes do produto */
+  .product-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Nome do produto */
+  .product-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Preço do produto */
+  .product-price {
+    font-size: 1.1rem;
+    color: #4caf50;
+    margin-bottom: 10px;
+  }
+  
+  /* Molhos, Adicionais e Observações */
+  .sauce-text, .additionals-text, .observations-text {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 10px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Exibição do total do carrinho */
+  .total {
+    width: 100%;
+    text-align: right;
+    margin-top: 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Botões de controle de quantidade */
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .quantity-controls button {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 5px 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .quantity-controls button:hover {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  
+  .quantity-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .footer {
+    font-family: "Poppins";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ac3c3c;
+    color: #ac3c3c;
+    padding: 10px 0;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.3);
+    border-top:7px solid var(--yellow-color);
+    text-align: center;
+    align-items: center;
+  }
+  
+  .bottom-container {
+    width: 100%;
+    position: fixed;
+  }
+
+  .footer-container {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    background-color: #ac3c3c;
+    flex-wrap: nowrap;
+  }
+  
+  /* Container dos botões no rodapé */
+  .footer-buttons {
+    display: flex;
+    gap: 150px;
+  }
+
+  app-navbar-checkout {
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+  }
+
+  /* Estilo dos botões */
+  .btn-footer {
+    background-color: rgb(138, 44, 44); /* Cor de fundo do botão */
+    color: #fff;
+    padding: 10px 20px;
+    width: 300px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Efeito de hover nos botões */
+  .btn-footer:hover {
+    background-color: var(--yellow-color); /* Cor do botão ao passar o mouse */
+    color: rgb(133, 92, 32);
+  }
+  
+  /* Responsividade - Ajustes para telas menores */
+  @media screen and (max-width: 767px) {
+    /* Layout da Checkout */
+    .checkout {
+      padding: 10px;
+    }
+  
+    /* Cards responsivos */
+    .product-card {
+      width: 100%; /* Garante que ocupe 100% da largura */
+      padding: 15px;
+    }
+  
+    /* Imagem do produto */
+    .product-image {
+      width: 80px;
+      height: 80px;
+    }
+  
+    /* Preço do produto */
+    .product-price {
+      font-size: 1rem;
+    }
+  
+    /* Descrição do produto */
+    .product-description {
+      font-size: 0.85rem;
+    }
+  
+    /* Quantidade */
+    .quantity {
+      font-size: 1rem;
+    }
+  
+    /* Total */
+    .total {
+      font-size: 1.2rem;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    
+      .footer-buttons {
+        gap: 10px;
+      }
+    
+      .btn-footer {
+        width: 100%; /* Os botões ocuparão toda a largura disponível em telas pequenas */
+      }
+  }
+  
