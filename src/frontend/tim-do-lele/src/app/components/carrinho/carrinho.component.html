@@ -5,13 +5,14 @@
     <!-- Exibindo os itens do carrinho -->
     <div *ngFor="let item of cartItems" class="product-card">
       <!-- Imagem do produto -->
-      <img class="product-image" [src]="getImagemPorTipo(item.TIPO)" alt="Produto" (error)="onImageError($event, item.TIPO)">
+      <img [src]="getImagemPorIdOuTipo(item.ID, item.TIPO)" alt="{{ item.NOME }}" class="product-image"
+                            (error)="onImageError($event, item.TIPO)" />
 
       <div class="product-details">
         <!-- Nome do produto -->
         <div class="product-header">
           <h2 class="product-name">{{ item.NOME }}</h2>
-          <p class="quantity">Quant: {{ item.QUANTITY }}</p>
+          <p class="quantity">Quantidade: {{ item.QUANTITY }}</p>
         </div>
 
         <!-- Preço do produto -->
