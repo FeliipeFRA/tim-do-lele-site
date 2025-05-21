@@ -450,6 +450,28 @@
   color: rgb(133, 92, 32);
 }
 
+.user-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.user-btn:hover {
+  transform: scale(1.1);
+}
+
+.logout-icon {
+  width: 24px;
+  height: 24px;
+  filter: invert(100%); /* Deixa o ícone branco em fundo escuro */
+  margin-left:20px;
+}
+
 /* Responsividade */
 @media screen and (max-width: 768px) {
   .internal-content {
@@ -726,4 +748,6 @@
     color: rgb(133, 92, 32);
   }
 }
+
+
 
