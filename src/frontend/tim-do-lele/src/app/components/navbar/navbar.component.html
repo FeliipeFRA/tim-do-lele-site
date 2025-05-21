@@ -18,7 +18,9 @@
         <a href="/perfil">
             <div class="ri-user-line" id="user-btn"></div>
         </a>
-        <button *ngIf="userName" (click)="logout()" class="logout-btn">Logout</button> <!-- Exibe o botão de logout se o usuário estiver logado -->
+        <button *ngIf="userName" (click)="logout()" class="user-btn">
+            <img src="assets/img/logout_icon.webp" alt="Logout" class="logout-icon" />
+        </button> <!-- Exibe o botão de logout se o usuário estiver logado -->
     </div>
 
   <!-- IMPLEMENTAR PESQUISA-->
