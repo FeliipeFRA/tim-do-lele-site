@@ -158,12 +158,17 @@ onClickOutside(event: MouseEvent) {
     this.router.navigate(['/login']);  // Navega para a página de login
   }
 
-  
-  scrollToSection(sectionId: string) {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToSection(sectionId: string): void {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    const yOffset = -120; // altura do header (ajuste se necessário)
+    const pos = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({
+      top: pos,
+      behavior: 'smooth'
+    });
   }
+}
 
 }
