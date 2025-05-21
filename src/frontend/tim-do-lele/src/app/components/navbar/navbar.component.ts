@@ -1,5 +1,4 @@
 import { Component, ElementRef, ViewChild, OnInit, HostListener } from '@angular/core';
-import { Component, ElementRef, ViewChild, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from 'app/service/cart.service';
 import { Food } from 'app/models/Food.model';
