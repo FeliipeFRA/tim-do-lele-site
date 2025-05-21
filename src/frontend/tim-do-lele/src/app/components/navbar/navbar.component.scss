@@ -51,6 +51,28 @@
   }
 }
 
+#status-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  user-select: none;
+  width: fit-content;
+}
+
+.fechado {
+  background-color: #f14141;
+  color: white;
+}
+
+.aberto {
+  background-color: #41a541;
+  color: white;
+}
 .icons {
   display: flex;
   align-items: center;
