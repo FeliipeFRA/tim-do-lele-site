@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
   totalItems: number = 0;
   userName: string | null = '';
   role: string | null = '';
-  isCartOpen = false;
+  isCartOpen: boolean = false;
 
   constructor(public cartService: CartService, private router: Router) {}
 
@@ -51,8 +51,24 @@ closeCartOnClickOutside(event: MouseEvent): void {
   }
 
   toggleCart() {
-   this.isCartOpen = !this.isCartOpen; // Alterna entre verdadeiro e falso
+    this.isCartOpen = !this.isCartOpen;
+    if (this.isCartOpen) {
+      this.cart.nativeElement.classList.add('active');
+    } else {
+      this.cart.nativeElement.classList.remove('active');
+    }
   }
+
+  @HostListener('document:click', ['$event'])
+onClickOutside(event: MouseEvent) {
+  const clickedInsideCart = this.cart?.nativeElement.contains(event.target);
+  const clickedCartIcon = (event.target as HTMLElement).id === 'cart-btn';
+
+  if (!clickedInsideCart && !clickedCartIcon) {
+    this.isCartOpen = false;
+    this.cart.nativeElement.classList.remove('active');
+  }
+}
 
   toggleMenu() {
     const nav = document.querySelector('.nav');
@@ -142,5 +158,18 @@ closeCartOnClickOutside(event: MouseEvent): void {
     // Redireciona o usuário para a página de login
     this.router.navigate(['/login']);  // Navega para a página de login
   }
+
+    scrollToSection(sectionId: string): void {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    const yOffset = -120; // altura do header (ajuste se necessário)
+    const pos = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({
+      top: pos,
+      behavior: 'smooth'
+    });
+  }
+}
 
 }

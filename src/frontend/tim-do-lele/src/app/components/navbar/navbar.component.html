@@ -1,26 +1,33 @@
 <header class="header">
-  <img class="logo" src="assets/img/logo-tim-header.png">
-  <nav class="nav">
-    <a href="/home">Início</a>
-    <a href="#burgers">Cachorro-Quente</a>
-    <a href="#burgers">Hamburguer</a>
-    <a href="#burgers">Frango</a>
-    <a href="#bebidas">Bebidas</a>
-  </nav>
-
-  <div class="icons">
-    <div class="ri-menu-line" id="menu-btn" (click)="toggleMenu()"></div>
-    <div class="ri-search-line" id="search-btn" (click)="toggleSearchForm()"></div>
-    <div class="ri-shopping-cart-line" id="cart-btn" (click)="toggleCart()">
-      <span *ngIf="totalItems > 0" class="cart-badge">{{ totalItems }}</span>
-    </div>
-    <a routerLink="/perfil">
-
-      <div class="ri-user-line" id="user-btn"></div>
-    </a>
-    <button *ngIf="userName" (click)="logout()" class="logout-btn">Logout</button>
-    <!-- Exibe o botão de logout se o usuário estiver logado -->
+    
+    <img class="logo" src="assets/img/logo-tim-header.png">
+    <nav class="nav">
+        <a href="/home">Início</a>
+        <a (click)="scrollToSection('cachorro-quente')">Cachorro-quente</a>
+        <a (click)="scrollToSection('hamburguer')">Hamburguer</a>
+        <a (click)="scrollToSection('frango')">Frango</a>
+        <a (click)="scrollToSection('bebidas')">Bebidas</a>
+    </nav>
+  
+      <div id="status-container" class="aberto" style="margin-left: 20px;">
+    <span class="status-text">Aberto</span>
+    <span class="status-icone">⏰</span>
   </div>
+
+
+    <div class="icons">
+        <div class="ri-menu-line" id="menu-btn" (click)="toggleMenu()"></div>
+        <div class="ri-search-line" id="search-btn" (click)="toggleSearchForm()"></div>
+        <div class="ri-shopping-cart-line" id="cart-btn" id="cart-btn" (click)="toggleCart()">
+            <span *ngIf="totalItems > 0" class="cart-badge">{{ totalItems }}</span>
+        </div>
+        <a href="/perfil">
+            <div class="ri-user-line" id="user-btn"></div>
+        </a>
+        <button *ngIf="userName" (click)="logout()" class="user-btn">
+            <img src="assets/img/logout_icon.webp" alt="Logout" class="logout-icon" />
+        </button> <!-- Exibe o botão de logout se o usuário estiver logado -->
+    </div>
 
   <!-- IMPLEMENTAR PESQUISA-->
   <form #searchForm action="" class="search-form">
@@ -115,6 +122,6 @@
            
         </div>
     </div>
-  </div>
-
+    </div>
 </header>
+
