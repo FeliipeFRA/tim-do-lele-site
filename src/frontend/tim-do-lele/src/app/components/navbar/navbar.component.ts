@@ -138,6 +138,9 @@ closeCartOnClickOutside(event: MouseEvent): void {
     localStorage.removeItem('userId');
     localStorage.removeItem('role');
     
+    //limpa o carrinho dps do logout
+    this.cartService.clearCart();  
+    
     // Redireciona o usuário para a página de login
     this.router.navigate(['/login']);  // Navega para a página de login
   }

@@ -78,5 +78,12 @@ export class CartService {
       this.cartSubject.next(this.cartItems);
     }
   }
+
+  clearCart(): void {
+    localStorage.removeItem('cart');  // Remove o carrinho do localStorage
+    this.cartItems = [];
+    this.cartSubject.next([]);  // Limpa o carrinho no BehaviorSubject
+  }
+  
   
 }
