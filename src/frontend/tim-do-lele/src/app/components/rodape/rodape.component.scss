@@ -66,16 +66,13 @@
     gap: 1.3rem;
 }
 
-.footer-contact a {
+.footer-contact i {
     font-size: 4.5rem;
-    color: white;
+    color: var(--yellow-color);
     text-decoration: none;
     margin: 0 0px;
     transition: 0.3s;
-}
-
-.footer-contact a:hover {
-    color: #f4c542;
+    cursor: pointer;
 }
 
 .footer-copyright {
