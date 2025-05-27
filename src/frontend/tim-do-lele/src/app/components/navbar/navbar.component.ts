@@ -36,15 +36,6 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  @HostListener('document:click', ['$event'])
-closeCartOnClickOutside(event: MouseEvent): void {
-  const target = event.target as HTMLElement; // Cast para HTMLElement
-
-  // Verifica se o carrinho está aberto e se o clique não foi dentro do carrinho
-  if (this.isCartOpen && target && !this.cart?.nativeElement.contains(target) && !target.closest('#cart-btn')) {
-    this.isCartOpen = false; // Fecha o carrinho se clicado fora
-  }
-}
 
   toggleSearchForm() {
     this.searchForm.nativeElement.classList.toggle('active');
@@ -158,6 +149,12 @@ onClickOutside(event: MouseEvent) {
     // Redireciona o usuário para a página de login
     this.router.navigate(['/login']);  // Navega para a página de login
   }
+scrollToTop(): void {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
 
     scrollToSection(sectionId: string): void {
   const element = document.getElementById(sectionId);
@@ -170,6 +167,8 @@ onClickOutside(event: MouseEvent) {
       behavior: 'smooth'
     });
   }
+
+  
 }
 
 }
