@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, OnInit, HostListener , CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, HostListener, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from 'app/service/cart.service';
 import { Food } from 'app/models/Food.model';
@@ -24,28 +24,30 @@ export class NavbarComponent implements OnInit {
   userName: string | null = '';
   role: string | null = '';
   isCartOpen: boolean = false;
+
   tiposMenu = [
-    { id: 'combos', nome: 'Combos' },
-    { id: 'pizzas-salgadas', nome: 'Pizzas Salgadas' },
-    { id: 'pizzas-doces', nome: 'Pizzas Doces' },
+    { id: 'inicio', nome: 'Início' },
+    { id: 'cachorro-quente', nome: 'Cachorro-quente' },
+    { id: 'hamburguer', nome: 'Hambúrguer' },
+    { id: 'frango', nome: 'Frango' },
+    { id: 'sanduiche', nome: 'Sanduíches' },
     { id: 'bebidas', nome: 'Bebidas' },
-    { id: 'esfirras-salgadas', nome: 'Esfirras Salgadas' },
-    { id: 'esfirras-doces', nome: 'Esfirras Doces' },
   ];
 
-  isMobile: boolean = false;
+  activeTabIndex = 0;
+  isMobile = false;
 
   checkIsMobile() {
     this.isMobile = window.innerWidth <= 768;
   }
 
-  constructor(public cartService: CartService, private router: Router) {}
+  constructor(public cartService: CartService, private router: Router) { }
 
   ngOnInit(): void {
     this.checkIsMobile();
     window.addEventListener('resize', () => this.checkIsMobile());
 
-    
+
     // Verifique se estamos no ambiente de navegador antes de acessar o localStorage
     if (typeof window !== 'undefined') {
       this.userName = localStorage.getItem('userId');
@@ -58,6 +60,9 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  setActiveTab(index: number) {
+    this.activeTabIndex = index;
+  }
 
   toggleSearchForm() {
     this.searchForm.nativeElement.classList.toggle('active');
@@ -73,15 +78,15 @@ export class NavbarComponent implements OnInit {
   }
 
   @HostListener('document:click', ['$event'])
-onClickOutside(event: MouseEvent) {
-  const clickedInsideCart = this.cart?.nativeElement.contains(event.target);
-  const clickedCartIcon = (event.target as HTMLElement).id === 'cart-btn';
+  onClickOutside(event: MouseEvent) {
+    const clickedInsideCart = this.cart?.nativeElement.contains(event.target);
+    const clickedCartIcon = (event.target as HTMLElement).id === 'cart-btn';
 
-  if (!clickedInsideCart && !clickedCartIcon) {
-    this.isCartOpen = false;
-    this.cart.nativeElement.classList.remove('active');
+    if (!clickedInsideCart && !clickedCartIcon) {
+      this.isCartOpen = false;
+      this.cart.nativeElement.classList.remove('active');
+    }
   }
-}
 
   toggleMenu() {
     const nav = document.querySelector('.nav');
@@ -92,7 +97,7 @@ onClickOutside(event: MouseEvent) {
     const imgElement = event.target as HTMLImageElement;
     imgElement.src = '../../../../assets/img/lanche-p.png'; // Caminho para a imagem padrão
   }
-  
+
   // Função para associar a imagem ao tipo
   getImagemPorTipo(tipo: string): string {
     switch (tipo) {
@@ -109,7 +114,7 @@ onClickOutside(event: MouseEvent) {
       default:
         return 'assets/img/lanches/default.png';  // Imagem padrão, caso o tipo não seja encontrado
     }
-  
+
   }
 
   onImageError(event: any, tipo: string) {
@@ -154,7 +159,7 @@ onClickOutside(event: MouseEvent) {
     const total = precoBase + precoAdd;
     return total.toFixed(2).replace('.', ',');
   }
-  
+
 
   private updateTotalItems(): void {
     this.totalItems = this.cartItems.reduce(
@@ -167,30 +172,30 @@ onClickOutside(event: MouseEvent) {
     // Limpa os dados de login armazenados no localStorage
     localStorage.removeItem('userId');
     localStorage.removeItem('role');
-    
+
     // Redireciona o usuário para a página de login
     this.router.navigate(['/login']);  // Navega para a página de login
   }
-scrollToTop(): void {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-}
-
-    scrollToSection(sectionId: string): void {
-  const element = document.getElementById(sectionId);
-  if (element) {
-    const yOffset = -120; // altura do header (ajuste se necessário)
-    const pos = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
+  scrollToTop(): void {
     window.scrollTo({
-      top: pos,
+      top: 0,
       behavior: 'smooth'
     });
   }
 
-  
-}
+  scrollToSection(sectionId: string): void {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const yOffset = -120; // altura do header (ajuste se necessário)
+      const pos = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+      window.scrollTo({
+        top: pos,
+        behavior: 'smooth'
+      });
+    }
+
+
+  }
 
 }

@@ -1,27 +1,16 @@
 <header class="header">
 
-    
+
     <div class="logo-text">
         <img class="logo" src="assets/img/logo-tim-header.png">
         <P (click)="scrollToTop()">Tim do Lelê</P>
     </div>
+
     <nav class="nav">
-        <a (click)="scrollToSection('cachorro-quente')">Cachorro-quente</a>
-        <a (click)="scrollToSection('hamburguer')">Hamburguer</a>
-        <a (click)="scrollToSection('frango')">Frango</a>
-        <a (click)="scrollToSection('bebidas')">Bebidas</a>
+
     </nav>
 
-    <swiper-container slides-per-view="auto" space-between="10" free-mode="true" class="mobile-swiper" *ngIf="isMobile">
-    <swiper-slide *ngFor="let tipo of tiposMenu">
-        <a (click)="scrollToSection(tipo.id)" class="swiper-slide-link">{{ tipo.nome }}</a>
-    </swiper-slide>
-    </swiper-container>
-
-
     
-
-
     <div class="icons">
         <div id="status-container" class="aberto">
             <span class="status-text">Aberto</span>
@@ -135,4 +124,28 @@
             </div>
         </div>
     </div>
+
+
+    
 </header>
+
+
+ <div class="menu-container">
+    <!-- Faixa de categorias fixa para DESKTOP -->
+    <ul *ngIf="!isMobile" class="menu-tabs">
+        <li *ngFor="let tipo of tiposMenu; let i = index" (click)="setActiveTab(i); scrollToSection(tipo.id)"
+            [class.active]="i === activeTabIndex" class="menu-tab-item">
+            
+            <span>{{ tipo.nome }}</span>
+        </li>
+    </ul>
+
+    <!-- Swiper arrastável para MOBILE -->
+    <swiper-container *ngIf="isMobile" slides-per-view="auto" space-between="10" free-mode="true" class="mobile-swiper">
+        <swiper-slide *ngFor="let tipo of tiposMenu" (click)="scrollToSection(tipo.id)" class="swiper-slide-link">
+            {{ tipo.nome }}
+        </swiper-slide>
+    </swiper-container>
+
+ </div>
+    
