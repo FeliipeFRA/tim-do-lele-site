@@ -1,19 +1,27 @@
 <header class="header">
-    <img class="logo" src="assets/img/logo-tim-header.png">
-    <nav class="nav">
-        <i class="ri-admin-line" id="admin__icon"></i>
-        <h1>Admin</h1> 
-        <a href="/pedidos">Pedidos</a>
-        <p>Status atual: 
-    <span *ngIf="siteAberto === true">Aberto</span>
-    <span *ngIf="siteAberto === false">Fechado</span>
-    <span *ngIf="siteAberto === null">Automático (Horário padrão)</span>
-  </p>
 
-  <button (click)="setStatusAberto()">Forçar Aberto</button>
-  <button (click)="setStatusFechado()">Forçar Fechado</button>
-  <button (click)="setStatusAutomatico()">Voltar ao Automático</button>
 
-  <p>{{ mensagemStatus }}</p>
-    </nav>
+    <div class="logo-text">
+        <img class="logo" src="assets/img/logo-tim-header.png">
+    
+    </div>
+
+
+
+
+    <div class="icons">
+        <div id="status-container" [ngClass]="siteAberto ? 'aberto' : 'fechado'">
+
+            <span class="status-text">{{ siteAberto ? 'Aberto' : 'Fechado' }}</span>
+            <span class="status-icone"><i class="ri-time-line"></i></span>
+
+        </div>
+
+        
+        <button *ngIf="userName" (click)="logout()" class="user-btn">
+            <img src="assets/img/logout_icon.webp" alt="Logout" class="logout-icon" />
+        </button> <!-- Exibe o botão de logout se o usuário estiver logado -->
+    </div>
+
+
 </header>
