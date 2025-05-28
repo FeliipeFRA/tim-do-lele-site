@@ -1,6 +1,9 @@
 // Módulo responsável por configurar as rotas da API
 const express = require('express');
 const cors = require('cors')
+const app = express();
+const path = require('path');
+
 const {ConsultarUsers } = require('./query_banco/consulta_cadastro.js');
 const {InserirUser} = require('./query_banco/inserir_cadastro.js')
 const {ConsultarLanches} = require('./query_banco/consulta_lanches.js')
@@ -22,12 +25,12 @@ const {CriptografarSenha} = require('./services/cipher.js')
 //validação de login
 const passport = require('./services/passport-config.js')
 
-const app = express();
+
 
 //api pagamentos
 app.use('/pagamento', pagamento);
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 
 app.use(cors({
@@ -39,6 +42,7 @@ app.use(cors({
   
 // Middleware para interpretar JSON
 app.use(express.json());
+
 
 
 // Função para validar e-mails com domínios específicos
@@ -223,6 +227,12 @@ app.post('/pagamentos/pix', async (req, res) =>{
 
     }
 })
+
+// Frontend
+app.use(express.static(path.join(__dirname, 'public', 'browser')));
+app.get('*angular', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/browser', 'index.html'));
+});
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);

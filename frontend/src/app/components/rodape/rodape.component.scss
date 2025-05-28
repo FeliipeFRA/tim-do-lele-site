@@ -25,6 +25,7 @@
 }
 
 .footer-info {
+    max-width: 33%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -68,23 +69,32 @@
 
 .footer-contact i {
     font-size: 4.5rem;
-    color: var(--yellow-color);
+    color: white;
     text-decoration: none;
     margin: 0 0px;
     transition: 0.3s;
     cursor: pointer;
 }
 
+.footer-contact i:hover {
+    color: var(--yellow-color);
+}
+    
+
+
 .footer-copyright {
     font-size: 1rem;
-    color: #fff;
+    color: var(--yellow-color);
+    font-weight: bold;
     text-align: right;
 }
 
 .footer-small {
+    font-weight: normal;
     font-size: 1rem;
     color: #ccc;
     text-align: right;
+    margin-bottom: 8px;
 }
 
 @media (max-width: 768px) {

@@ -1,0 +1,14 @@
+{
+  "routes": [
+    "/admin",
+    "/cadastro",
+    "/carrinho",
+    "/home",
+    "/login",
+    "/navbar",
+    "/navbar-checkout",
+    "/pedidos",
+    "/perfil",
+    "/tela-inicial"
+  ]
+}
