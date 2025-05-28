@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "ag-grid-angular": "^32.3.3",
-    "animate.css": "^4.1.1",
-    "sweetalert2": "^11.6.13"
-  }
-}

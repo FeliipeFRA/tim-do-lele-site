@@ -1,0 +1,18 @@
+.menu {
+    font-size: 4.5rem;
+    margin-top: 1rem;
+}
+
+.fotowide {
+    margin-top: 102px;
+}
+
+@media screen and (max-width: 767px) {
+
+    .fotowide {
+    margin-top: 13px;
+}
+    .type-tittle{
+    font-size: 1.6rem;
+    }
+}
