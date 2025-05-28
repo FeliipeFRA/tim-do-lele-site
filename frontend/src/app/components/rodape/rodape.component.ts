@@ -21,4 +21,11 @@ export class RodapeComponent {
     );
   }
 
+  scrollToTop(): void {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
 }

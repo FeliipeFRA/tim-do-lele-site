@@ -6,15 +6,15 @@
         <P (click)="scrollToTop()">Tim do Lelê</P>
     </div>
 
-    <nav class="nav">
-        <h1>Desde 1993</h1>
-    </nav>
 
-    
+
+
     <div class="icons">
-        <div id="status-container" class="aberto">
-            <span class="status-text">Aberto</span>
+        <div id="status-container" [ngClass]="siteAberto ? 'aberto' : 'fechado'">
+
+            <span class="status-text">{{ siteAberto ? 'Aberto' : 'Fechado' }}</span>
             <span class="status-icone"><i class="ri-time-line"></i></span>
+
         </div>
 
         <!-- <div class="ri-menu-line" id="menu-btn" (click)="toggleMenu()"></div> -->
@@ -48,7 +48,7 @@
 
                 <div class="internal-content">
                     <div *ngIf="cartItems.length === 0" class="empty-cart-message">
-                        Seu carrinho está vazio! :(
+                        {{ siteAberto ? 'Seu carrinho está vazio! :(' : 'O site está fechado!' }}
                     </div>
 
 
@@ -117,7 +117,13 @@
                 <ng-container *ngIf="cartItems.length > 0">
                     <div class="cart-footer">
                         <div class="total"><strong>Total:</strong> R$ {{ total.toFixed(2).replace('.', ',') }}</div>
-                        <a routerLink="/carrinho" class="checkout-btn">Finalizar Compra</a>
+                        <a
+  *ngIf="siteAberto"
+  routerLink="/carrinho"
+  class="checkout-btn"
+>
+  Finalizar Compra
+</a>
                     </div>
                 </ng-container>
 
@@ -126,26 +132,28 @@
     </div>
 
 
-    
+
 </header>
 
 
- <div class="menu-container">
+<div class="menu-container">
     <!-- Faixa de categorias fixa para DESKTOP -->
     <ul *ngIf="!isMobile" class="menu-tabs">
-        <li *ngFor="let tipo of tiposMenu; let i = index" (click)="setActiveTab(i); scrollToSection(tipo.id)"
-            [class.active]="i === activeTabIndex" class="menu-tab-item">
-            
+        <li *ngFor="let tipo of tiposMenu; let i = index" (click)="
+      setActiveTab(i);
+      i === 0 ? scrollToTop() : scrollToSection(tipo.id)
+    " [class.active]="i === activeTabIndex" class="menu-tab-item">
             <span>{{ tipo.nome }}</span>
         </li>
+
     </ul>
 
     <!-- Swiper arrastável para MOBILE -->
     <swiper-container *ngIf="isMobile" slides-per-view="auto" space-between="10" free-mode="true" class="mobile-swiper">
-        <swiper-slide *ngFor="let tipo of tiposMenu" (click)="scrollToSection(tipo.id)" class="swiper-slide-link">
+        <swiper-slide *ngFor="let tipo of tiposMenu; let i = index"
+            (click)="setActiveTab(i); i === 0 ? scrollToTop() : scrollToSection(tipo.id)" class="swiper-slide-link">
             {{ tipo.nome }}
         </swiper-slide>
     </swiper-container>
 
- </div>
-    
+</div>

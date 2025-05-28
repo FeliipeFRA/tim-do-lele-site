@@ -64,6 +64,8 @@
     align-items: center;
 
     &:hover {
+      color: var(--yellow-color);
+      transition: color 0.3s;
       font-weight: bold;
     }
   }
@@ -76,13 +78,15 @@
   .swiper-slide-link {
     padding: 0.5rem 1rem;
     font-weight: 500;
-    color: #222;
+    color: white;
     white-space: nowrap;
     border-radius: 6px;
     text-transform: capitalize;
+    width: fit-content;
 
     &:hover {
-      background-color: #f1f1f1;
+      background-color: var(--yellow-color);
+      color: rgb(133, 92, 32);
     }
   }
 }
@@ -162,13 +166,14 @@ body, main {
 }
 
 .fechado {
-  background-color: #f11010 !important;
+  background-color: #676767 !important;
   color: white !important;
 }
 
 .fechado:hover {
-  background-color: #d10f0f !important;
+  background-color: #575757 !important;
   color: white !important;
+  transition: 0.2s;
 }
 
 .aberto {
@@ -587,7 +592,7 @@ body, main {
 /* Responsividade */
 @media screen and (max-width: 768px) {
   #status-container {
-    display: none;
+    
     align-items: center;
     gap: 4px;
     padding: 6px 12px;

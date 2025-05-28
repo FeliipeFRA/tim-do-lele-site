@@ -11,7 +11,7 @@ const {ConsultarBebidas } = require('./query_banco/consulta_bebidas.js');
 const {ConsultarPedidos} = require('./query_banco/consulta_pedidos.js')
 const {ConsultarAdicionais} = require('./query_banco/consulta_adicionais.js')
 const {verificarEmailExistenteNoBanco } = require('./query_banco/verificar_email.js');
-
+const { buscarOverrideNoBanco, salvarOverrideNoBanco } = require('./query_banco/configuracoes.js');
 
 //rota de pagamentos
 const pagamento = require('./routes/pagamentos/pagamento.js');
@@ -25,6 +25,10 @@ const {CriptografarSenha} = require('./services/cipher.js')
 //validação de login
 const passport = require('./services/passport-config.js')
 
+const horariosPadrao = [
+  { inicio: "19:00", fim: "20:00" },
+  { inicio: "21:30", fim: "22:00" }
+];
 
 
 //api pagamentos
@@ -37,7 +41,7 @@ app.use(cors({
     // Cors serve para conectar portas diferentes
     origin: 'http://localhost:4200', 
     methods: ['GET', 'POST', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'], 
+    allowedHeaders: ['Content-Type', 'Authorization','x-user-role'], 
   }));
   
 // Middleware para interpretar JSON
@@ -67,6 +71,60 @@ function validarTelefone(telefone) {
 
     return padraoTelefone.test(telefone);
 }
+
+function estaNoIntervalo(agora, inicio, fim) {
+  const [hI, mI] = inicio.split(':').map(Number);
+  const [hF, mF] = fim.split(':').map(Number);
+  const inicioDate = new Date(agora);
+  inicioDate.setHours(hI, mI, 0, 0);
+  const fimDate = new Date(agora);
+  fimDate.setHours(hF, mF, 0, 0);
+
+  return agora >= inicioDate && agora <= fimDate;
+}
+
+function autenticarUsuario(req, res, next) {
+  const role = req.headers['x-user-role']; // exemplo simples
+  if (!role) {
+    return res.status(401).json({ message: 'Não autenticado' });
+  }
+  req.user = { role };
+  next();
+}
+
+function verificaAdmin(req, res, next) {
+  if (req.user.role === 'ADMIN') {
+    return next();
+  }
+  return res.status(403).json({ message: 'Acesso negado: Admins somente' });
+}
+
+
+app.get('/api/hora-servidor', (req, res) => {
+  const agora = new Date();
+  res.json({ horaServidor: agora.toString(), iso: agora.toISOString() });
+});
+
+app.get('/api/site-status', async (req, res) => {
+  try {
+    const override = await buscarOverrideNoBanco();
+    const agora = new Date();
+    console.log('Hora do servidor:', agora.toString());
+    console.log('Override:', override);
+
+    if (override !== null) {
+      console.log('Status: override admin', override);
+      return res.json({ aberto: override, motivo: 'override admin' });
+    }
+
+    const abertoAgora = horariosPadrao.some(h => estaNoIntervalo(agora, h.inicio, h.fim));
+    console.log('Status: horário padrão', abertoAgora);
+    res.json({ aberto: abertoAgora, motivo: 'horário padrão' });
+  } catch (error) {
+    console.error('Erro ao buscar status:', error);
+    res.status(500).json({ message: 'Erro ao buscar status' });
+  }
+});
 
 app.get('/consulta-users', async (req, res) => {
     //Endpoint responsável por consultar users
@@ -206,6 +264,22 @@ app.post('/enviar-cadastro', async (req, res) => {
     }
 });
 
+app.post('/api/site-status', autenticarUsuario, verificaAdmin, async (req, res) => {
+  const { aberto } = req.body; // true, false ou null
+console.log('Requisição POST /api/site-status body:', req.body);
+  if (aberto !== true && aberto !== false && aberto !== null) {
+    return res.status(400).json({ message: 'Valor inválido para aberto. Use true, false ou null.' });
+  }
+
+  try {
+    const valorStr = aberto === null ? 'null' : aberto.toString();
+    await salvarOverrideNoBanco(valorStr);
+    res.json({ message: 'Status atualizado com sucesso' });
+  } catch (error) {
+    console.error('Erro ao salvar override:', error);
+    res.status(500).json({ message: 'Erro ao salvar override' });
+  }
+});
 
 app.get('/pedidos', async (req, res) => {
     //Endpoint responsável pelos pedidos

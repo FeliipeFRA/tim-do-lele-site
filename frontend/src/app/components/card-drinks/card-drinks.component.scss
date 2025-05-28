@@ -32,7 +32,7 @@
 /* Card */
 .card {
     cursor: pointer;
-    background-color: rgb(145, 47, 47);
+    background-color: rgb(139, 0, 0);
     width: 240px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -71,13 +71,13 @@
 
 .card-title {
     font-size: 1.2rem;
-    color: var(--yellow-color);
+    color: white;
 }
 
 
 .card-text {
     font-size: 1.2rem;
-    color: #fff;
+    color: var(--yellow-color);
     font-weight: bold;
     margin-bottom: auto;
 }

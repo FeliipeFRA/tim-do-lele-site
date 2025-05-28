@@ -4,7 +4,16 @@
         <i class="ri-admin-line" id="admin__icon"></i>
         <h1>Admin</h1> 
         <a href="/pedidos">Pedidos</a>
-        <a href="/pedidos">Status Site</a>
-        <a href="/pedidos">Fechar</a>
+        <p>Status atual: 
+    <span *ngIf="siteAberto === true">Aberto</span>
+    <span *ngIf="siteAberto === false">Fechado</span>
+    <span *ngIf="siteAberto === null">Automático (Horário padrão)</span>
+  </p>
+
+  <button (click)="setStatusAberto()">Forçar Aberto</button>
+  <button (click)="setStatusFechado()">Forçar Fechado</button>
+  <button (click)="setStatusAutomatico()">Voltar ao Automático</button>
+
+  <p>{{ mensagemStatus }}</p>
     </nav>
 </header>

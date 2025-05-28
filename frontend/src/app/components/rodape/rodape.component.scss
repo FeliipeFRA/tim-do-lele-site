@@ -113,4 +113,54 @@
     .footer-info, .footer-contact, .footer-copyright {
         margin: 10px 0;
     }
+
+     .footer-container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        flex-direction: row;       /* itens em linha */
+        justify-content: center;   /* centraliza horizontalmente */
+        align-items: center;       /* centraliza verticalmente */
+        text-align: center;
+        flex-wrap: wrap;           /* para quebrar linha se precisar */
+        gap: 1.5rem;               /* espaçamento entre itens */
+    }
+
+    .footer-copyright {
+        text-align: center !important;
+    }
+
+    .footer-info, .footer-contact, .footer-copyright {
+        margin: 0 10px;            /* espaçamento lateral entre os blocos */
+        max-width: none;           /* remove limite de largura */
+        flex: 1 1 auto;            /* para distribuir espaço igualmente */
+    }
+
+    .slogan {
+        font-size: 1.3rem;         /* aumenta o tamanho da fonte do slogan */
+        margin-bottom: 10px !important;       /* espaçamento abaixo do slogan */
+        margin-top: 10px !important;
+    }
+
+    .footer-small {
+        font-size: 0.9rem;         /* reduz o tamanho da fonte do texto pequeno */
+        margin-top: 10px !important; /* espaçamento acima do texto pequeno */
+        margin-bottom: 10px !important; /* espaçamento abaixo do texto pequeno */
+    }
+
+    .logo-footer {
+        width: 6rem;               /* reduz o tamanho do logo */
+        height: auto;              /* mantém a proporção da imagem */
+        margin-bottom: 10px;       /* espaçamento abaixo do logo */
+    }
+
+    /* Opcional: se quiser centralizar os textos dentro dos blocos */
+    .footer-info p, 
+    .footer-info-title, 
+    .footer-contact h2,
+    .footer-copyright p,
+    .slogan,
+    .footer-small {
+        text-align: center;
+        margin: 0 auto;
+    }
 }

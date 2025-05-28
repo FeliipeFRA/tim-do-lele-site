@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CartService } from 'app/service/cart.service';
 import { Food } from 'app/models/Food.model';
 import { RouterLink, Router } from '@angular/router';
-
+import { SiteStatusService } from 'app/service/site-status.service';
 
 
 
@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
   userName: string | null = '';
   role: string | null = '';
   isCartOpen: boolean = false;
+  siteAberto: boolean = true;  // padrão aberto
 
   tiposMenu = [
     { id: 'inicio', nome: 'Início' },
@@ -41,7 +42,7 @@ export class NavbarComponent implements OnInit {
     this.isMobile = window.innerWidth <= 768;
   }
 
-  constructor(public cartService: CartService, private router: Router) { }
+  constructor(public cartService: CartService, private router: Router, private siteStatusService: SiteStatusService) { }
 
   ngOnInit(): void {
     this.checkIsMobile();
@@ -54,6 +55,18 @@ export class NavbarComponent implements OnInit {
       this.role = localStorage.getItem('role');
     }
 
+    
+    this.siteStatusService.consultarStatus().subscribe({
+      next: (res) => {
+        console.log('Resposta site-status:', res);
+        this.siteAberto = res.aberto;
+      },
+      error: (err) => {
+        console.error('Erro ao consultar status do site:', err);
+        this.siteAberto = true; // se erro, liberar por padrão
+      }
+    });
+
     this.cartService.cart$.subscribe((items) => {
       this.cartItems = items;
       this.updateTotalItems();
@@ -64,6 +77,7 @@ export class NavbarComponent implements OnInit {
     this.activeTabIndex = index;
   }
 
+  
   toggleSearchForm() {
     this.searchForm.nativeElement.classList.toggle('active');
   }
