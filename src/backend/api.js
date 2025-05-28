@@ -8,7 +8,7 @@ const {ConsultarBebidas } = require('./query_banco/consulta_bebidas.js');
 const {ConsultarPedidos} = require('./query_banco/consulta_pedidos.js')
 const {ConsultarAdicionais} = require('./query_banco/consulta_adicionais.js')
 const {verificarEmailExistenteNoBanco } = require('./query_banco/verificar_email.js');
-
+const { InserirPedido } = require('./query_banco/inserir_pedido.js');
 
 //rota de pagamentos
 const pagamento = require('./routes/pagamentos/pagamento.js');
@@ -214,6 +214,31 @@ app.get('/pedidos', async (req, res) => {
         res.status(500).send("Erro ao consultar a tabela pedidos.");
     }
 });
+
+app.post('/pedidos', async (req, res) => {
+    try {
+        const { userId, horarioReserva, itens } = req.body;
+        console.log('Recebido userId:', userId);
+        console.log('Recebido horarioReserva:', horarioReserva);
+        console.log('Recebido itens:', JSON.stringify(itens, null, 2));
+        if (!userId || !horarioReserva || !Array.isArray(itens) || itens.length === 0) {
+            return res.status(400).json({ message: 'Dados do pedido incompletos.' });
+        }
+        // Validação básica dos itens
+        for (const item of itens) {
+            console.log('Validando item:', JSON.stringify(item));
+            if (!item.tipo || !item.itemId || !item.quantidade) {
+                console.error('Item inválido:', item);
+                return res.status(400).json({ message: 'Item do pedido inválido.' });
+            }
+        }
+        const pedidoId = await InserirPedido(userId, horarioReserva, itens);
+        res.status(201).json({ message: 'Pedido realizado com sucesso!', pedidoId });
+    } catch (error) {
+        console.error('Erro ao inserir pedido:', error);
+        res.status(500).json({ message: 'Erro ao inserir pedido.', error: error.message });
+    }
+})
 
 app.post('/pagamentos/pix', async (req, res) =>{
     try{

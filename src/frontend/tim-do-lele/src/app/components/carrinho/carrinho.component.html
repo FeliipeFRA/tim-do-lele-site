@@ -2,6 +2,12 @@
 
 <div class="checkout">
   <div class="container">
+    <!-- Campo para horário de reserva -->
+    <div class="reserva-container">
+      <label for="horarioReserva"><strong>Horário de Reserva:</strong></label>
+      <input id="horarioReserva" type="time" [(ngModel)]="horarioReserva" required />
+    </div>
+
     <!-- Exibindo os itens do carrinho -->
     <div *ngFor="let item of cartItems" class="product-card">
       <!-- Imagem do produto -->
@@ -51,14 +57,15 @@
       <h3>Total: R$ {{ total.toFixed(2).replace('.', ',') }}</h3>
     </div>
   </div>
- 
 </div>
 
 <footer class="footer">
   <div class="footer-container">
-    <!-- Botões para Retirar no Local e Pagamento via PIX -->
     <div class="footer-buttons">
-      <button class="btn-footer" >Pagamento no Local <i class="ri-bank-card-line"></i></button>
+      <button class="btn-footer" [disabled]="!horarioReserva || isEnviandoPedido" (click)="pagamentoNoLocal()">
+        <span *ngIf="!isEnviandoPedido">Pagamento no Local <i class="ri-bank-card-line"></i></span>
+        <span *ngIf="isEnviandoPedido">Enviando...</span>
+      </button>
       <button class="btn-footer" >Pagamento via PIX <i class="ri-money-dollar-box-line"></i></button>
     </div>
   </div>

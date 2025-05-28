@@ -2,13 +2,14 @@ import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from 'app/service/cart.service';
 import { Food } from 'app/models/Food.model';
-import { RouterLink, Router } from '@angular/router';
 import { NavbarCheckoutComponent } from '../navbar-checkout/navbar-checkout.component';
+import { HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-carrinho',
   standalone: true,
-  imports: [CommonModule, RouterLink, NavbarCheckoutComponent],
+  imports: [CommonModule, FormsModule, NavbarCheckoutComponent],
   templateUrl: './carrinho.component.html',
   styleUrls: ['./carrinho.component.scss'],
 })
@@ -18,8 +19,10 @@ export class CarrinhoComponent implements OnInit {
   userName: string | null = '';
   role: string | null = '';
   private _total: number = 0; // Variável privada para armazenar o total
+  horarioReserva: string = '';
+  isEnviandoPedido: boolean = false;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private http: HttpClient) {}
 
   ngOnInit(): void {
     if (typeof window !== 'undefined') {
@@ -106,5 +109,81 @@ export class CarrinhoComponent implements OnInit {
       );
       return sum + precoBase + precoAdd;
     }, 0);
+  }
+
+  // Função para montar o objeto de pedido conforme o backend espera
+  montarPedidoParaEnvio(): any {
+    let itens: any[] = [];
+    this.cartItems.forEach((item, idx) => {
+      // Item principal (lanche/bebida)
+      const parentKey = `${item.TIPO}_${item.ID}_${idx}`;
+      itens.push({
+        tipo: item.TIPO,
+        itemId: item.ID,
+        quantidade: item.QUANTITY || 1,
+        parentItemId: null
+      });
+      // Molhos
+      if (item.sauces && item.sauces.length > 0) {
+        item.sauces.forEach((molho) => {
+          itens.push({
+            tipo: 'Molho',
+            itemId: this.getIdMolhoByName(molho),
+            quantidade: 1,
+            parentItemId: item.ID // Associa ao item pai
+          });
+        });
+      }
+      // Adicionais
+      if (item.additionals && item.additionals.length > 0) {
+        item.additionals.forEach((add) => {
+          itens.push({
+            tipo: 'Adicional',
+            itemId: add.ID,
+            quantidade: 1,
+            parentItemId: item.ID // Associa ao item pai
+          });
+        });
+      }
+    });
+    return {
+      userId: this.userName,
+      horarioReserva: this.horarioReserva,
+      itens
+    };
+  }
+
+  // Função auxiliar para obter o ID do molho pelo nome (ajuste conforme seu sistema)
+  getIdMolhoByName(nome: string): number {
+    // Exemplo fixo, ajuste para buscar do backend se necessário
+    const molhos = [
+      { id: 1, nome: 'Ketchup' },
+      { id: 2, nome: 'Mostarda' },
+      { id: 3, nome: 'Barbecue' },
+      { id: 4, nome: 'Maionese' },
+      { id: 5, nome: 'Pimenta' },
+      { id: 6, nome: 'Big Mac' }
+    ];
+    const found = molhos.find(m => m.nome === nome);
+    return found ? found.id : 0;
+  }
+
+  async pagamentoNoLocal() {
+    if (!this.horarioReserva) {
+      alert('Informe o horário de reserva antes de finalizar o pedido!');
+      return;
+    }
+    this.isEnviandoPedido = true;
+    const pedido = this.montarPedidoParaEnvio();
+    try {
+      const resp: any = await this.http.post('http://localhost:8000/pedidos', pedido).toPromise();
+      alert('Pedido realizado com sucesso!');
+      this.cartService.clearCart(); // Limpa carrinho corretamente
+      this.horarioReserva = '';
+    } catch (err: any) {
+      alert('Erro ao enviar pedido: ' + (err?.error?.message || 'Erro desconhecido.'));
+    } finally {
+      this.isEnviandoPedido = false;
+    }
   }
 }

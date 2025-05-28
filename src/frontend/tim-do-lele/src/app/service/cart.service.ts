@@ -79,4 +79,9 @@ export class CartService {
     }
   }
   
+  clearCart(): void {
+    this.cartItems = [];
+    this.cartSubject.next([]);
+  }
+  
 }
