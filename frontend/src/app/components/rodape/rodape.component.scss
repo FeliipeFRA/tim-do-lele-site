@@ -1,0 +1,166 @@
+.footer {
+    font-family: "Poppins", sans-serif;
+    background-color: rgb(173, 0, 0);
+    color: #fff;
+    padding: 10px 0;
+    margin-top: 5rem;
+    border-top: 7px solid var(--yellow-color);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-right: 3rem;
+    padding-left: 3rem;
+    background-color: rgb(173, 0, 0);
+    flex-wrap: nowrap;
+}
+
+.slogan {
+    font-size: 1.2rem;
+    color: var(--yellow-color);
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+.logo-footer {
+    width: 4rem;
+    padding: 3px;
+    height: auto;
+}
+
+.footer-info {
+    max-width: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.footer-info-item {
+    margin-bottom: 10px;
+}
+
+.footer-info-title {
+    font-weight: bold;
+    color: var(--yellow-color);
+    font-size: 1.2rem;
+}
+
+
+
+.footer-info p {
+    font-size: 0.9rem;
+}
+
+.footer-contact {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer-contact h2 {
+    color: var(--yellow-color);
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1.3rem;
+}
+
+.footer-contact i {
+    font-size: 4.5rem;
+    color: white;
+    text-decoration: none;
+    margin: 0 0px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.footer-contact i:hover {
+    color: var(--yellow-color);
+}
+    
+
+
+.footer-copyright {
+    font-size: 1rem;
+    color: var(--yellow-color);
+    font-weight: bold;
+    text-align: right;
+}
+
+.footer-small {
+    font-weight: normal;
+    font-size: 1rem;
+    color: #ccc;
+    text-align: right;
+    margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-info, .footer-contact, .footer-copyright {
+        margin: 10px 0;
+    }
+
+     .footer-container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        flex-direction: row;       /* itens em linha */
+        justify-content: center;   /* centraliza horizontalmente */
+        align-items: center;       /* centraliza verticalmente */
+        text-align: center;
+        flex-wrap: wrap;           /* para quebrar linha se precisar */
+        gap: 1.5rem;               /* espaçamento entre itens */
+    }
+
+    .footer-copyright {
+        text-align: center !important;
+    }
+
+    .footer-info, .footer-contact, .footer-copyright {
+        margin: 0 10px;            /* espaçamento lateral entre os blocos */
+        max-width: none;           /* remove limite de largura */
+        flex: 1 1 auto;            /* para distribuir espaço igualmente */
+    }
+
+    .slogan {
+        font-size: 1.3rem;         /* aumenta o tamanho da fonte do slogan */
+        margin-bottom: 10px !important;       /* espaçamento abaixo do slogan */
+        margin-top: 10px !important;
+    }
+
+    .footer-small {
+        font-size: 0.9rem;         /* reduz o tamanho da fonte do texto pequeno */
+        margin-top: 10px !important; /* espaçamento acima do texto pequeno */
+        margin-bottom: 10px !important; /* espaçamento abaixo do texto pequeno */
+    }
+
+    .logo-footer {
+        width: 6rem;               /* reduz o tamanho do logo */
+        height: auto;              /* mantém a proporção da imagem */
+        margin-bottom: 10px;       /* espaçamento abaixo do logo */
+    }
+
+    /* Opcional: se quiser centralizar os textos dentro dos blocos */
+    .footer-info p, 
+    .footer-info-title, 
+    .footer-contact h2,
+    .footer-copyright p,
+    .slogan,
+    .footer-small {
+        text-align: center;
+        margin: 0 auto;
+    }
+}

@@ -1,0 +1,65 @@
+<app-navbar-checkout></app-navbar-checkout>
+
+<div class="checkout">
+  <div class="container">
+    <!-- Exibindo os itens do carrinho -->
+    <div *ngFor="let item of cartItems" class="product-card">
+      <!-- Imagem do produto -->
+      <img [src]="getImagemPorIdOuTipo(item.ID, item.TIPO)" alt="{{ item.NOME }}" class="product-image"
+                            (error)="onImageError($event, item.TIPO)" />
+
+      <div class="product-details">
+        <!-- Nome do produto -->
+        <div class="product-header">
+          <h2 class="product-name">{{ item.NOME }}</h2>
+          <p class="quantity">Quantidade: {{ item.QUANTITY }}</p>
+        </div>
+
+        <!-- Preço do produto -->
+        <p class="product-price">R$ {{ formatarPrecoTotalItem(item) }}</p>
+
+  
+
+        <!-- Exibição de Molhos -->
+        <div *ngIf="item.sauces && item.sauces.length > 0" class="sauce-text">
+          <strong>Molhos:</strong>
+          <ul>
+            <li *ngFor="let sauce of item.sauces">{{ sauce }}</li>
+          </ul>
+        </div>
+
+        <!-- Exibição de Adicionais -->
+        <div *ngIf="item.additionals && item.additionals.length > 0" class="additionals-text">
+          <strong>Adicionais:</strong>
+          <ul>
+            <li *ngFor="let adicional of item.additionals">
+              {{ adicional.NOME }} - R$ {{ adicional.PRECO.toFixed(2).replace('.', ',') }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Exibição de Observações -->
+        <div *ngIf="item.observations" class="observations-text">
+          <strong>Observações:</strong> {{ item.observations }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class = bottom-container>
+    <div class="total">
+      <h3>Total: R$ {{ total.toFixed(2).replace('.', ',') }}</h3>
+    </div>
+  </div>
+ 
+</div>
+
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Botões para Retirar no Local e Pagamento via PIX -->
+    <div class="footer-buttons">
+      <button class="btn-footer" >Pagamento no Local <i class="ri-bank-card-line"></i></button>
+      <button class="btn-footer" >Pagamento via PIX <i class="ri-money-dollar-box-line"></i></button>
+    </div>
+  </div>
+</footer>

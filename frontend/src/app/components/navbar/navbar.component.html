@@ -1,0 +1,159 @@
+<header class="header">
+
+
+    <div class="logo-text">
+        <img class="logo" src="assets/img/logo-tim-header.png">
+        <P (click)="scrollToTop()">Tim do Lelê</P>
+    </div>
+
+
+
+
+    <div class="icons">
+        <div id="status-container" [ngClass]="siteAberto ? 'aberto' : 'fechado'">
+
+            <span class="status-text">{{ siteAberto ? 'Aberto' : 'Fechado' }}</span>
+            <span class="status-icone"><i class="ri-time-line"></i></span>
+
+        </div>
+
+        <!-- <div class="ri-menu-line" id="menu-btn" (click)="toggleMenu()"></div> -->
+        <div class="ri-search-line" id="search-btn" (click)="toggleSearchForm()"></div>
+        <div class="ri-shopping-cart-line" id="cart-btn" id="cart-btn" (click)="toggleCart()">
+            <span *ngIf="totalItems > 0" class="cart-badge">{{ totalItems }}</span>
+        </div>
+        <a href="/perfil">
+            <div class="ri-user-line" id="user-btn"></div>
+        </a>
+        <button *ngIf="userName" (click)="logout()" class="user-btn">
+            <img src="assets/img/logout_icon.webp" alt="Logout" class="logout-icon" />
+        </button> <!-- Exibe o botão de logout se o usuário estiver logado -->
+    </div>
+
+    <!-- IMPLEMENTAR PESQUISA-->
+    <form #searchForm action="" class="search-form">
+        <input type="search" id="search-box" placeholder="Pesquise aqui..." class="box">
+        <label for="search-box" class="ri-search-line"></label>
+    </form>
+
+    <div class="cart-container" *ngIf="isCartOpen">
+        <div #cart class="shopping-cart">
+            <span class="close-button" (click)="toggleCart()">&times;</span>
+            <div class="cart-content">
+                <div class="cart-header">
+                    <h3>MEU PEDIDO <i class="ri-shopping-cart-line cart-icon"></i></h3>
+                </div>
+
+
+
+                <div class="internal-content">
+                    <div *ngIf="cartItems.length === 0" class="empty-cart-message">
+                        {{ siteAberto ? 'Seu carrinho está vazio! :(' : 'O site está fechado!' }}
+                    </div>
+
+
+                    <ng-container *ngIf="cartItems.length > 0">
+                        <div class="box" *ngFor="let item of cartItems; let i = index">
+                            <!-- Exibição dinâmica da imagem -->
+                            <img [src]="getImagemPorIdOuTipo(item.ID, item.TIPO)" alt="{{ item.NOME }}" class="img-cart"
+                                (error)="onImageError($event, item.TIPO)" />
+
+
+                            <div class="content">
+                                <h3 class="card-title">{{ item.NOME }}</h3>
+                                <span class="price">
+                                    R$ {{ formatarPrecoTotalItem(item) }}
+                                </span>
+
+
+
+                                <!-- Exibir molhos -->
+                                <p *ngIf="item.sauces" class="sauce-text">
+                                    <span *ngIf="item.sauces.length > 0"><strong>Molhos: </strong></span>
+                                    <li *ngFor="let sauce of item.sauces">
+                                        {{ sauce }}
+                                    </li>
+                                </p>
+
+                                <div *ngIf="item.additionals && item.additionals.length > 0" class="additionals-text">
+                                    <strong>Adicionais:</strong>
+                                    <ul class="additionals-text">
+                                        <li *ngFor="let adicional of item.additionals">
+                                            {{ adicional.NOME }} - R$ {{ adicional.PRECO.toFixed(2).replace('.', ',') }}
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                                <!-- Exibir observação -->
+                                <p *ngIf="item.observations" class="observations-text">
+                                    <strong>Observações: </strong> {{ item.observations }}
+                                </p>
+
+
+
+
+                                <div class="quantity-controls">
+                                    <!-- Botões para controle de quantidade -->
+                                    <button *ngIf="(item.QUANTITY ?? 0) === 1" class="btn-quantity ri-delete-bin-6-line"
+                                        (click)="cartService.removeFromCart(item)">
+                                    </button>
+                                    <button *ngIf="(item.QUANTITY ?? 0) > 1" class="btn-quantity"
+                                        (click)="cartService.decreaseQuantity(item)">
+                                        -
+                                    </button>
+                                    <span class="quantity-value">{{ item.QUANTITY ?? 0 }}</span>
+                                    <button class="btn-quantity" (click)="cartService.increaseQuantity(item)">
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </ng-container>
+
+                </div>
+                <ng-container *ngIf="cartItems.length > 0">
+                    <div class="cart-footer">
+                        <div class="total"><strong>Total:</strong> R$ {{ total.toFixed(2).replace('.', ',') }}</div>
+                        <a
+  *ngIf="siteAberto"
+  routerLink="/carrinho"
+  class="checkout-btn"
+>
+  Finalizar Compra
+</a>
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</header>
+
+
+<div class="menu-container">
+    <!-- Faixa de categorias fixa para DESKTOP -->
+    <ul *ngIf="!isMobile" class="menu-tabs">
+        <li *ngFor="let tipo of tiposMenu; let i = index" (click)="
+      setActiveTab(i);
+      i === 0 ? scrollToTop() : scrollToSection(tipo.id)
+    " [class.active]="i === activeTabIndex" class="menu-tab-item">
+            <span>{{ tipo.nome }}</span>
+        </li>
+
+    </ul>
+
+    <!-- Swiper arrastável para MOBILE -->
+    <swiper-container *ngIf="isMobile" slides-per-view="auto" space-between="10" free-mode="true" class="mobile-swiper">
+        <swiper-slide *ngFor="let tipo of tiposMenu; let i = index"
+            (click)="setActiveTab(i); i === 0 ? scrollToTop() : scrollToSection(tipo.id)" class="swiper-slide-link">
+            {{ tipo.nome }}
+        </swiper-slide>
+    </swiper-container>
+
+</div>

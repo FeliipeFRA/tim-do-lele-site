@@ -1,0 +1,27 @@
+<header class="header">
+
+
+    <div class="logo-text">
+        <img class="logo" src="assets/img/logo-tim-header.png">
+    
+    </div>
+
+
+
+
+    <div class="icons">
+        <div id="status-container" [ngClass]="siteAberto ? 'aberto' : 'fechado'">
+
+            <span class="status-text">{{ siteAberto ? 'Aberto' : 'Fechado' }}</span>
+            <span class="status-icone"><i class="ri-time-line"></i></span>
+
+        </div>
+
+        
+        <button *ngIf="userName" (click)="logout()" class="user-btn">
+            <img src="assets/img/logout_icon.webp" alt="Logout" class="logout-icon" />
+        </button> <!-- Exibe o botão de logout se o usuário estiver logado -->
+    </div>
+
+
+</header>
