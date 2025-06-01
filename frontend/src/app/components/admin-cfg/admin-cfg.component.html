@@ -1,0 +1,61 @@
+<div class="details" *ngIf="isPopupOpen" (click)="onBackdropClick($event)">
+    <div class="details-content" (click)="$event.stopPropagation()">
+      <span class="close-button" (click)="closePopup()">&times;</span>
+
+      
+      <!-- Right Side para Título e Conteúdo -->
+      <div class="right-side">
+        <!-- Título ficará na seção right-side-tittle -->
+        <div class="right-side-top">
+          <p>Configurações</p>
+
+        </div>
+
+        <!-- Conteúdo com rolagem (molhos e observações) -->
+        <div class="internal-content">
+         
+          <h2 class="section_tittle">
+            Molhos:
+           
+          </h2>
+          <div class="sauce-section">
+            
+          </div>
+
+          <h2 class="section_tittle">
+            Adicionais:
+            
+        
+          </h2>
+
+          <div class="additionals-section">
+            
+          </div>
+
+          <!-- Observações com rolagem -->
+          <h2 class="section_tittle">
+            Observações:
+            
+        
+          </h2>
+
+          <div class="observations-section">
+            
+          </div>
+        </div>
+
+
+
+        <div class="right-side-bottom">
+          <div class="quantity-container">
+            
+
+          </div>
+          <div class="quantity-container">
+        
+             
+
+            </div>
+          </div>
+        </div>
+      </div>

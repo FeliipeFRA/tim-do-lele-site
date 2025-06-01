@@ -1,30 +1,29 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AdminGuard implements CanActivate {
+export const adminGuard: CanActivateFn = (route, state) => {
+  const router = inject(Router);
 
-  constructor(private router: Router) {}
+  const isBrowser = typeof window !== 'undefined' && typeof localStorage !== 'undefined';
 
-  canActivate(): boolean {
-    const userId = localStorage.getItem('userId');
-    const role = localStorage.getItem('role');
-  
-    if (!userId || !role) {
-      // Redireciona para o login se o usuário não estiver logado
-      this.router.navigate(['/admin']);
-      return false;
-    }
-  
-    // Verifica se o usuário tem o role 'admin'
-    if (this.router.url === '/admin' && role !== 'ADMIN') {
-      // Se o usuário não for admin, redireciona para a página Home
-      this.router.navigate(['/admin']);
-      return false;
-    }
-  
-    return true;
+  if (!isBrowser) {
+    console.warn('Tentativa de acesso fora do navegador.');
+    router.navigate(['/login']);
+    return false;
   }
-}
+
+  const userId = localStorage.getItem('userId');
+  const role = localStorage.getItem('role');
+
+  if (!userId || !role) {
+    router.navigate(['/login']);
+    return false;
+  }
+
+  if (state.url.startsWith('/pedidos') && role !== 'ADMIN') {
+    router.navigate(['/home']);
+    return false;
+  }
+
+  return true;
+};

@@ -1,6 +1,6 @@
 .header {
   font-family: "Poppins", sans-serif;
-  
+
   position: fixed;
   top: 0;
   left: 0;
@@ -12,87 +12,30 @@
   padding: 0rem 5%;
   background: rgb(173, 0, 0);
   box-shadow: var(--box-shadow);
-  border-bottom:7px solid rgb(139, 0, 0);
-}
-/* Faixa branca fixa logo abaixo da navbar */
-.tabs-bar-fixed {
-  position: fixed;
-  left: 0;
-  right: 0;
-  
-  z-index: 997;
-  border-bottom: 1px solid #ddd;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-.menu-container {
-  width: 100%;
-  font-family: "Poppins", sans-serif;
-  position: fixed;
-  margin-top: 63px;
-  z-index: 1000;
-  background-color: rgb(139, 0, 0);
   border-bottom: 7px solid rgb(139, 0, 0);
 }
-.swiper-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/* Estilo das tabs fixas (desktop) */
-.menu-tabs {
 
-  padding: 0.25rem 1.5rem;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
-  list-style: none;
-  overflow-x: auto;
-  white-space: nowrap;
-
-  .menu-tab-item {
-    flex: 1 1 auto; // força todos os itens a ocupar espaço proporcionalmente
-    text-align: center;
-    font-weight: 500;
-    font-weight: 500;
-    font-family: 'Poppins', sans-serif;
-    color: white;
-    cursor: pointer;
-    align-items: center;
-
-    &:hover {
-      color: var(--yellow-color);
-      transition: color 0.3s;
-      font-weight: bold;
-    }
-  }
+.config-btn {
+  background-color: rgb(173, 0, 0);
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  font-size: 2rem;
+  cursor: pointer;
 }
 
-/* Estilo do swiper no mobile */
-.mobile-swiper {
-  padding: 0.25rem 1rem;
-
-  .swiper-slide-link {
-    padding: 0.5rem 1rem;
-    font-weight: 500;
-    color: white;
-    white-space: nowrap;
-    border-radius: 6px;
-    text-transform: capitalize;
-    width: fit-content;
-
-    &:hover {
-      background-color: var(--yellow-color);
-      color: rgb(133, 92, 32);
-    }
-  }
+.user-btn {
+  background-color: rgb(173, 0, 0);
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  font-size: 2rem;
+  cursor: pointer;
 }
 
 /* Adiciona padding no body para que o conteúdo não fique atrás do header + tabs */
-body, main {
+body,
+main {
   padding-top: 120px; // 70px header + 50px tabs aprox
 }
 
@@ -118,7 +61,7 @@ body, main {
   cursor: pointer;
 }
 
-.nav h1{
+.nav h1 {
   font-family: "Poppins", sans-serif;
   font-size: 15%;
   overflow-x: hidden;
@@ -134,23 +77,31 @@ body, main {
   color: black;
   text-transform: uppercase;
   font-weight: bold;
-  
+
 
   a {
-      cursor: pointer;
-      font-size: 1.3vw;
-      margin: 0 1rem;
-      color: white;
+    cursor: pointer;
+    font-size: 1.3vw;
+    margin: 0 1rem;
+    color: white;
 
-      &:hover {
-          transition: 0.2s;
-          font-size: 1.3vw;
-          color: var(--yellow-color);
-          text-decoration: none;
-      }
+    &:hover {
+      transition: 0.2s;
+      font-size: 1.3vw;
+      color: var(--yellow-color);
+      text-decoration: none;
+    }
   }
 }
 
+.nav-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+}
 
 #status-container {
   display: flex;
@@ -163,6 +114,7 @@ body, main {
   font-size: 14px;
   user-select: none;
   width: fit-content;
+  margin-right: 1.5rem;
 }
 
 .fechado {
@@ -192,419 +144,568 @@ body, main {
   cursor: pointer;
 
   .a {
-      margin: 0;
+    margin: 0;
   }
+
   div {
-      display: inline-block;
-      height: 2.3rem;
-      width: 2.3rem;
-      line-height: 2.3rem;
-      border-radius: 1.5rem;
-      background: white;
-      color: rgb(117, 38, 38);
-      font-size: 1.5rem;
-      margin-left: 0.7rem;
-      text-align: center;
-      cursor: pointer;
+    display: inline-block;
+    height: 2.3rem;
+    width: 2.3rem;
+    line-height: 2.3rem;
+    border-radius: 1.5rem;
+    background: white;
+    color: rgb(117, 38, 38);
+    font-size: 1.5rem;
+    margin-left: 0.7rem;
+    text-align: center;
+    cursor: pointer;
 
-      &:hover {
-          background: var(--yellow-color);
-          color: rgb(133, 92, 32);
-      }
+    &:hover {
+      background: var(--yellow-color);
+      color: rgb(133, 92, 32);
+    }
   }
 }
 
-#menu-btn {
-  display: none; /* Esconde o ícone do menu em telas grandes */
-}
 
-.cart-container {
-    position: fixed;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    margin-top: 150px;
-    /* Fundo semitransparente */
-    z-index: 9999;
-    display: flex;
-    padding: 20px;
-    /* Previne a rolagem horizontal */
-    width: 100%;
-    padding: 0%;
-  }
 
-  .cart-content[_ngcontent-ng-c3192784958] {
-    max-height: inherit;
-    width: 100%;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    overflow-y: auto;
-    overflow-x: hidden;
-    text-align: left;
-  }
 
-.btn{
-  display: inline-block;
-  padding: .8rem;
-  font-size: 1.7rem;
-  border-radius: .5rem;
-  background-color: rgb(187, 44, 44);;
-  color:#fff;
-  cursor: pointer;
-}
 
-.checkout-btn{
-  display: inline-block;
-  padding: .8rem;
-  font-size: 1.7rem;
-  border-radius: .5rem;
-  background-color: rgb(187, 44, 44);;
-  color:#fff;
-  cursor: pointer;
-  margin: 0;
-}
 
-.checkout-btn:hover{
-  background-color: var(--yellow-color);
-  color: rgb(133, 92, 32);
-  text-decoration: none;
-}
-
-.btn:hover{
-  background-color: var(--yellow-color);
-  color: rgb(133, 92, 32);
-  text-decoration: none;
-}
-
-.search-form {
-  position: absolute;
-  top: 120%;
-  right: -200%;
-  width: 30rem;
-  height: 2rem;
-  background: #fff;
-  border-radius: 0.5rem;
-  overflow: hidden;
+.text-container {
   display: flex;
+  flex-direction: column;
+  /* Alinha o texto verticalmente */
+  justify-content: center;
+  /* Alinha o texto no centro */
+}
+
+
+
+.plus-btn:hover {
+  background-color: var(--yellow-color);
+  color: rgb(133, 92, 32);
+}
+
+.tw-toggle {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  box-shadow: var(--box-shadow);
-  transition: right 0.3s linear;
-
-  input {
-      height: 100%;
-      width: 100%;
-      background: none;
-      padding-left: 1rem;
-      text-transform: none;
-      font-size: 1.25rem;
-      color: var(--black-color);
-      padding: 1 1rem;
-  }
-
-  label {
-      font-size: 1.5rem;
-      padding-right: 1rem;
-      color: var(--black-color);
-      cursor: pointer;
-
-      &:hover {
-          color: var(--yellow-color);
-      }
-  }
-}
-
-.header .shopping-cart{
-  align-items: center;
-  position: absolute;
-  top:120%;
-  padding:1rem;
-  border-radius: .5rem;
-  box-shadow: var(--box-shadow);
-  width: 27rem;
-  background: #fff;
-  transition: right 0.3s linear;
-  max-height: 80vh; /* Define a altura máxima como 80% da altura da tela */
-  padding-right: 10px; /* Adiciona espaço extra para o scrollbar */
-    right: 1%; /* Mostra a barra de pesquisa quando ativa */
-  z-index: 9999;
-}
-
-.img-cart{
-  border-radius: 10px;
-  width: 30%;
-  height: auto;  
-  margin-right: 0.5rem;   
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;   
-}
-
-.cart-badge {
   position: relative;
-  top: 0; /* Alinha no topo */
-  right: 0; /* Alinha à direita */
-  transform: translate(90%, -50%); /* Ajusta a posição para o canto superior direito */
-  background-color: red;
-  color: white;
-  font-family: "Poppins", sans-serif;
-  font-size: 1rem; /* Reduz o tamanho da fonte */
-  font-weight: bold;
-  width: 1.5rem; /* Define a largura da bolinha */
-  height: 1.5rem; /* Define a altura da bolinha */
-  border-radius: 50%; /* Garante o formato circular */
+  border: 2px solid #95A5A6;
+  border-radius: 30px;
+  width: 100%;
+  max-width: 400px;
+  height: 50px;
+  padding: 5px;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.tw-toggle label {
+  flex: 1;
+  text-align: center;
+  font-family: sans-serif;
+  color: #95A5A6;
+  z-index: 2;
+  margin: 0;
+  padding: 10px 0;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.tw-toggle input {
+  position: absolute;
+  z-index: 3;
+  opacity: 0;
+  width: 33.33%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.tw-toggle input:nth-of-type(1) {
+  left: 0;
+}
+
+.tw-toggle input:nth-of-type(2) {
+  left: 33.33%;
+}
+
+.tw-toggle input:nth-of-type(3) {
+  left: 66.66%;
+}
+
+/* Bolinha */
+.tw-toggle span {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(33.33% - 10px);
+  height: calc(100% - 10px);
+  border-radius: 25px;
+  background: #fff;
+  transition: all 0.3s ease-in-out;
+  z-index: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.status-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  user-select: none;
+  width: 100%;
 }
 
-  .internal-content {
-  max-height: 50vh;
-  flex: 1;
+/* Movimentação da bolinha */
+.tw-toggle input[value="false"]:checked~span {
+  background: #e74c3c;
+  left: 5px;
+}
+
+.tw-toggle input[value="-1"]:checked~span {
+  background: #8bb4ff;
+  left: calc(33.33% + 5px);
+}
+
+.tw-toggle input[value="true"]:checked~span {
+  background: #27ae60;
+  left: calc(66.66% + 5px);
+}
+
+/* ✅ Cor do label quando ativo */
+.tw-toggle input:checked+label {
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+}
+
+/* ⚙️ Label normal (não ativo) */
+.tw-toggle label {
+  color: #95A5A6;
+}
+
+
+.tw {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Modal de Detalhes */
+.details {
+  font-family: "Poppins", sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Fundo semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+  overflow-x: hidden;
+  /* Previne a rolagem horizontal */
+  animation: animate__slideOutDown;
+  animation-duration: 2s;
+  /* don't forget to set a duration! */
+}
+
+.details-content {
+  background-color: #fff;
+  width: 80%;
+  max-width: 900px;
+  height: 80hv !important;
+
+  flex-direction: row;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  position: relative;
+  overflow: auto;
+  /* Garante que não haja rolagem horizontal */
+}
+
+.close-button {
+  position: absolute;
+  top: 7px;
+  right: 15px;
+  /* Agora no canto esquerdo */
+  font-size: 25px;
+  color: #000;
+  cursor: pointer;
+  z-index: 10000;
+  border: none;
+}
+
+.close-button:hover {
+  color: var(--yellow-color);
+  transition: color 0.2s;
+}
+
+.quantity-container {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-btn {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background-color: rgb(139, 0, 0);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quantity-btn:hover {
+  background-color: var(--yellow-color);
+  color: rgb(133, 92, 32);
+}
+
+.quantity-display {
+  color: black;
+  margin: 0 15px;
+  font-size: 1.2rem;
+}
+
+
+
+.btn-add-to-cart {
+  background-color: rgb(139, 0, 0);
+  font-family: Poppins;
+  font-size: medium;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: calc(100%);
+  /* Ajuste a largura do botão para ocupar quase todo o card */
+  /* Margem aos lados e embaixo */
+  position: relative;
+  right: 10px;
+}
+
+.btn-add-to-cart:hover {
+  background-color: var(--yellow-color);
+  color: rgb(133, 92, 32);
+}
+
+/* Lado Esquerdo (Imagem do Lanche) */
+.left-side {
+  width: 70%;
+  padding-right: 20px;
+}
+
+.details-img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.details-warning {
+  font-size: 0.8rem;
+  color: rgb(99, 99, 99);
+  margin: 0;
+}
+
+/* Lado Direito */
+.right-side {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  overflow-y: auto; /* Permite rolar apenas o conteúdo */
+  /* Organiza o título e conteúdo em coluna */
+  max-height: 70vh;
+  /* Limita a altura da área */
+  overflow-y: hidden;
+  /* Permite rolagem apenas na área de conteúdo */
+}
+
+.right-side-top {
+  width: 100%;
+  background-color: #fff;
+  text-align: left;
+  /* Espaço entre o título e o conteúdo */
+  color: black;
+  font-size: 30px;
+  font-weight: bold;
+  position: sticky;
+  background-color: #fff;
+
+  /* Linha de separação cinza */
+}
+
+.right-side-bottom {
+  width: 100%;
+  display: flex;
+  background-color: #fff;
+  z-index: 90;
+  /* Garante que o título fique acima do conteúdo */
+  padding: 10px 0;
+  text-align: center;
+  /* Alinhamento do título */
+  border-top: 3px solid #ddd;
+  /* Linha de separação */
+  margin-top: 3%;
+}
+
+.internal-content {
+  overflow-y: auto;
+  /* Permite rolar apenas o conteúdo */
   overflow-x: hidden;
   text-align: left;
 }
 
-/* Mensagem de carrinho vazio */
-.empty-cart-message {
-  font-size: 1.25rem;
-  color: rgb(43, 43, 43);
-  text-align: center;
-  flex: 1; /* Ocupa o espaço disponível */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.header .shopping-cart .box{
-  display: flex;
-  align-items: center;
-  gap: 0rem;
-  position: relative;
-  border-bottom: 1px solid #ccc; /* Linha entre os lanches */
-
-}
-
-/* Estilos para o texto dos molhos */
-.sauce-text {
-  font-size: 14px; /* Tamanho de texto pequeno */
-  color: black; /* Cor do texto preta */
-  margin: 0px; /* Espaçamento entre os molhos */
-  text-align: left; /* Alinha o texto à esquerda */
-  word-break: break-word; /* Quebra a palavra se necessário para evitar overflow */
-  white-space: normal; /* Permite quebra de linha normal */
-  overflow-wrap: break-word; /* Garante que o texto será quebrado em palavras longas */
-  max-width: 100%; /* Impede que o texto ultrapasse o limite do contêiner */
-  list-style: none;
-}
-
-.additionals-text {
-  font-size: 14px; /* Tamanho de texto pequeno */
-  color: black; /* Cor do texto preta */
-  margin: 0px; /* Espaçamento entre os molhos */
-  text-align: left; /* Alinha o texto à esquerda */
-  word-break: break-word; /* Quebra a palavra se necessário para evitar overflow */
-  white-space: normal; /* Permite quebra de linha normal */
-  overflow-wrap: break-word; /* Garante que o texto será quebrado em palavras longas */
-  max-width: 100%; /* Impede que o texto ultrapasse o limite do contêiner */
-  list-style: none;
-}
-
-
-/* Estilo para as observações */
-.observations-text {
-  font-size: 14px; /* Tamanho de texto pequeno */
-  color: black; /* Cor do texto preta */
-  text-align: left; /* Alinha o texto à esquerda */
-  word-break: break-word; /* Quebra a palavra se necessário para evitar overflow */
-  white-space: normal; /* Permite quebra de linha normal */
-  overflow-wrap: break-word; /* Garante que o texto será quebrado em palavras longas */
-  max-width: 100%; /* Impede que o texto ultrapasse o limite do contêiner */
-}
-
-
-.header .shopping-cart .box .content{
-  align-items: start;
-}
-
-.header .shopping-cart .box .content h3{
-  align-items: start;
-  color:rgb(43, 43, 43);
-  font-size: 1.5rem;
-  text-align: left; /* Alinha o texto à esquerda */
-  white-space: normal; /* Permite que o texto quebre em várias linhas */
-  overflow: hidden; /* Garante que não haja overflow */
-  text-overflow: ellipsis; /* Adiciona '...' caso o texto ultrapasse o limite, se necessário */
-}
-
-.cart-header {
-  position: sticky;
-  top: 0;
-  color: #000000;
-  text-align: center;
-  font-size: 1.25rem;
-  font-weight: bold;
-  z-index: 1;
-  background-color: white;
-  border-bottom: 3px solid #ddd;
-  margin-bottom: 5px;
-}
-
-.cart-footer {
-  position: sticky;
-  bottom: 0;
-  background-color: #ffffff;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-  font-size: 1rem;
-  z-index: 2;
+.section_tittle {
+  padding-top: 1rem;
   border-top: 3px solid #ddd;
-}
-
-.close-button {
-    position: absolute;
-    top: 7px;
-    right: 15px;
-    /* Agora no canto esquerdo */
-    font-size: 25px;
-    color: #000;
-    cursor: pointer;
-    z-index: 10000;
-    border: none;
-}
-
-.close-button:hover {
-    color: var(--yellow-color);
-    transition: color 0.2s;
-}
-
-.empty-cart-message{
-  padding-top: 0.5rem;
-  color:rgb(43, 43, 43);
-  font-size: 1.25rem;
-}
-
-.header .shopping-cart .box .content span{
-  color:rgb(61, 61, 61);
-  font-size: 1.6rem;
-}
-
-.header .shopping-cart .box .content .sauce-text span{
-  font-size: 14px; /* Tamanho de texto pequeno */
-  color: black; /* Cor do texto preta */
-}
-
-.header .shopping-cart .box .content quantity{
-  padding-left: 1rem;
-}
-
-.header .shopping-cart .total{
-  font-size: 1.75rem;  
-  text-align: right;
-  color: var(--black-color)
-}
-
-.header .shopping-cart .btn{
+  font-size: 1.3rem;
   font-weight: bold;
+  color: #333;
   display: block;
-  text-align: center;
+  margin-top: 1rem;
 }
 
-.quantity-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.btn-quantity {
-  width: 1.75rem;
-  height: 1.75rem;
-  border: none;
-  background-color: rgb(172, 60, 60);
-  color: white;
+.details-price {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   font-size: 1.5rem;
   font-weight: bold;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: rgb(184, 23, 23);
+  border-bottom: 2px solid #e0e0e0;
 }
 
-.btn-quantity:hover {
-  background-color: var(--yellow-color);
-  color: rgb(133, 92, 32);
+/* Ingredientes */
+.ingredients-text {
+  font-size: 1.2rem;
+  color: rgb(184, 23, 23);
+  padding-bottom: 2.5%;
+  margin-bottom: 2.5%;
+  margin-right: 2.5%;
+  border-bottom: 2px solid #e0e0e0;
 }
 
-.quantity-value {
+
+.arrow-icon {
   font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-  width: 2rem; /* Para alinhar bem o número */
-}
-
-.header .shopping-cart .box .ri-delete-bin-6-line {
-  font-size: 1rem; /* Tamanho do ícone da lixeira igual ao do botão */
-  color: white; /* Cor do ícone */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(172, 60, 60); /* Fundo igual ao do botão */
-  width: 1.75rem; /* Largura do botão */
-  height: 1.75rem; /* Altura do botão */
-  border-radius: 0.5rem;
   cursor: pointer;
+  margin-left: 10px;
+  /* Ajuste o espaço entre o título e a seta */
+  transition: transform 0.3s ease;
 }
 
-.header .shopping-cart .box .ri-delete-bin-6-line:hover {
-  background-color: var(--yellow-color);
-  color: rgb(133, 92, 32);
+.arrow-icon i {
+  font-size: 20px;
+  /* Define o tamanho do ícone */
+  color: #777777;
+  /* Cor do ícone (amarelo) */
 }
 
-.user-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease-in-out;
-}
-
-.user-btn:hover {
-  transform: scale(1.1);
-}
 
 .logout-icon {
-  width: 24px;
-  height: 24px;
-  filter: invert(100%); /* Deixa o ícone branco em fundo escuro */
-  margin-left:20px;
+  width: 2rem;
+  height: 2rem;
+  filter: invert(100%);
+  /* Deixa o ícone branco em fundo escuro */
 }
 
 /* Responsividade */
 @media screen and (max-width: 768px) {
+  .tw {
+    height: auto;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    color: white;
+  }
+
+  .card-text {
+    font-size: 0rem;
+    color: #ffcdcd;
+    margin-bottom: auto;
+  }
+
+  .grupo-card-container {
+    padding: 0px;
+    justify-content: center;
+  }
+
+  .tipo-titulo {
+    font-size: 2rem;
+    padding-left: 9%;
+  }
+
+  .details {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fundo semitransparente */
+    display: flex;
+    z-index: 9999;
+    padding: 20px;
+    overflow-x: hidden;
+    /* Previne a rolagem horizontal */
+    animation: animate__slideOutDown;
+    animation-duration: 2s;
+    /* don't forget to set a duration! */
+    width: 100%;
+    padding: 0%;
+    justify-content: flex-end; // fixar embaixo
+    align-items: flex-end; // fixar embaixo
+  }
+
+  .details-content {
+    background-color: #fff;
+    display: flex;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    position: relative;
+    overflow: auto;
+    /* Garante que não haja rolagem horizontal */
+    flex-direction: column;
+    width: 101%;
+    height: 85vh !important; // ocupa 80% da altura
+    overflow: hidden;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: #fff;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+
+    to {
+      transform: translateY(0%);
+    }
+  }
+
+  .left-side {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 15px;
+  }
+
+  .details-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .right-side {
+    width: 100%;
+    max-height: unset;
+    overflow: hidden;
+    padding-right: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .internal-content {
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .btn-add-to-cart {
+    position: sticky;
+    bottom: 0;
+    margin-top: auto;
+    width: 100%;
+    left: 0;
+    right: 0;
+    border-radius: 5px;
+  }
+
+  .details-title {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 10;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+  }
+
+
+
+  .details-img {
+    width: 60%;
+  }
+
+  .card-container {
+    justify-content: center;
+    /* Ajusta o alinhamento para que os cards ocupem 100% da largura no mobile */
+    justify-content: center;
+    padding: 0%;
+  }
+
+  .card {
+
+    flex-basis: 85%;
+    /* Cada card ocupa 100% da largura disponível (1 por linha no mobile) */
+    width: 90%;
+    /* Ajusta a largura para ocupar toda a linha */
+
+  }
+
+  .nav-text {
+    display: none;
+    /* Oculta o texto do menu em telas menores */
+  }
+
+
   #status-container {
-    
+
     align-items: center;
     gap: 4px;
     margin-right: 10px;
     padding: 6px 12px;
     border-radius: 8px;
+
     font-weight: bold;
     font-family: Arial, sans-serif;
     font-size: 14px;
     user-select: none;
     width: fit-content;
   }
-  
+
   .logout-icon {
     margin-left: 0.6rem;
     margin-right: 0.4rem;
@@ -620,27 +721,31 @@ body, main {
   }
 
   .header {
-      padding: 0% !important;
-      
+    padding: 0% !important;
+
   }
 
   .cart-footer {
-      padding: 0;
+    padding: 0;
   }
+
   .nav {
-      display: none; /* Oculta o menu de navegação em telas menores */
-      flex-direction: column;
-      position: absolute;
-      top: 100%; /* Exibe o menu abaixo do header */
-      right: 0;
-      background: rgb(172, 60, 60);
-      width: 100%;
-      transition: all 0.3s ease;
+    display: none;
+    /* Oculta o menu de navegação em telas menores */
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    /* Exibe o menu abaixo do header */
+    right: 0;
+    background: rgb(172, 60, 60);
+    width: 100%;
+    transition: all 0.3s ease;
   }
 
   .checkout-btn {
     margin: 0 !important;
   }
+
   .a {
     margin: 0 !important;
   }
@@ -654,16 +759,16 @@ body, main {
   }
 
   .nav.active {
-      display: flex; 
+    display: flex;
   }
 
   #menu-btn {
-      display: inline-block; 
+    display: inline-block;
   }
 
   .icons {
-      display: flex;
-      align-items: center;
+    display: flex;
+    align-items: center;
   }
 
   .cart-container {
@@ -680,73 +785,82 @@ body, main {
     overflow-x: hidden;
     /* Previne a rolagem horizontal */
     animation: animate__slideOutDown;
-    animation-duration: 2s; /* don't forget to set a duration! */
+    animation-duration: 2s;
+    /* don't forget to set a duration! */
     width: 100%;
     padding: 0%;
     justify-content: flex-end; // fixar embaixo
-    align-items: flex-end;     // fixar embaixo
+    align-items: flex-end; // fixar embaixo
   }
 
-  .header .shopping-cart{
-      background-color: #fff;
-      display: flex;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      box-sizing: border-box;
-      position: relative;
-      overflow: auto;
-  /* Garante que não haja rolagem horizontal */
-      right: 0%;
-      flex-direction: column;
-      width: 101%;
-      height: 85vh!important; // ocupa 80% da altura
-      overflow: hidden;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      background-color: #fff;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
-      animation: slideUp 0.3s ease-out;
+  .header .shopping-cart {
+    background-color: #fff;
+    display: flex;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    position: relative;
+    overflow: auto;
+    /* Garante que não haja rolagem horizontal */
+    right: 0%;
+    flex-direction: column;
+    width: 101%;
+    height: 85vh !important; // ocupa 80% da altura
+    overflow: hidden;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: #fff;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease-out;
   }
 
-  .img-cart{
+  .img-cart {
     border-radius: 10px;
     width: 30%;
-    height: auto;  
-    margin-right: 0.5rem;      
+    height: auto;
+    margin-right: 0.5rem;
   }
 
 
   .cart-badge {
     position: relative;
-    top: 0; /* Alinha no topo */
-    right: 0; /* Alinha à direita */
-    transform: translate(90%, -50%); /* Ajusta a posição para o canto superior direito */
+    top: 0;
+    /* Alinha no topo */
+    right: 0;
+    /* Alinha à direita */
+    transform: translate(90%, -50%);
+    /* Ajusta a posição para o canto superior direito */
     background-color: red;
     color: white;
     font-family: "Poppins", sans-serif;
-    font-size: 1rem; /* Reduz o tamanho da fonte */
+    font-size: 1rem;
+    /* Reduz o tamanho da fonte */
     font-weight: bold;
-    width: 1.5rem; /* Define a largura da bolinha */
-    height: 1.5rem; /* Define a altura da bolinha */
-    border-radius: 50%; /* Garante o formato circular */
+    width: 1.5rem;
+    /* Define a largura da bolinha */
+    height: 1.5rem;
+    /* Define a altura da bolinha */
+    border-radius: 50%;
+    /* Garante o formato circular */
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 2;
   }
-  
-  .header .shopping-cart .box{
+
+  .header .shopping-cart .box {
     display: flex;
     align-items: center;
     gap: 0rem;
     position: relative;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #ccc; /* Linha entre os lanches */
-  
+    border-bottom: 1px solid #ccc;
+    /* Linha entre os lanches */
+
   }
 
   .cart-content {
@@ -755,94 +869,124 @@ body, main {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    overflow-y: auto; /* Permite rolar apenas o conteúdo */
+    overflow-y: auto;
+    /* Permite rolar apenas o conteúdo */
     overflow-x: hidden;
     text-align: left;
   }
-  
+
   /* Estilos para o texto dos molhos */
   .sauce-text {
-    font-size: 14px; /* Tamanho de texto pequeno */
-    color: black; /* Cor do texto preta */
-    margin: 0px; /* Espaçamento entre os molhos */
-    text-align: left; /* Alinha o texto à esquerda */
-    word-break: break-word; /* Quebra a palavra se necessário para evitar overflow */
-    white-space: normal; /* Permite quebra de linha normal */
-    overflow-wrap: break-word; /* Garante que o texto será quebrado em palavras longas */
-    max-width: 100%; /* Impede que o texto ultrapasse o limite do contêiner */
+    font-size: 14px;
+    /* Tamanho de texto pequeno */
+    color: black;
+    /* Cor do texto preta */
+    margin: 0px;
+    /* Espaçamento entre os molhos */
+    text-align: left;
+    /* Alinha o texto à esquerda */
+    word-break: break-word;
+    /* Quebra a palavra se necessário para evitar overflow */
+    white-space: normal;
+    /* Permite quebra de linha normal */
+    overflow-wrap: break-word;
+    /* Garante que o texto será quebrado em palavras longas */
+    max-width: 100%;
+    /* Impede que o texto ultrapasse o limite do contêiner */
     list-style: none;
   }
-  
+
   .additionals-text {
-    font-size: 14px; /* Tamanho de texto pequeno */
-    color: black; /* Cor do texto preta */
-    margin: 0px; /* Espaçamento entre os molhos */
-    text-align: left; /* Alinha o texto à esquerda */
-    word-break: break-word; /* Quebra a palavra se necessário para evitar overflow */
-    white-space: normal; /* Permite quebra de linha normal */
-    overflow-wrap: break-word; /* Garante que o texto será quebrado em palavras longas */
-    max-width: 100%; /* Impede que o texto ultrapasse o limite do contêiner */
+    font-size: 14px;
+    /* Tamanho de texto pequeno */
+    color: black;
+    /* Cor do texto preta */
+    margin: 0px;
+    /* Espaçamento entre os molhos */
+    text-align: left;
+    /* Alinha o texto à esquerda */
+    word-break: break-word;
+    /* Quebra a palavra se necessário para evitar overflow */
+    white-space: normal;
+    /* Permite quebra de linha normal */
+    overflow-wrap: break-word;
+    /* Garante que o texto será quebrado em palavras longas */
+    max-width: 100%;
+    /* Impede que o texto ultrapasse o limite do contêiner */
     list-style: none;
   }
-  
-  
+
+
   /* Estilo para as observações */
   .observations-text {
-    font-size: 14px; /* Tamanho de texto pequeno */
-    color: black; /* Cor do texto preta */
-    text-align: left; /* Alinha o texto à esquerda */
-    word-break: break-word; /* Quebra a palavra se necessário para evitar overflow */
-    white-space: normal; /* Permite quebra de linha normal */
-    overflow-wrap: break-word; /* Garante que o texto será quebrado em palavras longas */
-    max-width: 100%; /* Impede que o texto ultrapasse o limite do contêiner */
+    font-size: 14px;
+    /* Tamanho de texto pequeno */
+    color: black;
+    /* Cor do texto preta */
+    text-align: left;
+    /* Alinha o texto à esquerda */
+    word-break: break-word;
+    /* Quebra a palavra se necessário para evitar overflow */
+    white-space: normal;
+    /* Permite quebra de linha normal */
+    overflow-wrap: break-word;
+    /* Garante que o texto será quebrado em palavras longas */
+    max-width: 100%;
+    /* Impede que o texto ultrapasse o limite do contêiner */
   }
-  
-  
-  .header .shopping-cart .box .content{
+
+
+  .header .shopping-cart .box .content {
     align-items: start;
   }
-  
-  .header .shopping-cart .box .content h3{
+
+  .header .shopping-cart .box .content h3 {
     align-items: start;
-    color:rgb(43, 43, 43);
+    color: rgb(43, 43, 43);
     font-size: 1.5rem;
-    text-align: left; /* Alinha o texto à esquerda */
-    white-space: normal; /* Permite que o texto quebre em várias linhas */
-    overflow: hidden; /* Garante que não haja overflow */
-    text-overflow: ellipsis; /* Adiciona '...' caso o texto ultrapasse o limite, se necessário */
+    text-align: left;
+    /* Alinha o texto à esquerda */
+    white-space: normal;
+    /* Permite que o texto quebre em várias linhas */
+    overflow: hidden;
+    /* Garante que não haja overflow */
+    text-overflow: ellipsis;
+    /* Adiciona '...' caso o texto ultrapasse o limite, se necessário */
   }
-  
-  .empty-cart-message{
-    color:rgb(43, 43, 43);
+
+  .empty-cart-message {
+    color: rgb(43, 43, 43);
     font-size: 1.25rem;
   }
-  
-  .header .shopping-cart .box .content span{
-    color:rgb(61, 61, 61);
+
+  .header .shopping-cart .box .content span {
+    color: rgb(61, 61, 61);
     font-size: 1.6rem;
   }
-  
-  .header .shopping-cart .box .content .sauce-text span{
-    font-size: 14px; /* Tamanho de texto pequeno */
-    color: black; /* Cor do texto preta */
+
+  .header .shopping-cart .box .content .sauce-text span {
+    font-size: 14px;
+    /* Tamanho de texto pequeno */
+    color: black;
+    /* Cor do texto preta */
   }
-  
-  .header .shopping-cart .box .content quantity{
+
+  .header .shopping-cart .box .content quantity {
     padding-left: 1rem;
   }
-  
-  .header .shopping-cart .btn{
+
+  .header .shopping-cart .btn {
     font-weight: bold;
     display: block;
     text-align: center;
   }
-  
+
   .quantity-controls {
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
-  
+
   .btn-quantity {
     width: 1.75rem;
     height: 1.75rem;
@@ -857,37 +1001,40 @@ body, main {
     justify-content: center;
     align-items: center;
   }
-  
+
   .btn-quantity:hover {
     background-color: var(--yellow-color);
     color: rgb(133, 92, 32);
   }
-  
+
   .quantity-value {
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
-    width: 2rem; /* Para alinhar bem o número */
+    width: 2rem;
+    /* Para alinhar bem o número */
   }
-  
+
   .header .shopping-cart .box .ri-delete-bin-6-line {
-    font-size: 1rem; /* Tamanho do ícone da lixeira igual ao do botão */
-    color: white; /* Cor do ícone */
+    font-size: 1rem;
+    /* Tamanho do ícone da lixeira igual ao do botão */
+    color: white;
+    /* Cor do ícone */
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(172, 60, 60); /* Fundo igual ao do botão */
-    width: 1.75rem; /* Largura do botão */
-    height: 1.75rem; /* Altura do botão */
+    background-color: rgb(172, 60, 60);
+    /* Fundo igual ao do botão */
+    width: 1.75rem;
+    /* Largura do botão */
+    height: 1.75rem;
+    /* Altura do botão */
     border-radius: 0.5rem;
     cursor: pointer;
   }
-  
+
   .header .shopping-cart .box .ri-delete-bin-6-line:hover {
     background-color: var(--yellow-color);
     color: rgb(133, 92, 32);
   }
 }
-
-
-

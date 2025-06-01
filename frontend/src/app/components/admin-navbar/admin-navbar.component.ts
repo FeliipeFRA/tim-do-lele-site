@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild, OnInit, HostListener, CUSTOM_ELEMENTS
 import { CommonModule } from '@angular/common';
 import { SiteStatusService } from 'app/service/site-status.service';
 import { RouterLink, Router } from '@angular/router';
+import { AdminCfgComponent } from '../admin-cfg/admin-cfg.component';
 
 @Component({
   selector: 'app-admin-navbar',
@@ -17,6 +18,10 @@ export class AdminNavbarComponent implements OnInit {
   role: string | null = '';
   activeTabIndex = 0;
   isMobile = false;
+  isPopupOpen = false;
+  modoSelecionado: 'aberto' | 'fechado' | 'automatico' = 'automatico';
+statusAtual: boolean = false; // Aberto (true) ou Fechado (false) real
+
 
   checkIsMobile() {
     this.isMobile = window.innerWidth <= 768;
@@ -26,6 +31,11 @@ export class AdminNavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarStatus();
+    
+    if (typeof window !== 'undefined') {
+      this.userName = localStorage.getItem('userId');
+      this.role = localStorage.getItem('role');
+    }
 
     
   }
@@ -36,7 +46,7 @@ export class AdminNavbarComponent implements OnInit {
     localStorage.removeItem('role');
 
     // Redireciona o usuário para a página de login
-    this.router.navigate(['/login']);  // Navega para a página de login
+    this.router.navigate(['/admin']);  // Navega para a página de login
   }
 
   carregarStatus(): void {
@@ -49,6 +59,34 @@ export class AdminNavbarComponent implements OnInit {
       }
     });
   }
+
+  setStatusAutomatico(): void {
+  this.siteStatusService.atualizarStatus(null).subscribe({
+    next: () => {
+      this.mensagemStatus = 'Status definido para Horário Padrão.';
+      this.siteAberto = null;
+
+      this.verificarStatusAutomatico(); // ✅ Checar imediatamente se está aberto ou fechado
+    },
+    error: () => {
+      this.mensagemStatus = 'Erro ao alterar status.';
+    }
+  });
+}
+
+
+verificarStatusAutomatico(): void {
+  this.siteStatusService.consultarStatus().subscribe({
+    next: (res) => {
+      this.siteAberto = res.aberto; // Se dentro do horário, retorna true, senão false
+    },
+    error: () => {
+      this.mensagemStatus = 'Erro ao verificar status automático.';
+    }
+  });
+}
+
+
 
   setStatusAberto(): void {
     this.siteStatusService.atualizarStatus(true).subscribe({
@@ -74,15 +112,18 @@ export class AdminNavbarComponent implements OnInit {
     });
   }
 
-  setStatusAutomatico(): void {
-    this.siteStatusService.atualizarStatus(null).subscribe({
-      next: () => {
-        this.siteAberto = null;
-        this.mensagemStatus = 'Status definido para Horário Padrão.';
-      },
-      error: () => {
-        this.mensagemStatus = 'Erro ao alterar status.';
-      }
-    });
+
+
+  onBackdropClick(event: Event): void {
+    this.closePopup();
+  }
+  
+  openPopupConfig(): void {
+    this.isPopupOpen = true;
+  }
+
+  closePopup(): void {
+    
+    this.isPopupOpen = false;
   }
 }

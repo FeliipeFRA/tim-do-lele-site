@@ -4,7 +4,8 @@
     <div class="grupo-card-container">
       <div *ngFor="let lanche of tipo.lanches" class="card" (click)="openPopup(lanche)" style="position: relative;">
         <div class="card-body">
-          <img [src]="getImagemPorIdOuTipo(lanche.ID, tipo.tipo)" alt="{{ lanche.NOME }}" class="img-fluid lanche-image" (error)="onImageError($event, tipo.tipo)"  />
+          <img [src]="getImagemPorIdOuTipo(lanche.ID, tipo.tipo)" alt="{{ lanche.NOME }}" class="img-fluid lanche-image"
+            (error)="onImageError($event, tipo.tipo)" />
           <div class="text-container">
             <h3 class="card-title">{{ lanche.NOME }}</h3>
             <p class="card-text">Ingredientes: {{ lanche.INGREDIENTES}}</p>
@@ -22,26 +23,27 @@
 
       <!-- Layout de Foto -->
       <div class="left-side">
-        <img [src]="getImagemPorIdOuTipo(selectedLanche!.ID, selectedLanche!.TIPO)" alt="{{ selectedLanche?.NOME }}" class="details-img" (error)="onImageError($event, selectedLanche!.TIPO)"/>
+        <img [src]="getImagemPorIdOuTipo(selectedLanche!.ID, selectedLanche!.TIPO)" alt="{{ selectedLanche?.NOME }}"
+          class="details-img" (error)="onImageError($event, selectedLanche!.TIPO)" />
         <p class="details-warning">* Imagem meramente ilustrativa</p>
       </div>
 
-      
+
       <!-- Right Side para Título e Conteúdo -->
       <div class="right-side">
         <!-- Título ficará na seção right-side-tittle -->
         <div class="right-side-top">
           <p>{{ selectedLanche?.NOME }}</p>
-          
+
         </div>
 
         <!-- Conteúdo com rolagem (molhos e observações) -->
         <div class="internal-content">
           <p class="details-price"> R${{ (selectedLanche!.PRECO).toFixed(2).replace('.', ',')}}</p>
           <h2 class="section_tittle">Ingredientes:</h2>
-          <p class="ingredients-text">{{ selectedLanche?.INGREDIENTES }}</p> 
+          <p class="ingredients-text">{{ selectedLanche?.INGREDIENTES }}</p>
           <!-- Opções de Molhos com rolagem -->
-          
+
           <h2 class="section_tittle">
             Molhos:
             <span (click)="toggleSaucesVisibility()" class="arrow-icon">
@@ -71,9 +73,10 @@
           <div class="additionals-section">
             <div *ngIf="isAdditionalsVisible">
               <div class="additionals-options">
-  
+
                 <label *ngFor="let Adicional of adicionais">
-                  <input type="checkbox" [checked]="Adicional.selected" (change)="toggleAdicional(Adicional)" /> <strong>R${{ Adicional.valor.toFixed(2).replace('.', ',') }}</strong>  - {{ Adicional.name }}
+                  <input type="checkbox" [checked]="Adicional.selected" (change)="toggleAdicional(Adicional)" />
+                  <strong>R${{ Adicional.valor.toFixed(2).replace('.', ',') }}</strong> - {{ Adicional.name }}
                 </label>
               </div>
             </div>
@@ -86,7 +89,7 @@
               <i class="fa" [ngClass]="isObservationsVisible ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
             </span>
           </h2>
-        
+
           <div class="observations-section">
             <div *ngIf="isObservationsVisible">
               <div class="textarea-container">
@@ -97,24 +100,27 @@
           </div>
         </div>
 
-        
+
 
         <div class="right-side-bottom">
           <div class="quantity-container">
-            <button class="quantity-btn" (click)="decreaseQuantity()">-</button>
+            <button class="quantity-btn" (click)="decreaseQuantity()" [disabled]="!siteAberto">-</button>
             <span class="quantity-display">{{ selectedLanche!.QUANTITY ?? 1}}</span>
-            <button class="quantity-btn" (click)="increaseQuantity()">+</button>
+            <button class="quantity-btn" (click)="increaseQuantity()" [disabled]="!siteAberto">+</button>
+
           </div>
           <div class="quantity-container">
             <div *ngIf="selectedLanche">
-              <button class="btn-add-to-cart" (click)="addToCart()">
+              <button class="btn-add-to-cart" (click)="addToCart()" [disabled]="!siteAberto"
+                [ngClass]="{ 'disabled-button': !siteAberto }">
                 Adicionar R$ {{ totalSelecionado.toFixed(2).replace('.', ',') }}
               </button>
+
             </div>
           </div>
-        </div> 
+        </div>
       </div>
-      
+
     </div>
   </div>
 </div>

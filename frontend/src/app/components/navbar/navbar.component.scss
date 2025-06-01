@@ -12,7 +12,7 @@
   padding: 0rem 5%;
   background: rgb(173, 0, 0);
   box-shadow: var(--box-shadow);
-  border-bottom:7px solid rgb(139, 0, 0);
+  border-bottom:7px solid var(--yellow-color);
 }
 /* Faixa branca fixa logo abaixo da navbar */
 .tabs-bar-fixed {
@@ -29,7 +29,7 @@
   font-family: "Poppins", sans-serif;
   position: fixed;
   margin-top: 63px;
-  z-index: 1000;
+  z-index: 900;
   background-color: rgb(139, 0, 0);
   border-bottom: 7px solid rgb(139, 0, 0);
 }
@@ -258,9 +258,9 @@ body, main {
 .checkout-btn{
   display: inline-block;
   padding: .8rem;
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   border-radius: .5rem;
-  background-color: rgb(187, 44, 44);;
+  background-color: rgb(139, 0, 0);
   color:#fff;
   cursor: pointer;
   margin: 0;
@@ -280,7 +280,7 @@ body, main {
 
 .search-form {
   position: absolute;
-  top: 120%;
+  top: 200%;
   right: -200%;
   width: 30rem;
   height: 2rem;
@@ -303,6 +303,10 @@ body, main {
       padding: 1 1rem;
   }
 
+  &.active {
+  right: 1%;
+}
+
   label {
       font-size: 1.5rem;
       padding-right: 1rem;
@@ -314,6 +318,7 @@ body, main {
       }
   }
 }
+
 
 .header .shopping-cart{
   align-items: center;
@@ -526,7 +531,7 @@ body, main {
   width: 1.75rem;
   height: 1.75rem;
   border: none;
-  background-color: rgb(172, 60, 60);
+  background-color: rgb(139, 0, 0);
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
@@ -555,7 +560,7 @@ body, main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(172, 60, 60); /* Fundo igual ao do botão */
+  background-color: rgb(139, 0, 0); /* Fundo igual ao do botão */
   width: 1.75rem; /* Largura do botão */
   height: 1.75rem; /* Altura do botão */
   border-radius: 0.5rem;
@@ -591,6 +596,23 @@ body, main {
 
 /* Responsividade */
 @media screen and (max-width: 768px) {
+  .search-form {
+    position: fixed;
+    top: 15%;
+    right: -200%;
+    width: 20rem;
+    height: 2rem;
+    background: #fff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+    transition: right 0.3s linear;
+    z-index: 1015;
+  }
+
+
   #status-container {
     
     align-items: center;
@@ -620,7 +642,7 @@ body, main {
 
   .header {
       padding: 0% !important;
-      
+      overflow: hidden;
   }
 
   .cart-footer {
@@ -632,7 +654,7 @@ body, main {
       position: absolute;
       top: 100%; /* Exibe o menu abaixo do header */
       right: 0;
-      background: rgb(172, 60, 60);
+      background: rgb(139, 0, 0);
       width: 100%;
       transition: all 0.3s ease;
   }
@@ -666,20 +688,20 @@ body, main {
   }
 
   .cart-container {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  
+ 
+
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     /* Fundo semitransparente */
     z-index: 9999;
     display: flex;
     padding: 20px;
-    overflow-x: hidden;
+    position: fixed;;
     /* Previne a rolagem horizontal */
     animation: animate__slideOutDown;
     animation-duration: 2s; /* don't forget to set a duration! */
+    height: 100%;
     width: 100%;
     padding: 0%;
     justify-content: flex-end; // fixar embaixo
@@ -687,13 +709,16 @@ body, main {
   }
 
   .header .shopping-cart{
+      align-items: center;
       background-color: #fff;
       display: flex;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       box-sizing: border-box;
-      position: relative;
+      top:auto;
+      bottom: 0;
+      position: absolute;
       overflow: auto;
   /* Garante que não haja rolagem horizontal */
       right: 0%;
@@ -846,7 +871,7 @@ body, main {
     width: 1.75rem;
     height: 1.75rem;
     border: none;
-    background-color: rgb(172, 60, 60);
+    background-color: rgb(139, 0, 0);
     color: white;
     font-size: 1.5rem;
     font-weight: bold;
@@ -875,7 +900,7 @@ body, main {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(172, 60, 60); /* Fundo igual ao do botão */
+    background-color: rgb(139, 0, 0); /* Fundo igual ao do botão */
     width: 1.75rem; /* Largura do botão */
     height: 1.75rem; /* Altura do botão */
     border-radius: 0.5rem;

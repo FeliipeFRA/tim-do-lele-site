@@ -3,13 +3,20 @@
 
     <div class="logo-text">
         <img class="logo" src="assets/img/logo-tim-header.png">
-    
+
     </div>
 
 
+    <div class="nav-text">
+        <p> Admin - Tim do Lelê </p>
+    </div>
 
 
     <div class="icons">
+
+
+
+
         <div id="status-container" [ngClass]="siteAberto ? 'aberto' : 'fechado'">
 
             <span class="status-text">{{ siteAberto ? 'Aberto' : 'Fechado' }}</span>
@@ -17,7 +24,11 @@
 
         </div>
 
-        
+        <button class="config-btn" (click)="openPopupConfig()">
+            <i class="ri-settings-5-fill"></i>
+        </button>
+
+
         <button *ngIf="userName" (click)="logout()" class="user-btn">
             <img src="assets/img/logout_icon.webp" alt="Logout" class="logout-icon" />
         </button> <!-- Exibe o botão de logout se o usuário estiver logado -->
@@ -25,3 +36,67 @@
 
 
 </header>
+
+<div class="details" *ngIf="isPopupOpen" (click)="onBackdropClick($event)">
+    <div class="details-content" (click)="$event.stopPropagation()">
+        <span class="close-button" (click)="closePopup()">&times;</span>
+
+
+
+        <!-- Título ficará na seção right-side-tittle -->
+        <div class="right-side-top">
+            <p>Configurações</p>
+
+        </div>
+
+        <!-- Conteúdo com rolagem (molhos e observações) -->
+        <div class="internal-content">
+
+            <h2 class="section_tittle">
+                Funcionamento do Site:
+            </h2>
+
+            <div class="tw">
+                <div class="tw-toggle">
+                    <input type="radio" name="toggle" value="false" id="fechado" (click)="setStatusFechado()"
+                        [checked]="siteAberto === false">
+                    <label for="fechado"><i class="ri-shut-down-line"></i></label>
+
+                    <input type="radio" name="toggle" value="-1" id="automatico" (click)="setStatusAutomatico()"
+                        [checked]="siteAberto === null">
+                    <label for="automatico"><i class="ri-24-hours-line"></i></label>
+
+                    <input type="radio" name="toggle" value="true" id="aberto" (click)="setStatusAberto()"
+                        [checked]="siteAberto === true">
+                    <label for="aberto"><i class="ri-check-fill"></i></label>
+
+                    <span></span>
+                </div>
+
+            </div>
+
+
+            <div class="status-container"> 
+                    <div id="status-container" [ngClass]="siteAberto ? 'aberto' : 'fechado'">
+            <span class="status-text">{{ siteAberto ? 'Aberto' : 'Fechado' }}</span>
+            <span class="status-icone"><i class="ri-time-line"></i></span>
+            </div>
+            </div>
+            
+            
+
+            <h2 class="section_tittle">
+                Definir Horário de Funcionamento:
+            </h2>
+            <p>(Em breve)</p>
+
+            <h2 class="section_tittle">
+                Editar Cardápio:
+            </h2>
+            <p>(Em breve)</p>
+
+
+
+        </div>
+
+    </div>
