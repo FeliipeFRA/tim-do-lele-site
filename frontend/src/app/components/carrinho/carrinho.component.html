@@ -1,12 +1,23 @@
 <app-navbar-checkout></app-navbar-checkout>
 
 <div class="checkout">
+  <div class="checkout-time">
+    <h1 class="checkout-title">Horário de Retirada</h1>
+    <p class="checkout-subtitle">Escolha um horário para retirar seu pedido:</p>
+
+   <!-- IMPLEMENTAR SELEÇÃO DE HORÁRIO -->
+
+
+  </div>
+
   <div class="container">
     <!-- Exibindo os itens do carrinho -->
+
+
     <div *ngFor="let item of cartItems" class="product-card">
       <!-- Imagem do produto -->
       <img [src]="getImagemPorIdOuTipo(item.ID, item.TIPO)" alt="{{ item.NOME }}" class="product-image"
-                            (error)="onImageError($event, item.TIPO)" />
+        (error)="onImageError($event, item.TIPO)" />
 
       <div class="product-details">
         <!-- Nome do produto -->
@@ -18,7 +29,7 @@
         <!-- Preço do produto -->
         <p class="product-price">R$ {{ formatarPrecoTotalItem(item) }}</p>
 
-  
+
 
         <!-- Exibição de Molhos -->
         <div *ngIf="item.sauces && item.sauces.length > 0" class="sauce-text">
@@ -46,20 +57,22 @@
     </div>
 
   </div>
-  <div class = bottom-container>
+  <div class=bottom-container>
     <div class="total">
-      <h3>Total: R$ {{ total.toFixed(2).replace('.', ',') }}</h3>
+      <p><strong>Total:</strong> R$ {{ total.toFixed(2).replace('.', ',') }}</p>
+      <p><strong>Horário de Retirada:</strong></p>
     </div>
   </div>
- 
+
 </div>
 
 <footer class="footer">
   <div class="footer-container">
     <!-- Botões para Retirar no Local e Pagamento via PIX -->
     <div class="footer-buttons">
-      <button class="btn-footer" >Pagamento no Local <i class="ri-bank-card-line"></i></button>
-      <button class="btn-footer" >Pagamento via PIX <i class="ri-money-dollar-box-line"></i></button>
+      <button class="btn-footer">Pagamento no Local <i class="ri-bank-card-line"></i></button>
+      <!-- Botão para Pagamento via PIX <button class="btn-footer" >Pagamento via PIX <i class="ri-money-dollar-box-line"></i></button> -->
+
     </div>
   </div>
 </footer>

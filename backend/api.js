@@ -26,7 +26,7 @@ const {CriptografarSenha} = require('./services/cipher.js')
 const passport = require('./services/passport-config.js')
 
 const horariosPadrao = [
-  { inicio: "19:00", fim: "20:00" },
+  { inicio: "19:10", fim: "20:20" },
   { inicio: "21:30", fim: "22:00" }
 ];
 

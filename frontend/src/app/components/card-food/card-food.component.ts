@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, HostListener} from '@angular/core';
 import { GetFoodService } from 'app/service/get-food.service';
 import { CartService } from 'app/service/cart.service';
 import { Food } from 'app/models/Food.model';
 import { CommonModule } from '@angular/common';
-
+import { RouterLink, Router } from '@angular/router';
+import { SiteStatusService } from 'app/service/site-status.service';
 
 @Component({
   selector: 'app-card-food',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './card-food.component.html',
   styleUrls: ['./card-food.component.scss'],
 })
@@ -21,6 +22,7 @@ export class CardFoodComponent implements OnInit {
   isSaucesVisible = true;
   isAdditionalsVisible = true;
   isObservationsVisible = true;
+  siteAberto: boolean = true;  // padrão aberto
   // Propriedade para controlar a exibição das opções de molhos
   isSauceOpen = false;
   adicionais: { name: string; valor: number; selected: boolean }[] = [];
@@ -33,7 +35,7 @@ export class CardFoodComponent implements OnInit {
     { name: 'Pimenta', selected: false },
   ];
 
-  constructor(private getFood: GetFoodService, private cartService: CartService) {}
+  constructor(private getFood: GetFoodService, private cartService: CartService, private siteStatusService: SiteStatusService) {}
 
   ngOnInit(): void {
     this.getFood.getDataFood().subscribe(data => {
@@ -58,6 +60,20 @@ export class CardFoodComponent implements OnInit {
         imagem: this.getImagemPorTipo(tipo)  // Associar imagem ao tipo
       }));
     });
+
+    this.siteStatusService.consultarStatus().subscribe({
+      next: (res) => {
+        console.log('Resposta site-status:', res);
+        this.siteAberto = res.aberto;
+      },
+      error: (err) => {
+        console.error('Erro ao consultar status do site:', err);
+        this.siteAberto = true; // se erro, liberar por padrão
+      }
+    });
+
+    
+  
 
     this.getFood.GetDataAdditionals().subscribe(adds => {
       this.adicionais = adds.map(a => ({

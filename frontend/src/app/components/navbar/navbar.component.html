@@ -6,7 +6,7 @@
         <P (click)="scrollToTop()">Tim do Lelê</P>
     </div>
 
-     
+
 
     <div class="icons">
         <div id="status-container" [ngClass]="siteAberto ? 'aberto' : 'fechado'">
@@ -21,7 +21,7 @@
         <div class="ri-shopping-cart-line" id="cart-btn" id="cart-btn" (click)="toggleCart()">
             <span *ngIf="totalItems > 0" class="cart-badge">{{ totalItems }}</span>
         </div>
-        <a href="/perfil">
+        <a routerLink="/perfil">
             <div class="ri-user-line" id="user-btn"></div>
         </a>
         <button *ngIf="userName" (click)="logout()" class="user-btn">
@@ -116,13 +116,9 @@
                 <ng-container *ngIf="cartItems.length > 0">
                     <div class="cart-footer">
                         <div class="total"><strong>Total:</strong> R$ {{ total.toFixed(2).replace('.', ',') }}</div>
-                        <a
-  *ngIf="siteAberto"
-  routerLink="/carrinho"
-  class="checkout-btn"
->
-  Finalizar Compra
-</a>
+                        <a *ngIf="siteAberto" routerLink="/carrinho" class="checkout-btn">
+                            Finalizar Compra
+                        </a>
                     </div>
                 </ng-container>
 

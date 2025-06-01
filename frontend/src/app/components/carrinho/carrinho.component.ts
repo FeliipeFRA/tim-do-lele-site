@@ -1,26 +1,33 @@
-import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { CartService } from 'app/service/cart.service';
 import { Food } from 'app/models/Food.model';
 import { RouterLink, Router } from '@angular/router';
 import { NavbarCheckoutComponent } from '../navbar-checkout/navbar-checkout.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+declare var timepicker: any;
 
 @Component({
   selector: 'app-carrinho',
   standalone: true,
-  imports: [CommonModule, RouterLink, NavbarCheckoutComponent],
+  imports: [CommonModule, FormsModule, RouterLink, NavbarCheckoutComponent, NgxMaterialTimepickerModule],
   templateUrl: './carrinho.component.html',
   styleUrls: ['./carrinho.component.scss'],
 })
-export class CarrinhoComponent implements OnInit {
+export class CarrinhoComponent implements OnInit, AfterViewInit {
   cartItems: Food[] = [];
   totalItems: number = 0;
   userName: string | null = '';
   role: string | null = '';
   private _total: number = 0; // Variável privada para armazenar o total
+  timepicker: any;
 
+  timeSlots: string[] = [];
+  horarioSelecionado: string = '';
   constructor(private cartService: CartService) {}
 
+  
   ngOnInit(): void {
     if (typeof window !== 'undefined') {
       this.userName = localStorage.getItem('userId');
@@ -32,6 +39,23 @@ export class CarrinhoComponent implements OnInit {
       this.updateTotal(); // Atualiza o total sempre que os itens do carrinho mudam
     });
   }
+
+  
+  ngAfterViewInit() {
+  timepicker('#horario', {
+    start: '19:30',
+    end: '22:00',
+    interval: 30,
+    theme: 'dark'
+  });
+}
+
+onHorarioChange(event: any) {
+  this.horarioSelecionado = event.target.value;
+  console.log('Horário selecionado:', this.horarioSelecionado);
+}
+
+  
 
   // Getter para a propriedade total
   get total(): number {
