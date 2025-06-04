@@ -14,13 +14,14 @@ import { AdminCfgComponent } from '../admin-cfg/admin-cfg.component';
 export class AdminNavbarComponent implements OnInit {
   siteAberto: boolean | null = null;
   mensagemStatus: string = '';
+  motivoStatus: string = '';
   userName: string | null = '';
   role: string | null = '';
   activeTabIndex = 0;
   isMobile = false;
   isPopupOpen = false;
   modoSelecionado: 'aberto' | 'fechado' | 'automatico' = 'automatico';
-statusAtual: boolean = false; // Aberto (true) ou Fechado (false) real
+ toggleMode: 'aberto' | 'fechado' | 'automatico' = 'automatico'; // Variável para controle do estado do toggle
 
 
   checkIsMobile() {
@@ -53,6 +54,13 @@ statusAtual: boolean = false; // Aberto (true) ou Fechado (false) real
     this.siteStatusService.consultarStatus().subscribe({
       next: (res) => {
         this.siteAberto = res.aberto;
+        this.motivoStatus = res.motivo;
+        
+        if (this.siteAberto === null) {
+          this.toggleMode = 'automatico';
+        } else {
+          this.toggleMode = this.siteAberto ? 'aberto' : 'fechado';
+        }
       },
       error: () => {
         this.mensagemStatus = 'Erro ao carregar status.';
@@ -65,8 +73,8 @@ statusAtual: boolean = false; // Aberto (true) ou Fechado (false) real
     next: () => {
       this.mensagemStatus = 'Status definido para Horário Padrão.';
       this.siteAberto = null;
-
-      this.verificarStatusAutomatico(); // ✅ Checar imediatamente se está aberto ou fechado
+      this.toggleMode = 'automatico'; 
+      this.verificarStatusAutomatico(); 
     },
     error: () => {
       this.mensagemStatus = 'Erro ao alterar status.';
@@ -78,7 +86,8 @@ statusAtual: boolean = false; // Aberto (true) ou Fechado (false) real
 verificarStatusAutomatico(): void {
   this.siteStatusService.consultarStatus().subscribe({
     next: (res) => {
-      this.siteAberto = res.aberto; // Se dentro do horário, retorna true, senão false
+      this.siteAberto = res.aberto; 
+      this.motivoStatus = res.motivo;
     },
     error: () => {
       this.mensagemStatus = 'Erro ao verificar status automático.';
@@ -92,7 +101,9 @@ verificarStatusAutomatico(): void {
     this.siteStatusService.atualizarStatus(true).subscribe({
       next: () => {
         this.siteAberto = true;
+        this.toggleMode = 'aberto';
         this.mensagemStatus = 'Status definido como Aberto.';
+        this.verificarStatusAutomatico();
       },
       error: () => {
         this.mensagemStatus = 'Erro ao alterar status.';
@@ -104,7 +115,9 @@ verificarStatusAutomatico(): void {
     this.siteStatusService.atualizarStatus(false).subscribe({
       next: () => {
         this.siteAberto = false;
+        this.toggleMode = 'fechado';
         this.mensagemStatus = 'Status definido como Fechado.';
+        this.verificarStatusAutomatico();
       },
       error: () => {
         this.mensagemStatus = 'Erro ao alterar status.';
