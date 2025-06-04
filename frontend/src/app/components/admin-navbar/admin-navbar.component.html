@@ -59,31 +59,34 @@
             <div class="tw">
                 <div class="tw-toggle">
                     <input type="radio" name="toggle" value="false" id="fechado" (click)="setStatusFechado()"
-                        [checked]="siteAberto === false">
+                        [checked]="toggleMode === 'fechado'">
                     <label for="fechado"><i class="ri-shut-down-line"></i></label>
 
                     <input type="radio" name="toggle" value="-1" id="automatico" (click)="setStatusAutomatico()"
-                        [checked]="siteAberto === null">
+                        [checked]="toggleMode === 'automatico'">
                     <label for="automatico"><i class="ri-24-hours-line"></i></label>
 
                     <input type="radio" name="toggle" value="true" id="aberto" (click)="setStatusAberto()"
-                        [checked]="siteAberto === true">
+                        [checked]="toggleMode === 'aberto'">
                     <label for="aberto"><i class="ri-check-fill"></i></label>
 
                     <span></span>
+                </div>
+            </div>
+
+
+            <div class="status-container">
+                <div id="status-container" [ngClass]="siteAberto ? 'aberto' : 'fechado'">
+                    <span class="status-text">{{ siteAberto ? 'Aberto' : 'Fechado' }}</span>
+                    <span class="status-icone"><i class="ri-time-line"></i></span>
+                </div>
+                <div *ngIf="motivoStatus" class="status-motivo">
+                    <p>({{ motivoStatus }})</p>
                 </div>
 
             </div>
 
 
-            <div class="status-container"> 
-                    <div id="status-container" [ngClass]="siteAberto ? 'aberto' : 'fechado'">
-            <span class="status-text">{{ siteAberto ? 'Aberto' : 'Fechado' }}</span>
-            <span class="status-icone"><i class="ri-time-line"></i></span>
-            </div>
-            </div>
-            
-            
 
             <h2 class="section_tittle">
                 Definir Horário de Funcionamento:

@@ -114,12 +114,12 @@ app.get('/api/site-status', async (req, res) => {
 
     if (override !== null) {
       console.log('Status: override admin', override);
-      return res.json({ aberto: override, motivo: 'override admin' });
+      return res.json({ aberto: override, motivo: 'Forçado pelo admin' });
     }
 
     const abertoAgora = horariosPadrao.some(h => estaNoIntervalo(agora, h.inicio, h.fim));
     console.log('Status: horário padrão', abertoAgora);
-    res.json({ aberto: abertoAgora, motivo: 'horário padrão' });
+    res.json({ aberto: abertoAgora, motivo: 'Horário padrão definido' });
   } catch (error) {
     console.error('Erro ao buscar status:', error);
     res.status(500).json({ message: 'Erro ao buscar status' });
