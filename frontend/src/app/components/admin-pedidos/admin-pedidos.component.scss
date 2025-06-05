@@ -287,3 +287,102 @@
     padding: 1rem 0.5rem;
   }
 }
+
+.status-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: flex-start;
+  margin-top: 2rem;
+}
+.status-group {
+  min-width: 350px;
+  max-width: 500px;
+  flex: 1 1 350px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  padding: 1.2rem 1.5rem 2rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.status-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 1.2rem;
+  padding: 0.3rem 1rem;
+  border-radius: 12px;
+  display: inline-block;
+}
+.status-pendente.status-title {
+  background: #fff3cd;
+  color: #856404;
+}
+.status-pronto.status-title {
+  background: #d4edda;
+  color: #155724;
+}
+.status-entregue.status-title {
+  background: #b2f2bb;
+  color: #155724;
+}
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 9999;
+  animation: fadeInUp 0.3s;
+}
+.btn-undo {
+  background: #ffe082;
+  color: #8a2c2c;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-undo:hover {
+  background: #ffd54f;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px) translateX(-50%); }
+  to { opacity: 1; transform: translateY(0) translateX(-50%); }
+}
+
+.date-filter-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+.date-filter-container label {
+  font-weight: bold;
+  color: #8a2c2c;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.date-filter-container input[type="date"] {
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1.1rem;
+  background: #fff;
+  color: #333;
+}
+.date-filter-container input[type="date"]:focus {
+  outline: 2px solid #8a2c2c;
+}

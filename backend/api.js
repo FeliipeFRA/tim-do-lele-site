@@ -285,7 +285,11 @@ console.log('Requisição POST /api/site-status body:', req.body);
 app.get('/pedidos', async (req, res) => {
     //Endpoint responsável pelos pedidos
     try{
-        const pedidos = await ConsultarPedidos();
+        const dataFiltro = req.query.data;
+        let pedidos = await ConsultarPedidos();
+        if (dataFiltro) {
+            pedidos = pedidos.filter(p => p.DataPedido === dataFiltro);
+        }
         res.status(200).json(pedidos);
     }
     catch(erro){

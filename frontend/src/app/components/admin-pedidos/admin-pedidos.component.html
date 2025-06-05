@@ -2,31 +2,48 @@
 <div class="admin_background">
   <div class="orders-section">
     <h3 class="orders-title">Últimos Pedidos</h3>
-    <div class="cards-container">
-      <div *ngFor="let pedido of rowData" class="pedido-card">
-        <div class="pedido-header">
-          <div class="pedido-user"><i class="ri-user-3-line"></i> {{ pedido.NomeUsuario }}</div>
-          <div class="pedido-status" [ngClass]="{'status-pendente': pedido.StatusPedido === 'Pendente', 'status-pronto': pedido.StatusPedido === 'Pronto', 'status-entregue': pedido.StatusPedido === 'Entregue'}">
-            {{ pedido.StatusPedido }}
+    <div class="date-filter-container">
+      <label for="data-pedidos"><i class="ri-calendar-line"></i> Escolha a data:</label>
+      <input id="data-pedidos" type="date" [value]="dataSelecionada" (change)="onDataChange($event)" />
+    </div>
+    <div class="status-groups">
+      <div *ngFor="let status of statusList" class="status-group">
+        <h4 class="status-title" [ngClass]="{
+          'status-pendente': status === 'Pendente',
+          'status-pronto': status === 'Pronto',
+          'status-entregue': status === 'Entregue'
+        }">{{ status }}</h4>
+        <div class="cards-container">
+          <div *ngFor="let pedido of pedidosAgrupados[status]" class="pedido-card">
+            <div class="pedido-header">
+              <div class="pedido-user"><i class="ri-user-3-line"></i> {{ pedido.NomeUsuario }}</div>
+              <div class="pedido-status" [ngClass]="{'status-pendente': pedido.StatusPedido === 'Pendente', 'status-pronto': pedido.StatusPedido === 'Pronto', 'status-entregue': pedido.StatusPedido === 'Entregue'}">
+                {{ pedido.StatusPedido }}
+              </div>
+            </div>
+            <div class="pedido-info">
+              <div><b>ID Pedido:</b> {{ pedido.PedidoID }}</div>
+              <div><b>Data:</b> {{ pedido.DataPedido }}</div>
+              <div><b>Horário:</b> {{ pedido.HorarioReserva }}</div>
+            </div>
+            <div class="pedido-itens">
+              <div class="item-nome"><b>Lanche:</b> {{ pedido.NomeLanche }}</div>
+              <div><b>Quantidade:</b> {{ pedido.Quantidade }}</div>
+              <div *ngIf="pedido.Molhos"><b>Molhos:</b> {{ pedido.Molhos }}</div>
+              <div *ngIf="pedido.Adicionais"><b>Adicionais:</b> {{ pedido.Adicionais }}</div>
+              <div *ngIf="pedido.Observacoes"><b>Observações:</b> {{ pedido.Observacoes }}</div>
+            </div>
+            <div class="pedido-actions">
+              <button *ngIf="pedido.StatusPedido === 'Pendente'" class="btn-pronto" (click)="atualizarStatusPedido(pedido.PedidoID, 'Pronto')">Marcar como Pronto</button>
+              <button *ngIf="pedido.StatusPedido === 'Pronto'" class="btn-entregue" (click)="atualizarStatusPedido(pedido.PedidoID, 'Entregue')">Marcar como Entregue</button>
+            </div>
           </div>
         </div>
-        <div class="pedido-info">
-          <div><b>ID Pedido:</b> {{ pedido.PedidoID }}</div>
-          <div><b>Data:</b> {{ pedido.DataPedido }}</div>
-          <div><b>Horário:</b> {{ pedido.HorarioReserva }}</div>
-        </div>
-        <div class="pedido-itens">
-          <div class="item-nome"><b>Lanche:</b> {{ pedido.NomeLanche }}</div>
-          <div><b>Quantidade:</b> {{ pedido.Quantidade }}</div>
-          <div *ngIf="pedido.Molhos"><b>Molhos:</b> {{ pedido.Molhos }}</div>
-          <div *ngIf="pedido.Adicionais"><b>Adicionais:</b> {{ pedido.Adicionais }}</div>
-          <div *ngIf="pedido.Observacoes"><b>Observações:</b> {{ pedido.Observacoes }}</div>
-        </div>
-        <div class="pedido-actions">
-          <button *ngIf="pedido.StatusPedido === 'Pendente'" class="btn-pronto" (click)="atualizarStatusPedido(pedido.PedidoID, 'Pronto')">Marcar como Pronto</button>
-          <button *ngIf="pedido.StatusPedido === 'Pronto'" class="btn-entregue" (click)="atualizarStatusPedido(pedido.PedidoID, 'Entregue')">Marcar como Entregue</button>
-        </div>
       </div>
+    </div>
+    <div class="toast" *ngIf="showToast">
+      <span>{{ toastMsg }}</span>
+      <button *ngIf="pedidoBackup" class="btn-undo" (click)="desfazerUltimaAcao()">Desfazer</button>
     </div>
   </div>
 </div>
