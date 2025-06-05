@@ -1,0 +1,24 @@
+﻿
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : [{"PedidoID":1,"NomeUsuario":"Felipe Ferreira","DataPedido":"2025-05-14 18:19:18","HorarioReserva":"21:00","StatusPedido":"P
+                    endente","NomeLanche":null,"Quantidade":1,"TipoItem":"LANCHE","Molhos":""},{...
+RawContent        : HTTP/1.1 200 OK
+                    Access-Control-Allow-Origin: http://localhost:4200
+                    Vary: Origin
+                    Connection: keep-alive
+                    Keep-Alive: timeout=5
+                    Content-Length: 2282
+                    Content-Type: application/json; charset=utf-8
+                    D...
+Forms             : {}
+Headers           : {[Access-Control-Allow-Origin, http://localhost:4200], [Vary, Origin], [Connection, keep-alive], [Keep-Alive, timeout=5]...}
+Images            : {}
+InputFields       : {}
+Links             : {}
+ParsedHtml        : System.__ComObject
+RawContentLength  : 2282
+
+
+

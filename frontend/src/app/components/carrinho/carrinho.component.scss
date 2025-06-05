@@ -213,6 +213,31 @@ app-navbar-checkout {
   color: rgb(133, 92, 32);
 }
 
+/* Mensagens de erro e sucesso */
+.mensagem-erro {
+  color: #b00020;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.mensagem-sucesso {
+  color: #388e3c;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Input de horário */
+.input-horario {
+  width: 200px;
+  padding: 8px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
 /* Responsividade - Ajustes para telas menores */
 @media screen and (max-width: 767px) {
 

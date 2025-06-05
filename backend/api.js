@@ -12,6 +12,7 @@ const {ConsultarPedidos} = require('./query_banco/consulta_pedidos.js')
 const {ConsultarAdicionais} = require('./query_banco/consulta_adicionais.js')
 const {verificarEmailExistenteNoBanco } = require('./query_banco/verificar_email.js');
 const { buscarOverrideNoBanco, salvarOverrideNoBanco } = require('./query_banco/configuracoes.js');
+const { inserirPedidoCompleto } = require('./query_banco/inserir_pedido');
 
 //rota de pagamentos
 const pagamento = require('./routes/pagamentos/pagamento.js');
@@ -40,7 +41,7 @@ const PORT = process.env.PORT || 8000;
 app.use(cors({
     // Cors serve para conectar portas diferentes
     origin: 'http://localhost:4200', 
-    methods: ['GET', 'POST', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization','x-user-role'], 
   }));
   
@@ -284,7 +285,11 @@ console.log('Requisição POST /api/site-status body:', req.body);
 app.get('/pedidos', async (req, res) => {
     //Endpoint responsável pelos pedidos
     try{
-        const pedidos = await ConsultarPedidos();
+        const dataFiltro = req.query.data;
+        let pedidos = await ConsultarPedidos();
+        if (dataFiltro) {
+            pedidos = pedidos.filter(p => p.DataPedido === dataFiltro);
+        }
         res.status(200).json(pedidos);
     }
     catch(erro){
@@ -301,6 +306,58 @@ app.post('/pagamentos/pix', async (req, res) =>{
 
     }
 })
+
+app.post('/finalizar-pedido', async (req, res) => {
+    try {
+        const { userId, itens, horarioReserva } = req.body;
+        if (!userId || !Array.isArray(itens) || itens.length === 0 || !horarioReserva) {
+            return res.status(400).json({ message: 'Dados do pedido incompletos.' });
+        }
+        const resultado = await inserirPedidoCompleto(userId, itens, horarioReserva);
+        res.status(200).json({ message: 'Pedido finalizado com sucesso!', ...resultado });
+    } catch (error) {
+        console.error('Erro ao finalizar pedido:', error);
+        res.status(500).json({ message: 'Erro ao finalizar pedido.' });
+    }
+});
+
+// Endpoint de debug para listar molhos de um item específico
+app.get('/debug/molhos/:pedidoItemId', async (req, res) => {
+    const pedidoItemId = req.params.pedidoItemId;
+    const db = require('./query_banco/config_banco').ConfigBanco();
+    db.all(`SELECT * FROM PEDIDOS_ITENS_MOLHOS WHERE PEDIDO_ITEM_ID = ?`, [pedidoItemId], (err, rows) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(rows);
+    });
+});
+
+// Endpoint de debug para listar todos os itens de pedido
+app.get('/debug/pedidos-itens', async (req, res) => {
+    const db = require('./query_banco/config_banco').ConfigBanco();
+    db.all(`SELECT * FROM PEDIDOS_ITENS`, (err, rows) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(rows);
+    });
+});
+
+app.put('/pedidos/:pedidoId/status', async (req, res) => {
+    const pedidoId = req.params.pedidoId;
+    const { status } = req.body;
+    if (!pedidoId || !status) {
+        return res.status(400).json({ message: 'Dados insuficientes.' });
+    }
+    const db = require('./query_banco/config_banco').ConfigBanco();
+    db.run('UPDATE PEDIDOS SET STATUS = ? WHERE ID = ?', [status, pedidoId], function (err) {
+        if (err) {
+            return res.status(500).json({ message: 'Erro ao atualizar status.' });
+        }
+        res.json({ message: 'Status atualizado com sucesso!' });
+    });
+});
 
 // Frontend
 app.use(express.static(path.join(__dirname, 'public', 'browser')));

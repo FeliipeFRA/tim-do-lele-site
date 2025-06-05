@@ -13,4 +13,8 @@ export class GetPedidosService {
   getPedidos(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
+
+  getPedidosPorData(data: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}?data=${data}`);
+  }
 }
