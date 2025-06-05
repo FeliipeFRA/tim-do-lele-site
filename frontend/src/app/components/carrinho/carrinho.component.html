@@ -4,10 +4,7 @@
   <div class="checkout-time">
     <h1 class="checkout-title">Horário de Retirada</h1>
     <p class="checkout-subtitle">Escolha um horário para retirar seu pedido:</p>
-
-   <!-- IMPLEMENTAR SELEÇÃO DE HORÁRIO -->
-
-
+    <input id="horario" type="time" [(ngModel)]="horarioSelecionado" name="horario" placeholder="Selecione o horário" class="input-horario" min="19:00" max="22:00" step="1800" />
   </div>
 
   <div class="container">
@@ -60,7 +57,7 @@
   <div class=bottom-container>
     <div class="total">
       <p><strong>Total:</strong> R$ {{ total.toFixed(2).replace('.', ',') }}</p>
-      <p><strong>Horário de Retirada:</strong></p>
+      <p><strong>Horário de Retirada:</strong> {{ horarioSelecionado }}</p>
     </div>
   </div>
 
@@ -68,11 +65,14 @@
 
 <footer class="footer">
   <div class="footer-container">
-    <!-- Botões para Retirar no Local e Pagamento via PIX -->
     <div class="footer-buttons">
-      <button class="btn-footer">Pagamento no Local <i class="ri-bank-card-line"></i></button>
-      <!-- Botão para Pagamento via PIX <button class="btn-footer" >Pagamento via PIX <i class="ri-money-dollar-box-line"></i></button> -->
-
+      <button class="btn-footer" (click)="finalizarPedido()" [disabled]="isLoading || pedidoFinalizado || cartItems.length === 0">
+        <span *ngIf="!isLoading && !pedidoFinalizado">Pagamento no Local <i class="ri-bank-card-line"></i></span>
+        <span *ngIf="isLoading">Enviando pedido...</span>
+        <span *ngIf="pedidoFinalizado">Pedido Finalizado!</span>
+      </button>
     </div>
+    <div *ngIf="mensagemErro" class="mensagem-erro">{{ mensagemErro }}</div>
+    <div *ngIf="mensagemSucesso" class="mensagem-sucesso">{{ mensagemSucesso }}</div>
   </div>
 </footer>

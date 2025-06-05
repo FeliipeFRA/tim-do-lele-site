@@ -30,7 +30,7 @@ export class AdminPedidosComponent implements OnInit {
 
   columnDefs: ColDef[] = [
     { field: 'NomeUsuario', headerName: 'Nome do Usuário', flex: 2, floatingFilter: true, filter: true },
-    { field: 'NomeItem', headerName: 'Lanche Pedido', flex: 3, floatingFilter: true },
+    { field: 'NomeLanche', headerName: 'Lanche Pedido', flex: 3, floatingFilter: true },
     { field: 'Quantidade', headerName: 'Quantidade', flex: 1, floatingFilter: true },
     { field: 'Molhos', headerName: 'Molhos', flex: 2, floatingFilter: true },
     { field: 'StatusPedido', headerName: 'Status do Pedido', flex: 2, floatingFilter: true },
@@ -105,7 +105,7 @@ export class AdminPedidosComponent implements OnInit {
         console.log('Pedidos recebidos:', pedidos);  // Verifique se os dados estão sendo recebidos
         this.rowData = pedidos.map((pedido: any) => ({
           NomeUsuario: pedido.NomeUsuario,
-          NomeItem: pedido.NomeItem,
+          NomeLanche: pedido.NomeLanche,
           Quantidade: pedido.Quantidade,
           Molhos: pedido.Molhos,
           StatusPedido: pedido.StatusPedido,

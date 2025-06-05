@@ -6,12 +6,13 @@ import { Food } from 'app/models/Food.model';
 import { RouterLink, Router } from '@angular/router';
 import { NavbarCheckoutComponent } from '../navbar-checkout/navbar-checkout.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 declare var timepicker: any;
 
 @Component({
   selector: 'app-carrinho',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, NavbarCheckoutComponent, NgxMaterialTimepickerModule],
+  imports: [CommonModule, FormsModule, RouterLink, NavbarCheckoutComponent, NgxMaterialTimepickerModule, HttpClientModule],
   templateUrl: './carrinho.component.html',
   styleUrls: ['./carrinho.component.scss'],
 })
@@ -25,7 +26,12 @@ export class CarrinhoComponent implements OnInit, AfterViewInit {
 
   timeSlots: string[] = [];
   horarioSelecionado: string = '';
-  constructor(private cartService: CartService) {}
+  isLoading = false;
+  pedidoFinalizado = false;
+  mensagemErro = '';
+  mensagemSucesso = '';
+
+  constructor(private cartService: CartService, private http: HttpClient, private router: Router) {}
 
   
   ngOnInit(): void {
@@ -51,8 +57,16 @@ export class CarrinhoComponent implements OnInit, AfterViewInit {
 }
 
 onHorarioChange(event: any) {
-  this.horarioSelecionado = event.target.value;
-  console.log('Horário selecionado:', this.horarioSelecionado);
+  const value = event.target.value;
+  // Aceita apenas formato HH:MM (24h)
+  const regex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+  if (regex.test(value)) {
+    this.horarioSelecionado = value;
+    this.mensagemErro = '';
+  } else {
+    this.horarioSelecionado = '';
+    this.mensagemErro = 'Horário inválido. Use o formato HH:MM.';
+  }
 }
 
   
@@ -130,5 +144,37 @@ onHorarioChange(event: any) {
       );
       return sum + precoBase + precoAdd;
     }, 0);
+  }
+
+  async finalizarPedido() {
+    this.isLoading = true;
+    this.mensagemErro = '';
+    this.mensagemSucesso = '';
+    try {
+      const userId = localStorage.getItem('userId');
+      if (!userId) {
+        this.mensagemErro = 'Usuário não autenticado.';
+        this.isLoading = false;
+        return;
+      }
+      if (!this.horarioSelecionado) {
+        this.mensagemErro = 'Selecione um horário de retirada válido (HH:MM).';
+        this.isLoading = false;
+        return;
+      }
+      const response: any = await this.http.post('http://localhost:8000/finalizar-pedido', {
+        userId: Number(userId),
+        itens: this.cartItems,
+        horarioReserva: this.horarioSelecionado
+      }).toPromise();
+      this.mensagemSucesso = 'Pedido finalizado com sucesso! Total: R$ ' + (response.totalPedido || 0).toFixed(2).replace('.', ',');
+      this.pedidoFinalizado = true;
+      this.cartService.clearCart();
+      // Removido o redirecionamento para o perfil
+    } catch (error: any) {
+      this.mensagemErro = error?.error?.message || 'Erro ao finalizar pedido.';
+    } finally {
+      this.isLoading = false;
+    }
   }
 }
