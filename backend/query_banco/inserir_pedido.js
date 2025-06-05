@@ -17,8 +17,8 @@ async function inserirPedidoCompleto(userId, itens, horarioReserva) {
       // 1. Inserir na tabela PEDIDOS
       const dataAtual = new Date().toISOString();
       db.run(
-        `INSERT INTO PEDIDOS (USER_ID, DATA, HORARIO_RESERVA, STATUS) VALUES (?, ?, ?, ?)`,
-        [userId, dataAtual, horarioReserva, 'Pendente'],
+        `INSERT INTO PEDIDOS (USER_ID, DATA, HORARIO_RESERVA, STATUS, OBSERVACOES, ADICIONAIS) VALUES (?, ?, ?, ?, ?, ?)`,
+        [userId, dataAtual, horarioReserva, 'Pendente', (itens[0]?.observacoes || null), JSON.stringify(itens[0]?.additionals || [])],
         function (err) {
           if (err) {
             db.close();

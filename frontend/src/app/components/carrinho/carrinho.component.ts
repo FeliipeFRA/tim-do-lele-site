@@ -164,7 +164,11 @@ onHorarioChange(event: any) {
       }
       const response: any = await this.http.post('http://localhost:8000/finalizar-pedido', {
         userId: Number(userId),
-        itens: this.cartItems,
+        itens: this.cartItems.map(item => ({
+          ...item,
+          observacoes: item.observations || null,
+          additionals: item.additionals || []
+        })),
         horarioReserva: this.horarioSelecionado
       }).toPromise();
       this.mensagemSucesso = 'Pedido finalizado com sucesso! Total: R$ ' + (response.totalPedido || 0).toFixed(2).replace('.', ',');

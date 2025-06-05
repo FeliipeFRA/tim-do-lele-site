@@ -36,6 +36,8 @@ export class AdminPedidosComponent implements OnInit {
     { field: 'StatusPedido', headerName: 'Status do Pedido', flex: 2, floatingFilter: true },
     { field: 'DataPedido', headerName: 'Data do Pedido', flex: 2, floatingFilter: true },
     { field: 'HorarioReserva', headerName: 'Horário da Reserva', flex: 2, floatingFilter: true },
+    { field: 'Observacoes', headerName: 'Observações', flex: 2, floatingFilter: true },
+    { field: 'Adicionais', headerName: 'Adicionais', flex: 2, floatingFilter: true },
   ];
 
   ngOnInit(): void {
@@ -111,6 +113,19 @@ export class AdminPedidosComponent implements OnInit {
           StatusPedido: pedido.StatusPedido,
           DataPedido: pedido.DataPedido,
           HorarioReserva: pedido.HorarioReserva,
+          Observacoes: pedido.Observacoes,
+          Adicionais: (() => {
+            if (!pedido.Adicionais) return '';
+            try {
+              const arr = typeof pedido.Adicionais === 'string' ? JSON.parse(pedido.Adicionais) : pedido.Adicionais;
+              if (Array.isArray(arr)) {
+                return arr.map((a: any) => a.NOME || a.name).join(', ');
+              }
+              return '';
+            } catch {
+              return '';
+            }
+          })()
         }));
       },
       error: (err) => {

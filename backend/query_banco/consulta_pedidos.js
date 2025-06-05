@@ -20,7 +20,9 @@ function  ConsultarPedidos() {
                   FROM PEDIDOS_ITENS_MOLHOS PIM
                   JOIN MOLHOS M ON PIM.MOLHO_ID = M.ID
                   WHERE PIM.PEDIDO_ITEM_ID = PI.ID
-                ), '') AS Molhos
+                ), '') AS Molhos,
+                P.OBSERVACOES AS Observacoes,
+                P.ADICIONAIS AS Adicionais
             FROM
                 PEDIDOS P
                 JOIN USERS U ON P.USER_ID = U.ID
