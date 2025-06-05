@@ -18,7 +18,7 @@ Este projeto visa oferecer um sistema de acompanhamento de pedidos de lanche, ut
 - **sweetAlert2**: Biblioteca para exibição de alertas bonitos e personalizáveis.
 - **PrimeNG**: Biblioteca de componentes ricos para Angular.
 - **PrimeIcons**: Ícones personalizados para serem usados com os componentes do PrimeNG.
-
+- **Swiper**: Biblioteca de componentes arrastaveis responsavel para maior usabilidade em dispositivos mobile.
 
 ## Como Rodar o Projeto
 
