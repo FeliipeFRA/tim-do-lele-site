@@ -12,6 +12,34 @@ export class CartService {
   private cartSubject = new BehaviorSubject<Food[]>([]);
   public cart$ = this.cartSubject.asObservable();
 
+  private getStorageKey(): string {
+  const userId = localStorage.getItem('userId');
+  return userId ? `cart_${userId}` : 'cart_guest';
+  }
+  reloadCart(): void {
+    if (typeof window !== 'undefined' && localStorage) {
+      const storedCart = localStorage.getItem(this.getStorageKey());
+      this.cartItems = storedCart ? JSON.parse(storedCart) : [];
+      this.cartSubject.next(this.cartItems);
+    }
+  }
+
+  constructor() {
+    if (typeof window !== 'undefined' && localStorage) {
+      const storedCart = localStorage.getItem(this.getStorageKey());
+      if (storedCart) {
+        this.cartItems = JSON.parse(storedCart);
+        this.cartSubject.next(this.cartItems);
+      }
+    }
+  }
+ 
+  private updateLocalStorage() {
+    if (typeof window !== 'undefined' && localStorage) {
+      localStorage.setItem(this.getStorageKey(), JSON.stringify(this.cartItems));
+    }
+  }
+  
   
 
   addToCart(item: Food): void {
@@ -29,6 +57,7 @@ export class CartService {
     }
   
     this.cartSubject.next(this.cartItems);
+    this.updateLocalStorage();
   }
   
   increaseQuantity(item: Food): void {
@@ -76,7 +105,14 @@ export class CartService {
     if (index !== -1) {
       this.cartItems.splice(index, 1);
       this.cartSubject.next(this.cartItems);
+       this.updateLocalStorage(); // Atualiza o localStorage com o carrinho modificado
     }
   }
-  
+  clearCart(): void {
+    this.cartItems = [];
+    this.cartSubject.next([]);
+    if (typeof window !== 'undefined' && localStorage) {
+      localStorage.removeItem(this.getStorageKey());
+    }
+  }
 }

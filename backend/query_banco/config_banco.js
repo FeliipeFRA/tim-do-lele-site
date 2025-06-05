@@ -1,9 +1,12 @@
 //Arquivo responsável pelas configurações do banco
 
 const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
 
 function ConfigBanco() {
-    return new sqlite3.Database('./TIM-DO-LELE.db', (error) => {
+    // Caminho absoluto para a raiz do projeto
+    const dbPath = path.resolve(__dirname, '../../TIM-DO-LELE.db');
+    return new sqlite3.Database(dbPath, (error) => {
         if (error) {
             console.error("Erro ao conectar ao banco TIM-DO-LELE:", error.message);
         } else {

@@ -138,3 +138,251 @@
     background-image: url('/assets/img/admin-bg-mobile.png');
   }
 }
+
+.ag-theme-quartz-dark .ag-cell.wrap-text {
+  white-space: pre-line !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  line-height: 1.3;
+  max-width: 250px;
+}
+
+.status-pendente {
+  background: #fff3cd !important;
+  color: #856404 !important;
+  font-weight: bold;
+}
+.status-outro {
+  background: #d4edda !important;
+  color: #155724 !important;
+  font-weight: bold;
+}
+.status-entregue {
+  background: #b2f2bb;
+  color: #155724;
+}
+
+.ag-theme-quartz-dark .ag-cell {
+  font-size: 1.1rem;
+}
+
+.ag-theme-quartz-dark .ag-header-cell-label {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.ag-theme-quartz-dark {
+  overflow-x: auto;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: flex-start;
+  margin-top: 2rem;
+}
+
+.pedido-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 1.5rem 2rem;
+  min-width: 320px;
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  font-family: 'Poppins', sans-serif;
+  transition: box-shadow 0.2s;
+}
+.pedido-card:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.16);
+}
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.pedido-user {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #8a2c2c;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pedido-status {
+  padding: 0.3rem 1rem;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  background: #fff3cd;
+  color: #856404;
+}
+.status-pronto {
+  background: #d4edda;
+  color: #155724;
+}
+.pedido-info {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+}
+.pedido-itens {
+  font-size: 1.05rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.item-nome {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #912f2f;
+}
+.pedido-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+.btn-pronto {
+  background: #ffe082;
+  color: #8a2c2c;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-pronto:hover {
+  background: #ffd54f;
+}
+.btn-entregue {
+  background: #b2f2bb;
+  color: #155724;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-entregue:hover {
+  background: #69db7c;
+}
+@media (max-width: 900px) {
+  .cards-container {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .pedido-card {
+    min-width: 90vw;
+    max-width: 98vw;
+    padding: 1rem 0.5rem;
+  }
+}
+
+.status-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: flex-start;
+  margin-top: 2rem;
+}
+.status-group {
+  min-width: 350px;
+  max-width: 500px;
+  flex: 1 1 350px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  padding: 1.2rem 1.5rem 2rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.status-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 1.2rem;
+  padding: 0.3rem 1rem;
+  border-radius: 12px;
+  display: inline-block;
+}
+.status-pendente.status-title {
+  background: #fff3cd;
+  color: #856404;
+}
+.status-pronto.status-title {
+  background: #d4edda;
+  color: #155724;
+}
+.status-entregue.status-title {
+  background: #b2f2bb;
+  color: #155724;
+}
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 9999;
+  animation: fadeInUp 0.3s;
+}
+.btn-undo {
+  background: #ffe082;
+  color: #8a2c2c;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-undo:hover {
+  background: #ffd54f;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px) translateX(-50%); }
+  to { opacity: 1; transform: translateY(0) translateX(-50%); }
+}
+
+.date-filter-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+.date-filter-container label {
+  font-weight: bold;
+  color: #8a2c2c;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.date-filter-container input[type="date"] {
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1.1rem;
+  background: #fff;
+  color: #333;
+}
+.date-filter-container input[type="date"]:focus {
+  outline: 2px solid #8a2c2c;
+}
