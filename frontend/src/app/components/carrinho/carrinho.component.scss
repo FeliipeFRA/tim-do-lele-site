@@ -22,8 +22,15 @@
   margin-right: 0.5rem;
 }
 
+.checkout-time-container {
+  display: flex; 
+  align-items: 
+  center; 
+  gap: 12px;
+}
+
 .checkout-time {
-  margin-top: 5rem;
+  margin-top: 6rem;
   width: 100%;
   max-width: 1200px;
   font-size: 1rem;
@@ -41,7 +48,7 @@
   flex-direction: column;
   overflow-y: auto;
   /* Rolagem só nos itens do carrinho */
-  max-height: calc(100vh - 250px);
+  max-height: calc(100vh - 400px);
   /* Limita a altura para que a navbar e o rodapé fiquem fixos */
   gap: 10px
 }
@@ -232,14 +239,17 @@ app-navbar-checkout {
 .input-horario {
   width: 200px;
   padding: 8px;
-  margin-top: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 /* Responsividade - Ajustes para telas menores */
 @media screen and (max-width: 767px) {
+  .checkout-time-container {
+  flex-direction: column;
+}
 
   /* Layout da Checkout */
   .checkout {
@@ -280,7 +290,7 @@ app-navbar-checkout {
   }
 
   .container {
-      max-height: calc(100vh - 250px);
+      max-height: calc(100vh - 400px);
     /* Ajusta a altura máxima para telas pequenas */
   }
   .footer-container {

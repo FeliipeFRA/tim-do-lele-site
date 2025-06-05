@@ -1,13 +1,13 @@
 /* Seção de Pedidos */
 .orders-section {
-    margin-top: 7%;
+    margin-top: 75px;
     font-family: "Poppins", sans-serif;
     color: black;
     .orders-title {
       font-size: 2.2rem;
       font-weight: bold;
       color: rgb(255, 255, 255);
-      margin-bottom: 15px;
+      margin-bottom: 5px;
       text-align: center;
     }
   
@@ -124,7 +124,6 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center top;
-    justify-content: center;
     align-items: center;
   }
   .ag-theme-quartz {
@@ -305,6 +304,57 @@
   padding: 1.2rem 1.5rem 2rem 1.5rem;
   margin-bottom: 2rem;
 }
+
+@media (max-width: 900px) {
+  .status-groups {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .status-group {
+    min-width: 90vw;
+    max-width: 98vw;
+    padding: 1rem 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .status-groups {
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+  }
+  .status-group {
+    min-width: 95vw;
+    max-width: 99vw;
+    margin-bottom: 0.5rem;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    padding: 0.7rem 0.3rem 1rem 0.3rem;
+  }
+  .cards-container {
+    gap: 0.7rem;
+    margin-top: 1rem;
+  }
+  .pedido-card {
+    min-width: 90vw;
+    max-width: 97vw;
+    padding: 0.7rem 0.3rem;
+    font-size: 0.97rem;
+  }
+  .status-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.7rem;
+    padding: 0.2rem 0.7rem;
+  }
+}
+@media (min-width: 769px) {
+  .mobile-status-selector {
+    display: none !important;
+  }
+  .hidden-mobile {
+    display: block !important;
+  }
+}
 .status-title {
   font-size: 1.3rem;
   font-weight: bold;
@@ -370,7 +420,7 @@
 }
 .date-filter-container label {
   font-weight: bold;
-  color: #8a2c2c;
+  color: white;
   display: flex;
   align-items: center;
   gap: 0.5rem;

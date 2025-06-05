@@ -7,6 +7,7 @@ import { RouterLink, Router } from '@angular/router';
 import { NavbarCheckoutComponent } from '../navbar-checkout/navbar-checkout.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import Swal from 'sweetalert2';
 declare var timepicker: any;
 
 @Component({
@@ -153,11 +154,48 @@ onHorarioChange(event: any) {
     try {
       const userId = localStorage.getItem('userId');
       if (!userId) {
+        Swal.fire({
+              icon: 'error',
+              title: 'Usuário não autenticado.',
+              confirmButtonText: 'Tentar Novamente',  // Texto do botão de confirmação
+              confirmButtonColor: '#d33',  // Cor do botão de confirmação
+              background: '#f8d7da',  // Cor de fundo
+              customClass: {
+              popup: 'custom-popup',  // Classe CSS personalizada para o popup
+              confirmButton: 'custom-confirm-btn',  // Classe CSS para o botão
+            },
+            showClass: {
+              popup: 'animate__fadeIn',  // Animação de entrada
+              
+            },
+            hideClass: {
+              popup: 'animate__bounceOut',  // Animação de saída
+            },
+            });
         this.mensagemErro = 'Usuário não autenticado.';
         this.isLoading = false;
         return;
       }
       if (!this.horarioSelecionado) {
+        Swal.fire({
+              icon: 'error',
+              title: 'Selecione um horário de retirada válido!).',
+              confirmButtonText: 'Tentar Novamente',  // Texto do botão de confirmação
+              confirmButtonColor: '#d33',  // Cor do botão de confirmação
+              background: '#f8d7da',  // Cor de fundo
+              customClass: {
+              popup: 'custom-popup',  // Classe CSS personalizada para o popup
+              confirmButton: 'custom-confirm-btn',  // Classe CSS para o botão
+            },
+            showClass: {
+              popup: 'animate__fadeIn',  // Animação de entrada
+              
+            },
+            hideClass: {
+              popup: 'animate__bounceOut',  // Animação de saída
+            },
+            });
+  
         this.mensagemErro = 'Selecione um horário de retirada válido (HH:MM).';
         this.isLoading = false;
         return;
@@ -171,10 +209,31 @@ onHorarioChange(event: any) {
         })),
         horarioReserva: this.horarioSelecionado
       }).toPromise();
+      Swal.fire({
+        icon: 'success',
+        title: 'Pedido realizado!',
+        text: 'Seu pedido foi finalizado com sucesso.',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#3085d6',
+        background: '#e6ffed',
+        customClass: {
+          popup: 'custom-popup',
+          confirmButton: 'custom-confirm-btn',
+        },
+        showClass: {
+          popup: 'animate__fadeIn',
+        },
+        hideClass: {
+          popup: 'animate__bounceOut',
+        },
+      });
+        
       this.mensagemSucesso = 'Pedido finalizado com sucesso! Total: R$ ' + (response.totalPedido || 0).toFixed(2).replace('.', ',');
       this.pedidoFinalizado = true;
       this.cartService.clearCart();
-      // Removido o redirecionamento para o perfil
+      setTimeout(() => {
+        this.router.navigate(['/home']);
+      }, 2000);
     } catch (error: any) {
       this.mensagemErro = error?.error?.message || 'Erro ao finalizar pedido.';
     } finally {

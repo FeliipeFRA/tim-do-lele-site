@@ -3,8 +3,11 @@
 <div class="checkout">
   <div class="checkout-time">
     <h1 class="checkout-title">Horário de Retirada</h1>
-    <p class="checkout-subtitle">Escolha um horário para retirar seu pedido:</p>
-    <input id="horario" type="time" [(ngModel)]="horarioSelecionado" name="horario" placeholder="Selecione o horário" class="input-horario" min="19:00" max="22:00" step="1800" />
+    <div class="checkout-time-container" style="display: flex; align-items: center; gap: 12px;">
+      <p class="checkout-subtitle" style="margin: 0;">Escolha um horário para retirar seu pedido:</p>
+      <input id="horario" type="time" [(ngModel)]="horarioSelecionado" name="horario" placeholder="Selecione o horário" class="input-horario" min="19:00" max="22:00" step="1800" />
+    </div>
+    
   </div>
 
   <div class="container">
