@@ -41,7 +41,7 @@ const PORT = process.env.PORT || 8000;
 app.use(cors({
     // Cors serve para conectar portas diferentes
     origin: 'http://localhost:4200', 
-    methods: ['GET', 'POST', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization','x-user-role'], 
   }));
   
@@ -337,6 +337,21 @@ app.get('/debug/pedidos-itens', async (req, res) => {
             return res.status(500).json({ error: err.message });
         }
         res.json(rows);
+    });
+});
+
+app.put('/pedidos/:pedidoId/status', async (req, res) => {
+    const pedidoId = req.params.pedidoId;
+    const { status } = req.body;
+    if (!pedidoId || !status) {
+        return res.status(400).json({ message: 'Dados insuficientes.' });
+    }
+    const db = require('./query_banco/config_banco').ConfigBanco();
+    db.run('UPDATE PEDIDOS SET STATUS = ? WHERE ID = ?', [status, pedidoId], function (err) {
+        if (err) {
+            return res.status(500).json({ message: 'Erro ao atualizar status.' });
+        }
+        res.json({ message: 'Status atualizado com sucesso!' });
     });
 });
 

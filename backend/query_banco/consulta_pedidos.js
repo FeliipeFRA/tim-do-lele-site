@@ -8,6 +8,7 @@ function  ConsultarPedidos() {
         db.all(`
             SELECT
                 P.ID AS PedidoID,
+                PI.PEDIDO_ID AS PedidoItemID,
                 U.NOME AS NomeUsuario,
                 strftime('%d/%m/%Y', P.DATA) AS DataPedido,
                 P.HORARIO_RESERVA AS HorarioReserva,

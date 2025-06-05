@@ -106,6 +106,7 @@ export class AdminPedidosComponent implements OnInit {
       next: (pedidos) => {
         console.log('Pedidos recebidos:', pedidos);  // Verifique se os dados estão sendo recebidos
         this.rowData = pedidos.map((pedido: any) => ({
+          PedidoID: pedido.PedidoID, // Sempre o ID do pedido principal
           NomeUsuario: pedido.NomeUsuario,
           NomeLanche: pedido.NomeLanche,
           Quantidade: pedido.Quantidade,
@@ -134,4 +135,26 @@ export class AdminPedidosComponent implements OnInit {
     });
   }
   
+  onGridReady(params: any) {
+    // Remover autoSizeAllColumns e sizeColumnsToFit para voltar ao layout anterior
+  }
+
+  atualizarStatusPedido(pedidoId: number, novoStatus: string) {
+    // Chama o backend para atualizar o status do pedido
+    fetch(`http://localhost:8000/pedidos/${pedidoId}/status`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: novoStatus })
+    })
+      .then(res => res.json())
+      .then(() => {
+        // Atualiza a lista local sem recarregar tudo
+        this.rowData = this.rowData.map(p =>
+          p.PedidoID === pedidoId ? { ...p, StatusPedido: novoStatus } : p
+        );
+      })
+      .catch(() => {
+        alert('Erro ao atualizar status do pedido!');
+      });
+  }
 }
