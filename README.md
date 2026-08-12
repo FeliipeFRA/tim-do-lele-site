@@ -57,6 +57,13 @@ Isso instalará o Angular.
     ng serve
     ```
 
+## Minha Contribuição (Fábio Peixoto Corbi)
+
+Atuei no desenvolvimento do back-end do projeto, incluindo:
+- Lógica de negócio para gerenciamento de pedidos
+- Integração com o banco de dados para persistência das informações
+- Desenvolvimento de rotas e endpoints da API utilizando Node.js e Express.js
+
 ## Licença
 
 Este projeto está sob a licença [MIT](LICENSE).
